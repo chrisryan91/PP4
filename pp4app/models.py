@@ -11,17 +11,26 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Utensil(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
 
 class Recipe(models.Model):
     title = models.CharField(max_length=100)
     ingredients = models.ManyToManyField(Ingredient)
-    image_url = models.URLField()
+    utensils = models.ManyToManyField(Utensil)
+    image_url = CloudinaryField()
 
     def __str__(self):
         return self.title
 
 class Review(models.Model):
     title = models.CharField(max_length=100, unique=True)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
     updated_on = models.DateTimeField(auto_now=True)
@@ -31,7 +40,6 @@ class Review(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     upvotes = models.ManyToManyField(User, related_name="review_likes", blank=True)
-    rating = models.ManyToManyField(User, related_name="review_rating", blank=True)
     prep_time = models.IntegerField(help_text='Preparation time in minutes')
 
     class Meta:

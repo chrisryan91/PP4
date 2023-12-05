@@ -29,8 +29,9 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["portfolio-project-four.herokuapp.com", "localhost", "portfolio-project-four-1f2f0bc1d6a0.herokuapp.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "portfolio-project-four.herokuapp.com", "portfolio-project-four-1f2f0bc1d6a0.herokuapp.com"]
 
+# AUTH_USER_MODEL = 'yourapp.CustomUser'
 
 # Application definition
 
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+    'django_summernote',
     'pp4app',
 ]
 

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 mt-3 left">
+            <div class="row">
+                {% for review in review_list %}
+                    <div class="col-md-4 mb-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="image-container">
+                                    {% if "placeholder" in review.featured_image %}
+                                        <img src="https://media.istockphoto.com/id/1134020110/vector/cutlery-restaurant-icons.jpg?s=612x612&w=0&k=20&c=udrCAY1Ru_iLEdwJK_fyuHXNQoH3y47ZCuNIr7uRwR0=" alt="cutlery clipart" class="card-img-top">
+                                    {% else %}
+                                        <img src="{{ review.featured_image.url }}" class="card-img-top">
+                                    {% endif %}
+                                </div>
+                                <a href="#" class="post-link">
+                                    <h2 class="card-title">{{ review.title }}</h2>
+                                    <p class="card-text">{{ review.excerpt }}</p>
+                                </a>
+                                <hr>
+                                <p class="card-text text-muted h6">{{ review.created_on }}
+                                    <i class="fas fa-thumbs-up">{{ review.upvotes }}</i>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                        </div><div class="row">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+
+{%endblock%}
