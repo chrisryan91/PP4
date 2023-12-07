@@ -33,6 +33,8 @@ class Review(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
+    ingredients = models.ManyToManyField(Ingredient, blank=True)
+    utensils = models.ManyToManyField(Utensil, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     featured_image = CloudinaryField("image", default="placeholder")
