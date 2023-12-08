@@ -5,29 +5,19 @@
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
                 <h1 class="post-title">{{ review.title }}</h1>
-                <p class="post-subtitle">{{ review.author }} | {{ post.created_on }}</p>
-            </div>
-            <div class="d-none d-md-block col-md-6 masthead-image">
-                {% if "placeholder" in review.featured_image.url %}
-                <img src="https://media.istockphoto.com/id/1134020110/vector/cutlery-restaurant-icons.jpg?s=612x612&w=0&k=20&c=udrCAY1Ru_iLEdwJK_fyuHXNQoH3y47ZCuNIr7uRwR0=" width="100%">
-                {% else %}
-                <img src=" {{ review.featured_image.url }}" width="100%">
-                {% endif %}
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col card mb-4  mt-3 left  top">
-            <div class="card-body">
-                <p class="card-text ">
+                <h2 class="post-subtitle">{{ review.author }} | {{ post.created_on }}</h2>
+                <hr>
+                <p>
                     {{ review.content | safe }}
                 </p>
-                <div class="row">
-                    <div class="col-1">
-                        <strong class="text-secondary"><i class="far fa-heart"></i> {{ post.number_of_likes }} </strong>
-                    </div>
+            </div>
+            <div class="d-none d-md-block col-md-6 masthead-image">
+                <div class="img-container">
+                    {% if "placeholder" in review.featured_image.url %}
+                    <img src="https://media.istockphoto.com/id/1134020110/vector/cutlery-restaurant-icons.jpg?s=612x612&w=0&k=20&c=udrCAY1Ru_iLEdwJK_fyuHXNQoH3y47ZCuNIr7uRwR0=" width="100%">
+                    {% else %}
+                    <img src=" {{ review.featured_image.url }}" width="100%">
+                    {% endif %}
                 </div>
             </div>
         </div>

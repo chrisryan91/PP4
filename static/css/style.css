@@ -90,6 +90,17 @@ nav {
     font-family: Merriweather, sans-serif;
 }
 
+.container {
+    font-family: Merriweather, sans-serif;
+    color: #6096B4;
+    padding-top: 50px;
+}
+
+.img-container {
+    padding-left: 20px;
+    padding-bottom: 20px;
+}
+
 .footer {
     background-color: #93BFCF;
     font-family: Merriweather, sans-serif;
