@@ -97,6 +97,7 @@ nav {
 }
 
 .img-container {
+    text-decoration: none;
     padding-left: 20px;
     padding-bottom: 20px;
     overflow: hidden;
@@ -105,4 +106,9 @@ nav {
 .footer {
     background-color: #93BFCF;
     font-family: Merriweather, sans-serif;
+}
+
+button {
+    background-color: white;
+    border-radius: 5px;
 }
