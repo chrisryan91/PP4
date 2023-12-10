@@ -8,6 +8,9 @@ def Homepage(request):
 def Search(request):
     return render(request, 'search.html')
 
+def SubmitReview(request):
+    return render(request, 'submit_review.html')
+
 class Reviews(generic.ListView):
     model = Review
     queryset = Review.objects.filter(status=1).order_by('-created_on')
