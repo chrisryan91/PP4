@@ -2,6 +2,9 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
 from .models import Review
 
+def Homepage(request):
+    return render(request, 'index.html')
+
 class Reviews(generic.ListView):
     model = Review
     queryset = Review.objects.filter(status=1).order_by('-created_on')
