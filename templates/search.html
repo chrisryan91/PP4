@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Search Page</h1>
-<h2>Search Box</h2>
+
+<h2>Recipe Search</h2>
+<form method="post" action="{% url 'search' %}">
+  {% csrf_token %}
+  <label for="query">Enter ingredients:</label>
+  <input type="text" name="query" required>
+  <button type="submit">Search</button>
+</form>
+
 {% endblock content %}
