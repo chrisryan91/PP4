@@ -2,12 +2,35 @@
 
 {% block content %}
 
-<h2>Recipe Search</h2>
-<form method="post" action="{% url 'search' %}">
-  {% csrf_token %}
-  <label for="query">Enter ingredients:</label>
-  <input type="text" name="query" required>
-  <button type="submit">Search</button>
-</form>
+<div class="container">
+    <div div="row">
+        <div class="col-12 mt-3 left">
+            <h2>Recipe Search</h2>
+            <form method="post" action="{% url 'search' %}">
+                {% csrf_token %}
+                <label for="query">Enter ingredients:</label>
+                <input type="text" name="query" required>
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div div="row">
+        <div class="col-12 mt-3 left">
+            <h2>Search results for: {{ query }}</h2>
+
+            {% if recipes %}
+                <ul>
+                    {% for recipe in recipes %}
+                        <li>{{ recipe.recipe.label }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No recipes found for your search query.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 {% endblock content %}

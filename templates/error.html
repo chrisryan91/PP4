@@ -1,8 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="container">
+    <div div="row">
+        <div class="col-12 mt-3 left">
+            <h1>Error</h1>
+            <p>{{ error_message }}</p>
+        </div>
+    </div>
+</div>
 
-<h1>Error</h1>
-<p>{{ error_message }}</p>
 
 {% endblock content %}
