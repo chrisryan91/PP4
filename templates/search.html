@@ -26,31 +26,36 @@
                     <div class="col-12 mt-3 left">
                         <div class="row">
                             {% for recipe in recipes %}
-                                <div class="col-md-3">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="image-container">
-                                                {% if "placeholder" in review.featured_image %}
-                                                    <img src="https://media.istockphoto.com/id/1134020110/vector/cutlery-restaurant-icons.jpg?s=612x612&w=0&k=20&c=udrCAY1Ru_iLEdwJK_fyuHXNQoH3y47ZCuNIr7uRwR0=" alt="cutlery clipart" class="card-img-top">
-                                                    <a href="{% url 'review_post' review.slug %}" class="post-link">
-                                                        <div class="middle">
-                                                            <div class="text"> {{ recipe.recipe.label }} </div>
-                                                        </div>
-                                                    </a>
-                                                {% else %}
+                            <div class="col-md-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="image-container">
                                                 <img src="{{ recipe.recipe.image }}" class="card-img-top">
-                                                <a href="{{ recipe.recipe.url }}" class="post-link">
+                                                <a href="#" class="post-link" onclick="showModal('{{ recipe.recipe.label }}'); return false;">
                                                     <div class="middle">
-                                                        <div class="text"> {{ recipe.recipe.label }} </div>
-                                                            <p class="card-text">{{ recipe.recipe.source }}
-                                                            </p>
+                                                        <div class="text">{{ recipe.recipe.label }}</div>
+                                                        <p class="card-text">More info</p>
                                                     </div>
                                                 </a>
-                                                {% endif %}
+                                        </div>
+                                        <div id="id01" class="w3-modal w3-animate-opacity" style="display: none;">
+                                            <div class="w3-modal-content w3-card-4">
+                                                <header class="w3-container w3-teal"> 
+                                                    <span onclick="hideModal()" class="w3-button w3-large w3-display-topright">&times;</span>
+                                                    <h2 id="modalHeader">Modal Header</h2>
+                                                </header>
+                                                <div class="w3-container">
+                                                    <p>Some text..</p>
+                                                    <p>Some text..</p>
+                                                </div>
+                                                <footer class="w3-container w3-teal">
+                                                    <p>Modal Footer</p>
+                                                </footer>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                                 {% if forloop.counter|divisibleby:4 and not forloop.last %}
                                     </div><div class="row">
                                 {% endif %}
