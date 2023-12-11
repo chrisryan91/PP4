@@ -20,7 +20,7 @@ def Search(request):
             'q': query,
             'app_id': app_id,
             'app_key': app_key,
-            'type': 'public',
+            'type': 'public'
         }
 
         response = requests.get(api_url, params=params)

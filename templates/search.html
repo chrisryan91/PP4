@@ -21,11 +21,55 @@
             <h2>Search results for: {{ query }}</h2>
 
             {% if recipes %}
-                <ul>
-                    {% for recipe in recipes %}
-                        <li>{{ recipe.recipe.label }}</li>
-                    {% endfor %}
-                </ul>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 mt-3 left">
+                        <div class="row">
+                            {% for recipe in recipes %}
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="image-container">
+                                                {% if "placeholder" in review.featured_image %}
+                                                    <img src="https://media.istockphoto.com/id/1134020110/vector/cutlery-restaurant-icons.jpg?s=612x612&w=0&k=20&c=udrCAY1Ru_iLEdwJK_fyuHXNQoH3y47ZCuNIr7uRwR0=" alt="cutlery clipart" class="card-img-top">
+                                                    <a href="{% url 'review_post' review.slug %}" class="post-link">
+                                                        <div class="middle">
+                                                            <div class="text"> {{ recipe.recipe.label }} </div>
+                                                        </div>
+                                                    </a>
+                                                {% else %}
+                                                <img src="{{ recipe.recipe.image }}" class="card-img-top">
+                                                <a href="{{ recipe.recipe.url }}" class="post-link">
+                                                    <div class="middle">
+                                                        <div class="text"> {{ recipe.recipe.label }} </div>
+                                                            <p class="card-text">{{ recipe.recipe.source }}
+                                                            </p>
+                                                    </div>
+                                                </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                                    </div><div class="row">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% if is_paginated %}
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+            </div>
             {% else %}
                 <p>No recipes found for your search query.</p>
             {% endif %}
