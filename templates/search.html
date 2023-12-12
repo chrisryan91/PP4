@@ -6,7 +6,7 @@
     <div div="row">
         <div class="col-12 mt-3 left">
             <h2>Recipe Search</h2>
-            <form method="post" action="{% url 'search' %}">
+            <form method="get" action="{% url 'search' %}">
                 {% csrf_token %}
                 <label for="query">Enter ingredients:</label>
                 <input type="text" name="query" required>
@@ -62,18 +62,6 @@
                             {% endfor %}
                         </div>
                     </div>
-                {% if is_paginated %}
-                <nav aria-label="Page navigation">
-                    <ul class="pagination justify-content-center">
-                        {% if page_obj.has_previous %}
-                        <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
-                        {% endif %}
-                        {% if page_obj.has_next %}
-                        <li><a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
-                {% endif %}
             </div>
             {% else %}
                 <p>No recipes found for your search query.</p>
@@ -81,5 +69,25 @@
         </div>
     </div>
 </div>
-
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-3 left">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if recipes.has_previous %}
+                        <a href="?query={{ query }}&page=1">&laquo; first</a>
+                        <a href="?query={{ query }}&page={{ recipes.previous_page_number }}">previous</a>
+                    {% endif %}
+                    <span class="current">
+                        Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.
+                    </span>
+                    {% if recipes.has_next %}
+                        <a href="?query={{ query }}&page={{ recipes.next_page_number }}">next</a>
+                        <a href="?query={{ query }}&page={{ recipes.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

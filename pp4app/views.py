@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Review
 from decouple import config
 import requests
@@ -8,32 +9,53 @@ import os
 def Homepage(request):
     return render(request, 'index.html')
 
-def Search(request):
+from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
+def search(request):
+    recipes = []
+
     if request.method == 'POST':
         query = request.POST.get('query')
+        recipes = get_recipes(query)
 
-        api_url = 'https://api.edamam.com/api/recipes/v2'
-        app_id = os.environ.get("EDA_APP_ID")
-        app_key = os.environ.get("EDA_APP_KEY")
+    elif request.method == 'GET':
+        query = request.GET.get('query')
+        page = request.GET.get('page', 1)
 
-        params = {
-            'q': query,
-            'app_id': app_id,
-            'app_key': app_key,
-            'type': 'public'
-        }
+        if query:
+            recipes = get_recipes(query)
 
-        response = requests.get(api_url, params=params)
-        
-        if response.status_code == 200:
-            data = response.json()
-            recipes = data.get('hits', [])
-            return render(request, 'search.html', {'query': query, 'recipes': recipes})
-        else:
-            error_message = 'Error fetching recipes from the API.'
-            return render(request, 'error.html', {'error_message': error_message})
+            paginator = Paginator(recipes, 8)
+            try:
+                recipes = paginator.page(page)
+            except PageNotAnInteger:
+                recipes = paginator.page(1)
+            except EmptyPage:
+                recipes = paginator.page(paginator.num_pages)
 
-    return render(request, 'search.html', {'query': '', 'recipes': []})
+    return render(request, 'search.html', {'query': query, 'recipes': recipes})
+
+
+def get_recipes(query):
+    api_url = 'https://api.edamam.com/api/recipes/v2'
+    app_id = os.environ.get("EDA_APP_ID")
+    app_key = os.environ.get("EDA_APP_KEY")
+
+    params = {
+        'q': query,
+        'app_id': app_id,
+        'app_key': app_key,
+        'type': 'public'
+    }
+
+    response = requests.get(api_url, params=params)
+
+    if response.status_code == 200:
+        data = response.json()
+        return data.get('hits', [])
+    else:
+        return []
 
 def SubmitReview(request):
     return render(request, 'submit_review.html')
