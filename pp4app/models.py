@@ -43,7 +43,7 @@ class Review(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     upvotes = models.ManyToManyField(User, related_name="review_likes", blank=True)
     prep_time = models.IntegerField(help_text='Preparation time in minutes')
-    comments = models.ManyToManyField('pp4app.Comment', related_name='reviews')
+    comments = models.ManyToManyField('pp4app.Comment', related_name='review_comments')
 
     class Meta:
         ordering = ['-created_on']
@@ -55,7 +55,7 @@ class Review(models.Model):
         return self.upvotes.count()
     
 class Comment(models.Model):
-    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="review_comments")
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="comments_review")
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()

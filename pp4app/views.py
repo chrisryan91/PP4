@@ -79,7 +79,8 @@ class ReviewPost(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments.filter(approved=True).order_by('created_on')
+        context['comments'] = self.object.comments_review.filter(approved=True).order_by('created_on')
+        print("Comments:", context['comments'])
         context['comment_form'] = CommentForms()
         context['commented'] = False
         return context
