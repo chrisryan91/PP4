@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
 from django.views import generic, View
+from django.views.generic import DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Review
-from decouple import config
+from .forms import CommentForms
 import requests
 import os
 
@@ -26,7 +27,7 @@ def search(request):
         if query:
             recipes = get_recipes(query)
 
-            paginator = Paginator(recipes, 8)
+            paginator = Paginator(recipes, 16)
             try:
                 recipes = paginator.page(page)
             except PageNotAnInteger:
@@ -71,16 +72,33 @@ class Reviews(generic.ListView):
         context['reviews'] = self.queryset
         return context
 
-class ReviewPost(View):
+class ReviewPost(DetailView):
+    model = Review
+    template_name = 'review.html'
+    context_object_name = 'review'
 
-    def get(self, request, slug, *args, **kwargs):
-        queryset = Review.objects.filter(status=1)
-        review = get_object_or_404(queryset, slug=slug)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['comments'] = self.object.comments.filter(approved=True).order_by('created_on')
+        context['comment_form'] = CommentForms()
+        context['commented'] = False
+        return context
 
-        return render(
-            request,
-            "review.html",
-            {
-            "review": review,
-            }
-        )
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        context = self.get_context_data()
+
+        comment_form = CommentForms(data=request.POST)
+
+        if comment_form.is_valid():
+            comment_form.instance.email = request.user.email
+            comment_form.instance.name = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.post = self.object
+            comment.save()
+            context['commented'] = True
+            context['comment_form'] = CommentForms()
+        else:
+            context['comment_form'] = comment_form
+
+        return self.render_to_response(context)

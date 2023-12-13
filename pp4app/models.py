@@ -27,7 +27,7 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
-
+    
 class Review(models.Model):
     title = models.CharField(max_length=100, unique=True)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, null=True, blank=True)
@@ -43,6 +43,7 @@ class Review(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     upvotes = models.ManyToManyField(User, related_name="review_likes", blank=True)
     prep_time = models.IntegerField(help_text='Preparation time in minutes')
+    comments = models.ManyToManyField('pp4app.Comment', related_name='reviews')
 
     class Meta:
         ordering = ['-created_on']
@@ -52,18 +53,17 @@ class Review(models.Model):
 
     def number_of_likes(self):
         return self.upvotes.count()
-
+    
 class Comment(models.Model):
-    recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE, related_name="comments")
+    review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="review_comments")
     name = models.CharField(max_length=80)
     email = models.EmailField()
-    text = models.TextField()
+    body = models.TextField()
     created_on = models.DateTimeField(default=timezone.now)
     approved = models.BooleanField(default=False)
-    likes = models.ManyToManyField(User, related_name="comment_likes", blank=True)
     
     class Meta:
         ordering = ['created_on']
 
     def __str__(self):
-        return f"Comment {self.text} by {self.name}"
+        return f"Comment {self.body} by {self.name}"
