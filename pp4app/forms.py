@@ -1,6 +1,10 @@
-from .models import Comment
+from .models import Review, Comment
 from django import forms
 
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['title', 'content', 'prep_time']
 class CommentForms(forms.ModelForm):
     class Meta:
         model = Comment
