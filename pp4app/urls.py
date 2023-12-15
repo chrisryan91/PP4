@@ -7,4 +7,5 @@ urlpatterns = [
     path('submit_review/', views.SubmitReview, name='submit_review'),
     path('blog/', views.Reviews.as_view(), name="blog"),
     path('<slug:slug>/', views.ReviewPost.as_view(), name='review_post'),
+    path('review_blog.html', views.Reviews.as_view(), name='review_blog'),
 ]

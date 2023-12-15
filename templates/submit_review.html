@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Submit Review Page</h1>
-<h2>Submit Review Form</h2>
+<div class="container">
+    <div div="row">
+        <div class="col-12 mt-3 left">
+            <h1>Submit Review Page</h1>
+            <h2>Submit Review Form</h2>
+            <form method="post" action="{% url 'submit_review' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Submit Review</button>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock content %}

@@ -65,7 +65,7 @@ def SubmitReview(request):
             review = form.save(commit=False)
             review.author = request.user
             review.save()
-            return redirect('reviews.html')
+            return redirect('review_blog')
     
     else:
         form = ReviewForm()
