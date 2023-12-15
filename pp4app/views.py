@@ -1,9 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views import generic, View
 from django.views.generic import DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Review
-from .forms import CommentForms
+from .forms import CommentForms, ReviewForm
 import requests
 import os
 
@@ -59,7 +59,18 @@ def get_recipes(query):
         return []
 
 def SubmitReview(request):
-    return render(request, 'submit_review.html')
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user
+            review.save()
+            return redirect('reviews.html')
+    
+    else:
+        form = ReviewForm()
+
+    return render(request, 'submit_review.html', {'form': form})
 
 class Reviews(generic.ListView):
     model = Review
