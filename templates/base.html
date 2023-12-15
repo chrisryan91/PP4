@@ -71,10 +71,17 @@
     </footer>
     <script>
 
-        function showModal(label) {
+        function showModal(label, url) {
             console.log('Showing modal', label);
             document.getElementById('id01').style.display = 'block';
             document.getElementById('modalHeader').innerHTML = label;
+            
+            var urlElement = document.getElementById('modalURL');
+            var linkElement = document.createElement('a');
+            linkElement.href = url;
+            linkElement.innerHTML = "Visit Recipe";
+            urlElement.innerHTML = "";
+            urlElement.appendChild(linkElement);
         }
 
         function hideModal() {
