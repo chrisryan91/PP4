@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Homepage</h1>
-<h2>Search</h2>
-<h2>Submit Review</h2>
-<h2>View Blog</h2>
+<div class="container">
+    <div div="row">
+        <div class="col-12 mt-3 left">
+            <h1>Homepage</h1>
+            <h2><a href="{% url 'search' %}">Search</a></h2>
+            <h2><a href="{% url 'review_blog' %}">View Blog</a></h2>
+        </div>
+    </div>
+</div> 
 {% endblock content %}

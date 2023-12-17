@@ -60,11 +60,15 @@ def get_recipes(query):
 
 def SubmitReview(request):
     if request.method == "POST":
-        form = ReviewForm(request.POST)
+        form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
             review = form.save(commit=False)
             review.author = request.user
             review.save()
+            if review.featured_image:
+                print(f"Cloudinary URL: {review.featured_image.url}")
+            else:
+                print("No Cloudinary URL available (featured_image is None)")
             return redirect('review_blog')
     
     else:

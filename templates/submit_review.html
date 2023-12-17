@@ -6,7 +6,7 @@
         <div class="col-12 mt-3 left">
             <h1>Submit Review Page</h1>
             <h2>Submit Review Form</h2>
-            <form method="post" action="{% url 'submit_review' %}">
+            <form method="post" action="{% url 'submit_review' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Submit Review</button>
