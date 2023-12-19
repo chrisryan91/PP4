@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+{% load crispy_forms_tags %}
+
 <div class="container">
     <div div="row">
         <div class="col-12 mt-3 left">
             <h1>Submit Review Page</h1>
-            <h2>Submit Review Form</h2>
             <form method="post" action="{% url 'submit_review' %}" enctype="multipart/form-data">
+                {{ form | crispy }}
                 {% csrf_token %}
-                {{ form.as_p }}
-                <p id="title" ></p>
                 <button type="submit">Submit Review</button>
             </form>
         </div>

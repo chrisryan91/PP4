@@ -69,6 +69,12 @@ def SubmitReview(request):
                 print(f"Cloudinary URL: {review.featured_image.url}")
             else:
                 print("No Cloudinary URL available (featured_image is None)")
+
+            url = form.cleaned_data.get("url")
+            if url:
+                request.session["modalURL"] = url
+                print(f"Session modalURL set to: {url}")
+
             return redirect('review_blog')
     
     else:
