@@ -17,6 +17,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
+    <script src="{% static 'js/script.js' %}"></script>
 </head>
 
 <body class="d-flex flex-column h-100 main-bg">
@@ -69,57 +70,5 @@
             <i class="fab fa-instagram-square ms-3"></i>
             <i class="fab fa-youtube-square ms-3"></i></p>
     </footer>
-    <script>
-        function showModal(label, url) {
-            console.log('Showing modal', label);
-            console.log(url);
-            document.getElementById('id01').style.display = 'block';
-            document.getElementById('modalHeader').innerHTML = label;
-    
-            var urlElement = document.getElementById('modalURL');
-            var linkElement = document.createElement('a');
-            linkElement.href = url;
-            linkElement.innerHTML = "Visit Recipe";
-    
-
-            sessionStorage.setItem('modalLabel', label);
-            sessionStorage.setItem('modalURL', url);
-
-    
-            urlElement.innerHTML = "";
-            urlElement.appendChild(linkElement);
-        }
-    
-        function hideModal() {
-            console.log('Hiding modal');
-            document.getElementById('id01').style.display = 'none';
-        }
-
-    
-        document.addEventListener('DOMContentLoaded', function() {
-            var label = sessionStorage.getItem('modalLabel');
-            var url = sessionStorage.getItem('modalURL');
-            var titleElement = document.getElementById('title');
-
-            if (label && titleElement) {
-                titleElement.textContent = label;
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-                        var urlInput = document.getElementById("id_url");
-                        var labelInput = document.getElementById("id_title");
-                        var storedUrl = sessionStorage.getItem("modalURL");
-                        var storedLabel = sessionStorage.getItem("modalLabel");
-            
-                        if (storedUrl) {
-                            urlInput.value = storedUrl;
-                        }
-
-                        if (storedLabel) {
-                            labelInput.value = storedLabel;
-                        }
-                    });
-    </script>
 </body>                            
 </html>
