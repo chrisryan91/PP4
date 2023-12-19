@@ -18,8 +18,11 @@
 <div class="container">
     <div div="row">
         <div class="col-12 mt-3 left">
+            {% if query != None %}
             <h2>Search results for: {{ query }}</h2>
-
+            {% else %}
+            <h3>Search for a valid ingredient, cuisine type or dish name</h3>
+            {% endif %}
             {% if recipes %}
             <div class="container-fluid">
                 <div class="row">
@@ -64,8 +67,6 @@
                         </div>
                     </div>
             </div>
-            {% else %}
-                <p>No recipes found for your search query.</p>
             {% endif %}
         </div>
     </div>
@@ -79,9 +80,7 @@
                         <a href="?query={{ query }}&page=1">&laquo; first</a>
                         <a href="?query={{ query }}&page={{ recipes.previous_page_number }}">previous</a>
                     {% endif %}
-                    <span class="current">
-                        Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.
-                    </span>
+                    <hr>
                     {% if recipes.has_next %}
                         <a href="?query={{ query }}&page={{ recipes.next_page_number }}">next</a>
                         <a href="?query={{ query }}&page={{ recipes.paginator.num_pages }}">last &raquo;</a>

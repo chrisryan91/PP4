@@ -13,6 +13,12 @@
                     {{ review.content | safe }}
                 </p>
             </div>
+            <div>
+                <p> {{ review.ingredients }} </p>
+            </div>
+            <div>
+                <p> {{ review.url }} </p>
+            </div>
             <div class="d-nfromone d-md-block col-md-6 masthead-image">
                 <div class="img-container">
                     {% if "placeholder" in review.featured_image.url %}

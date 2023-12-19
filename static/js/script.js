@@ -35,16 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-                var urlInput = document.getElementById("id_url");
-                var labelInput = document.getElementById("id_title");
-                var storedUrl = sessionStorage.getItem("modalURL");
-                var storedLabel = sessionStorage.getItem("modalLabel");
-    
-                if (storedUrl) {
-                    urlInput.value = storedUrl;
-                }
+    // Check if the script should run on the current page
+    if (window.location.pathname === '/submit_review/') {
+        var urlInput = document.getElementById("id_url");
+        var labelInput = document.getElementById("id_title");
+        var storedUrl = sessionStorage.getItem("modalURL");
+        var storedLabel = sessionStorage.getItem("modalLabel");
 
-                if (storedLabel) {
-                    labelInput.value = storedLabel;
-                }
-            });
+        if (urlInput && storedUrl) {
+            urlInput.value = storedUrl;
+        }
+
+        if (labelInput && storedLabel) {
+            labelInput.value = storedLabel;
+        }
+    }
+});
