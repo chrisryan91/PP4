@@ -34,7 +34,7 @@ class ReviewForm(forms.ModelForm):
 class CommentForms(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ['body', 'review']
+        fields = ['body']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

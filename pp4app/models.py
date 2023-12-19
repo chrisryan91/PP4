@@ -33,7 +33,7 @@ class Review(models.Model):
     status = models.IntegerField(choices=STATUS, default=0)
     upvotes = models.ManyToManyField(User, related_name="review_likes", blank=True)
     prep_time = models.IntegerField(help_text='Preparation time in minutes')
-    comments = models.ManyToManyField('pp4app.Comment', related_name='review_comments')
+
     class Meta:
         ordering = ['-created_on']
 

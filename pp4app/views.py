@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic, View
 from django.views.generic import DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -122,7 +122,7 @@ class ReviewPost(DetailView):
             comment_form.instance.email = request.user.email
             comment_form.instance.name = request.user.username
             comment = comment_form.save(commit=False)
-            comment.post = self.object
+            comment.review = self.object
             comment.save()
             context['commented'] = True
             context['comment_form'] = CommentForms()
