@@ -70,25 +70,41 @@
             <i class="fab fa-youtube-square ms-3"></i></p>
     </footer>
     <script>
-
         function showModal(label, url) {
             console.log('Showing modal', label);
+            console.log(url);
             document.getElementById('id01').style.display = 'block';
             document.getElementById('modalHeader').innerHTML = label;
-            
+    
             var urlElement = document.getElementById('modalURL');
             var linkElement = document.createElement('a');
             linkElement.href = url;
             linkElement.innerHTML = "Visit Recipe";
+    
+
+            sessionStorage.setItem('modalLabel', label);
+            localStorage.setItem('modalURL', url);
+
+    
             urlElement.innerHTML = "";
             urlElement.appendChild(linkElement);
         }
-
+    
         function hideModal() {
             console.log('Hiding modal');
             document.getElementById('id01').style.display = 'none';
         }
-
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            var label = sessionStorage.getItem('modalLabel');
+            var titleElement = document.getElementById('title');
+    
+            // Check if label is not null or undefined before setting the content
+            console.log(label);
+            if (label && titleElement) {
+                titleElement.textContent = label;
+            }
+        });
     </script>
 </body>                            
 </html>

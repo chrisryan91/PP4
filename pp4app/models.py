@@ -7,14 +7,12 @@ STATUS = ((0, "DRAFT"), (1, "Published"))
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
 
     def __str__(self):
         return self.name
     
 class Utensil(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -30,7 +28,8 @@ class Recipe(models.Model):
     
 class Review(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, null=True, blank=True)
+    label = models.ForeignKey(Recipe, on_delete=models.CASCADE, null=True, blank=True)
+    url = models.URLField(blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
     ingredients = models.ManyToManyField(Ingredient, blank=True)

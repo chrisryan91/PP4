@@ -8,7 +8,7 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ['title', 'content', 'featured_image', 'prep_time']
+        fields = ['title', 'content', 'featured_image', 'prep_time',  'label', 'url']
 
     def save(self, commit=True):
         instance = super().save(commit=False)
