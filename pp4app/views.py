@@ -62,6 +62,7 @@ def SubmitReview(request):
     if request.method == "POST":
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
+            print("Form is valid")
             review = form.save(commit=False)
             review.author = request.user
             review.save()
@@ -76,9 +77,14 @@ def SubmitReview(request):
                 print(f"Session modalURL set to: {url}")
 
             return redirect('review_blog')
+        else:
+            print("form not valid")
+            print(form.errors)
     
     else:
+        
         form = ReviewForm()
+        print(form.errors)
 
     return render(request, 'submit_review.html', {'form': form})
 

@@ -100,10 +100,7 @@
             var label = sessionStorage.getItem('modalLabel');
             var url = sessionStorage.getItem('modalURL');
             var titleElement = document.getElementById('title');
-    
-            // Check if label is not null or undefined before setting the content
-            console.log(label);
-            console.log(URL);
+
             if (label && titleElement) {
                 titleElement.textContent = label;
             }

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
 from cloudinary.models import CloudinaryField
 
@@ -17,23 +18,13 @@ class Utensil(models.Model):
     def __str__(self):
         return self.name
 
-class Recipe(models.Model):
-    title = models.CharField(max_length=100)
-    ingredients = models.ManyToManyField(Ingredient)
-    utensils = models.ManyToManyField(Utensil)
-    image_url = CloudinaryField()
-
-    def __str__(self):
-        return self.title
-    
 class Review(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    label = models.ForeignKey(Recipe, on_delete=models.CASCADE, null=True, blank=True)
     url = models.URLField(blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
-    ingredients = models.ManyToManyField(Ingredient, blank=True)
-    utensils = models.ManyToManyField(Utensil, blank=True)
+    ingredients = ArrayField(models.CharField(max_length=100), blank=True, default=list)
+    utensils = ArrayField(models.CharField(max_length=100), blank=True, default=list)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     featured_image = CloudinaryField("image", default="placeholder")

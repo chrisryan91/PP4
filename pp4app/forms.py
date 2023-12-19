@@ -8,7 +8,17 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ['title', 'content', 'featured_image', 'prep_time',  'label', 'url']
+        fields = ['title', 
+                'content', 
+                'featured_image', 
+                'prep_time',
+                'url', 
+                'ingredients', 
+                'utensils']
+        widgets = {
+                'ingredients': forms.Textarea(attrs={'rows': 3}),
+                'utensils': forms.Textarea(attrs={'rows': 3}),
+                }
 
     def save(self, commit=True):
         instance = super().save(commit=False)
