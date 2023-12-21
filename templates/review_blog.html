@@ -7,33 +7,38 @@
         <div class="col-12 mt-3 left">
             <div class="row">
                 {% for review in review_list %}
-                    <div class="col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="image-container">
-                                    {% if "placeholder" in review.featured_image %}
-                                        <img src="" alt="cutlery clipart" class="card-img-top">
-                                        <a href="{% url 'review_post' review.slug %}" class="post-link">
-                                            <div class="middle">
-                                                <div class="text"> {{ review.title }} </div>
-                                            </div>
-                                        </a>
-                                    {% else %}
-                                        <img src="{{ review.featured_image.url }}" class="card-img-top">
-                                        <a href="{% url 'review_post' review.slug %}" class="post-link">
-                                            <div class="middle">
-                                                <div class="text"> {{ review.title }} </div>
-                                                <a href="{% url 'review_post' review.slug %}" class="post-link">
-                                                    <p class="card-text">{{ review.created_on }}
-                                                        <i class="fas fa-thumbs-up">{{ review.upvotes }}</i>
-                                                    </p>
-                                            </div>
-                                        </a>
-                                    {% endif %}
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="image-container">
+                                {% if "placeholder" in review.featured_image %}
+                                    <img src="" alt="cutlery clipart" class="card-img-top">
+                                {% else %}
+                                    <img src="{{ review.featured_image.url }}" class="card-img-top">
+                                {% endif %}
+                                <a href="{% url 'review_post' review.slug %}" class="post-link">
+                                    <div class="middle">
+                                        <h3 class="text">
+                                            {{ review.title }}
+                                        </h3>
+                                        <h4 class="card-text">
+                                            {{ review.author }}
+                                        </h4>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="text-container">
+                                <div>
+                                    <i class="fas fa-arrow-up"></i>
+                                    <i class="fas fa-arrow-down"></i>
+                                </div>
+                                <div>
+                                    {{ review.created_on }}
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                     {% if forloop.counter|divisibleby:4 and not forloop.last %}
                         </div><div class="row">
                     {% endif %}
