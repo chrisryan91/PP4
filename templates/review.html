@@ -8,6 +8,22 @@
             <div class="col-md-6 masthead-text">
                 <h1 class="post-title">{{ review.title }}</h1>
                 <h2 class="post-subtitle">{{ review.author }} | {{ post.created_on }}</h2>
+                <div>
+                    {% if user.is_authenticated %}
+                    <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" name="review_id" value="{{review.slug}}" class="btn-like">
+                            {% if user_has_upvoted %}
+                                <i class="fas fa-heart"></i>
+                            {% else %}
+                                <i class="far fa-heart"></i>
+                            {% endif %}
+                        </button>
+                    </form>
+                    {% else %}     
+                    <i class="fas fa-arrow-up"></i>
+                    {% endif %}
+                </div>
                 <hr>
                 <p>
                     {{ review.content | safe }}
@@ -74,6 +90,5 @@
     </div>
 </div>
 </div>
-
 
 {% endblock content %}

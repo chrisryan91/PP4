@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views import generic, View
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import DetailView
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views import generic, View
+from django.http import HttpResponseRedirect
 from .models import Review
 from .forms import CommentForms, ReviewForm
 import requests
@@ -129,3 +130,18 @@ class ReviewPost(DetailView):
             context['comment_form'] = comment_form
 
         return self.render_to_response(context)
+    
+class ReviewUpvote(View):
+    template_name = 'review.html'
+
+    def post(self, request, *args, **kwargs):
+        review = get_object_or_404(Review, slug=self.kwargs['slug'])
+
+        if request.user.is_authenticated:
+            user_has_upvoted = review.upvotes.filter(id=request.user.id).exists()
+            if user_has_upvoted:
+                review.upvotes.remove(request.user)
+            else:
+                review.upvotes.add(request.user)
+
+        return render(request, self.template_name, {'review': review, 'user_has_upvoted': user_has_upvoted})

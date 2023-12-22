@@ -47,6 +47,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: Merriweather, sans-serif;
 }
 
 .text-container i:first-child {
@@ -188,4 +189,17 @@ nav {
 button {
     background-color: white;
     border-radius: 5px;
+}
+
+.btn-like {
+    color: #E84610;
+    border: none;
+    background: transparent;
+}
+
+.btn-like:hover,
+.btn-like:active {
+    color: #E84610;
+    background: transparent;
+    border: none;
 }
