@@ -5,9 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
         cardDiv.addEventListener('mouseover', function(event) {
             var label = cardDiv.querySelector('.text').textContent;
             var url = cardDiv.querySelector('a[href]').getAttribute('href');
+            var image = cardDiv.querySelector('img').getAttribute('src');
 
             sessionStorage.setItem('modalLabel', label);
             sessionStorage.setItem('modalURL', url);
+            sessionStorage.setItem('modalImg', image);
         });
     });
 });
