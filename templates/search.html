@@ -36,12 +36,14 @@
                                             <img src="{{ recipe.recipe.image }}" class="card-img-top">
                                             <div class="middle">
                                                 <div class="text">{{ recipe.recipe.label }}</div>
-                                                <a href="{{ recipe.recipe.url }}">
-                                                    <p class="card-text">Visit</p>
-                                                </a>
-                                                <a href="{% url 'submit_review' %}" id='eviewLink'>
-                                                    <p class="card-text">Review</p>
-                                                </a>
+                                                <div class="icon-container">
+                                                    <a href="{{ recipe.recipe.url }}" class="card-text">
+                                                        <i class="fas fa-book"><span class="tooltiptext1">Visit Recipe</span></i>
+                                                    </a>
+                                                    <a href="{% url 'submit_review' %}"  class="card-text">
+                                                        <i class="fas fa-pen"><span class="tooltiptext2">Review Recipe</span></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

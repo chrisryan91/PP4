@@ -19,6 +19,13 @@ class ReviewForm(forms.ModelForm):
                 'ingredients': forms.Textarea(attrs={'rows': 3}),
                 'utensils': forms.Textarea(attrs={'rows': 3}),
                 }
+        
+    def __init__(self, *args, **kwargs):
+        super(ReviewForm, self).__init__(*args, **kwargs)
+
+        # Make title and url fields read-only
+        self.fields['title'].widget.attrs['readonly'] = True
+        self.fields['url'].widget.attrs['readonly'] = True
 
     def save(self, commit=True):
         instance = super().save(commit=False)
