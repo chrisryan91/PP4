@@ -1,36 +1,25 @@
-function showModal(label, url) {
-    console.log('Showing modal', label);
-    console.log(url);
-    document.getElementById('id01').style.display = 'block';
-    document.getElementById('modalHeader').innerHTML = label;
+document.addEventListener('DOMContentLoaded', function() {
+    var cardDivs = document.querySelectorAll('.card');
 
-    var urlElement = document.getElementById('modalURL');
-    var linkElement = document.createElement('a');
-    linkElement.href = url;
-    linkElement.innerHTML = "Visit Recipe";
+    cardDivs.forEach(function(cardDiv) {
+        cardDiv.addEventListener('mouseover', function(event) {
+            var label = cardDiv.querySelector('.text').textContent;
+            var url = cardDiv.querySelector('a[href]').getAttribute('href');
 
-
-    sessionStorage.setItem('modalLabel', label);
-    sessionStorage.setItem('modalURL', url);
-
-
-    urlElement.innerHTML = "";
-    urlElement.appendChild(linkElement);
-}
-
-function hideModal() {
-    console.log('Hiding modal');
-    document.getElementById('id01').style.display = 'none';
-}
+            sessionStorage.setItem('modalLabel', label);
+            sessionStorage.setItem('modalURL', url);
+        });
+    });
+});
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    var label = sessionStorage.getItem('modalLabel');
-    var url = sessionStorage.getItem('modalURL');
+    var label2 = sessionStorage.getItem('modalLabel');
+    var url2 = sessionStorage.getItem('modalURL');
     var titleElement = document.getElementById('title');
 
-    if (label && titleElement) {
-        titleElement.textContent = label;
+    if (label2 && titleElement) {
+        titleElement.textContent = label2;
     }
 });
 

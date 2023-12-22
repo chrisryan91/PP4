@@ -37,7 +37,6 @@ def search(request):
 
     return render(request, 'search.html', {'query': query, 'recipes': recipes})
 
-
 def get_recipes(query):
     api_url = 'https://api.edamam.com/api/recipes/v2'
     app_id = os.environ.get("EDA_APP_ID")

@@ -33,28 +33,15 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="image-container">
-                                                <img src="{{ recipe.recipe.image }}" class="card-img-top">
-                                                <a href="#" class="post-link" onclick="showModal('{{ recipe.recipe.label }}', '{{ recipe.recipe.url }}'); return false;">
-                                                    <div class="middle">
-                                                        <div class="text">{{ recipe.recipe.label }}</div>
-                                                        <p class="card-text">More info</p>
-                                                    </div>
+                                            <img src="{{ recipe.recipe.image }}" class="card-img-top">
+                                            <div class="middle">
+                                                <div class="text">{{ recipe.recipe.label }}</div>
+                                                <a href="{{ recipe.recipe.url }}">
+                                                    <p class="card-text">Visit</p>
                                                 </a>
-                                        </div>
-                                        <div id="id01" class="w3-modal w3-animate-opacity" style="display: none;">
-                                            <div class="w3-modal-content w3-card-4">
-                                                <header class="w3-container w3-teal"> 
-                                                    <span onclick="hideModal()" class="w3-button w3-large w3-display-topright">&times;</span>
-                                                    <h2 id="modalHeader"></h2>
-                                                </header>
-                                                <div class="w3-container">
-                                                    <p id="modalURL">Visit Recipe</p>
-                                                </div>
-                                                <div>
-                                                    <a href="{% url 'submit_review' %}">
-                                                        <p>Review this recipe</p>
-                                                    </a>
-                                                </div>
+                                                <a href="{% url 'submit_review' %}" id='eviewLink'>
+                                                    <p class="card-text">Review</p>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
