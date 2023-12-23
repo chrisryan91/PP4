@@ -21,19 +21,17 @@
                                         <h3 class="text">
                                             {{ review.title }}
                                         </h3>
-                                        <h4 class="card-text">
-                                            {{ review.author }}
+                                        <h4 class="card-text"><i class="fas fa-book"><span class="tooltiptext1">Visit Review</span></i>
                                         </h4>
                                     </div>
                                 </a>
                             </div>
                             <div class="text-container">
                                 <div>
-                                    <i class="fas fa-arrow-up icon-cog"></i>
-                                    <i class="fas fa-arrow-down"></i>
+                                    <span id="like-count"><i class="fas fa-heart"></i>{{ review.number_of_likes }}</span>
                                 </div>
                                 <div>
-                                    {{ review.created_on }}
+                                    {{ review.created_on }} by {{ review.author }}
                                 </div>
                             </div>
                         </div>

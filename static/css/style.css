@@ -21,6 +21,14 @@ nav {
     text-decoration: none;
 }
 
+.main {
+    display: flex;
+}
+
+.link {
+    margin-right: 50px;
+}
+
 .card {
     width: 100%;
     border: none;
