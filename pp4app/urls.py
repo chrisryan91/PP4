@@ -9,4 +9,6 @@ urlpatterns = [
     path('<slug:slug>/', views.ReviewPost.as_view(), name='review_post'),
     path('review_blog.html', views.Reviews.as_view(), name='review_blog'),
     path('upvotes/<slug:slug>', views.ReviewUpvote.as_view(), name="review_upvote"),
+    path('update_review/<slug:slug>/', views.UpdateReview.as_view(), name='update_review'),
+    path('review/<slug:slug>/', views.ReviewPost.as_view(), name='review_post'),
 ]

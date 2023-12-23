@@ -45,6 +45,9 @@
                     {% endif %}
                 </div>
             </div>
+            {% if user.is_authenticated and user == review.author %}
+            <a href="{% url 'update_review' slug=review.slug %}">Update Review</a>
+            {% endif %}
         </div>
     </div>
 </div>
