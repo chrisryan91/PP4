@@ -145,3 +145,19 @@ class ReviewUpvote(View):
                 review.upvotes.add(request.user)
 
         return render(request, self.template_name, {'review': review, 'user_has_upvoted': user_has_upvoted})
+    
+class UpdateReview(View):
+    template_name = 'update_review.html'
+    
+    def get(self, request, slug):
+        review = get_object_or_404(Review, slug=slug, author=request.user)
+        form = ReviewForm(instance=review)
+        return render(request, self.template_name, {'form': form, 'review': review})
+    
+    def post(self, request, slug):
+        review = get_object_or_404(Review, slug=slug, author=request.user)
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            return redirect(review.get_absolute_url())
+        return render(request, self.template_name, {'form': form, 'review': review})

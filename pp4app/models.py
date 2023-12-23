@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.postgres.fields import ArrayField
 from django.utils import timezone
+from django.urls import reverse
 from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "DRAFT"), (1, "Published"))
@@ -42,6 +43,9 @@ class Review(models.Model):
 
     def number_of_likes(self):
         return self.upvotes.count()
+
+    def get_absolute_url(self):
+        return reverse('review', kwargs={'slug': self.slug})
     
 class Comment(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="comments_review")

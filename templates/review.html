@@ -12,17 +12,18 @@
                     {% if user.is_authenticated %}
                     <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
                         {% csrf_token %}
-                        <button type="submit" name="review_id" value="{{review.slug}}" class="btn-like">
+                        <button type="submit" name="review_id" value="{{review.slug}}">
                             {% if user_has_upvoted %}
-                                <i class="fas fa-heart"></i>
-                            {% else %}
                                 <i class="far fa-heart"></i>
+                            {% else %}
+                                <i class="fas fa-heart"></i>
                             {% endif %}
                         </button>
                     </form>
                     {% else %}     
-                    <i class="fas fa-arrow-up"></i>
+                    <i class="fas fa-heart"></i>
                     {% endif %}
+                    <span id="like-count">{{ review.number_of_likes }}</span>
                 </div>
                 <hr>
                 <p>
