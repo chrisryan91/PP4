@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from .models import Review
+from .models import Review, Ingredient, Utensil
 from .forms import CommentForms, ReviewForm
 import requests
 import os
@@ -88,7 +88,7 @@ def SubmitReview(request):
         form = ReviewForm()
         print(form.errors)
 
-    return render(request, 'submit_review.html', {'form': form})
+    return render(request, 'submit_review.html', {'form': form, 'ingredients': Ingredient.objects.all(), 'utensils': Utensil.objects.all()})
 
 class Reviews(generic.ListView):
     model = Review

@@ -1,10 +1,23 @@
-from .models import Review, Comment
+from .models import Review, Comment, Ingredient, Utensil
 from cloudinary.forms import CloudinaryFileField
 from django import forms
 from django.utils.text import slugify
 
 class ReviewForm(forms.ModelForm):
+
     featured_image = CloudinaryFileField(required=False)
+
+    ingredients = forms.ModelMultipleChoiceField(
+        queryset=Ingredient.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    utensils = forms.ModelMultipleChoiceField(
+        queryset=Utensil.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
 
     class Meta:
         model = Review
@@ -15,15 +28,10 @@ class ReviewForm(forms.ModelForm):
                 'url', 
                 'ingredients', 
                 'utensils']
-        widgets = {
-                'ingredients': forms.Textarea(attrs={'rows': 3}),
-                'utensils': forms.Textarea(attrs={'rows': 3}),
-                }
         
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
 
-        # Make title and url fields read-only
         self.fields['title'].widget.attrs['readonly'] = True
         self.fields['url'].widget.attrs['readonly'] = True
 

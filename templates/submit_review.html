@@ -11,6 +11,8 @@
             <form method="post" action="{% url 'submit_review' %}" enctype="multipart/form-data">
                 {{ form | crispy }}
                 {% csrf_token %}
+                {{ form.ingredients }}
+                {{ form.utensils }}
                 <button type="submit">Submit Review</button>
             </form>
         </div>
