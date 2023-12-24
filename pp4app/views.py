@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from django.utils.decorators import method_decorator
+from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic, View
 from django.http import HttpResponseRedirect
@@ -64,7 +65,6 @@ def SubmitReview(request):
     if request.method == "POST":
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
-            print("Form is valid")
             review = form.save(commit=False)
             review.author = request.user
             review.save()
@@ -80,7 +80,6 @@ def SubmitReview(request):
 
             return redirect('review_blog')
         else:
-            print("form not valid")
             print(form.errors)
     
     else:
@@ -92,13 +91,23 @@ def SubmitReview(request):
 
 class Reviews(generic.ListView):
     model = Review
-    queryset = Review.objects.filter(status=1).order_by('-created_on')
     template_name = 'review_blog.html'
     paginate_by = 8
 
+    def get_queryset(self):
+        sort_option = self.request.GET.get('sort', '-created_on')
+        print(f"Sort option: {sort_option}")
+
+        if sort_option == 'upvotes':
+            queryset = Review.objects.filter(status=1).annotate(like_count=Count('upvotes')).order_by('-like_count', '-created_on')
+        else:
+            queryset = Review.objects.filter(status=1).order_by('-created_on')
+
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['reviews'] = self.queryset
+        context['current_sort'] = self.request.GET.get('sort', '')
         return context
 
 class ReviewPost(DetailView):
@@ -170,4 +179,3 @@ class UpdateReview(View):
             return redirect(review.get_absolute_url())
         
         return render(request, self.template_name, {'form': form, 'review': review})
-    
