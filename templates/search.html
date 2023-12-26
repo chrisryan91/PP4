@@ -60,17 +60,14 @@
         </div>
     </div>
 </div>
-<div>
-    <div>
-        {% if recipes.has_previous %}
-            <a href="?query={{ query }}&page=1">&laquo; first</a>
-            <a href="?query={{ query }}&page={{ recipes.previous_page_number }}">previous</a>
-        {% endif %}
-        <hr>
-        {% if recipes.has_next %}
-            <a href="?query={{ query }}&page={{ recipes.next_page_number }}">next</a>
-            <a href="?query={{ query }}&page={{ recipes.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </div>
+<div class="pag">
+    {% if recipes.has_previous %}
+        <a href="?query={{ query }}&page=1">&laquo; First</a>
+        <a href="?query={{ query }}&page={{ recipes.previous_page_number }}">Previous</a>
+    {% endif %}
+    {% if recipes.has_next %}
+        <a href="?query={{ query }}&page={{ recipes.next_page_number }}">Next</a>
+        <a href="?query={{ query }}&page={{ recipes.paginator.num_pages }}">Last &raquo;</a>
+    {% endif %}
 </div>
 {% endblock content %}

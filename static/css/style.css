@@ -30,6 +30,10 @@ a:link {
     text-decoration: none;
 }
 
+.nav-item a:hover {
+    color: #E86A33;
+}
+
 .container {
     margin: auto;
     font-family: Merriweather, sans-serif;
@@ -203,6 +207,10 @@ a:link {
     font-family: Merriweather, sans-serif;
 }
 
+footer p i:hover {
+    color: #E86A33;
+}
+
 button {
     background-color: white;
     border-radius: 5px;
@@ -220,4 +228,9 @@ button {
     color: #E84610;
     background: transparent;
     border: none;
+}
+
+.pag {
+    font-weight: bold;
+    margin-bottom: 20px;
 }
