@@ -3,17 +3,13 @@
 {% block content %}
 
 <div class="container">
-    <div div="row">
-        <div class="col-12 mt-3 left">
-            <h2>Recipe Search</h2>
-            <form method="get" action="{% url 'search' %}">
-                {% csrf_token %}
-                <label for="query">Enter ingredients:</label>
-                <input type="text" name="query" required>
-                <button type="submit">Search</button>
-            </form>
-        </div>
-    </div>
+    <h2 class="search">Search by cuisine type, dishes or ingredients</h2>
+    <hr>
+    <form method="get" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input type="text" name="query" required>
+        <button type="submit">Search</button>
+    </form>
 </div>
 <div class="container">
     <div div="row">
@@ -21,7 +17,7 @@
             {% if query != None %}
             <h2>Search results for: {{ query }}</h2>
             {% else %}
-            <h3>Search for a valid ingredient, cuisine type or dish name</h3>
+            <h3>What do you have in your fridge?</h3>
             {% endif %}
             {% if recipes %}
             <div class="container-fluid">
@@ -38,10 +34,14 @@
                                                 <div class="text">{{ recipe.recipe.label }}</div>
                                                 <div class="icon-container">
                                                     <a href="{{ recipe.recipe.url }}" class="card-text">
-                                                        <i class="fas fa-book"><span class="tooltiptext1">Visit Recipe</span></i>
+                                                        <i class="fas fa-book">
+                                                            <span class="tooltiptext1">Visit Recipe</span>
+                                                        </i>
                                                     </a>
                                                     <a href="{% url 'submit_review' %}"  class="card-text">
-                                                        <i class="fas fa-pen"><span class="tooltiptext2">Review Recipe</span></i>
+                                                        <i class="fas fa-pen">
+                                                            <span class="tooltiptext2">Review Recipe</span>
+                                                        </i>
                                                     </a>
                                                 </div>
                                             </div>
@@ -60,23 +60,17 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-12 mt-3 left">
-            <div class="pagination">
-                <span class="step-links">
-                    {% if recipes.has_previous %}
-                        <a href="?query={{ query }}&page=1">&laquo; first</a>
-                        <a href="?query={{ query }}&page={{ recipes.previous_page_number }}">previous</a>
-                    {% endif %}
-                    <hr>
-                    {% if recipes.has_next %}
-                        <a href="?query={{ query }}&page={{ recipes.next_page_number }}">next</a>
-                        <a href="?query={{ query }}&page={{ recipes.paginator.num_pages }}">last &raquo;</a>
-                    {% endif %}
-                </span>
-            </div>
-        </div>
+<div>
+    <div>
+        {% if recipes.has_previous %}
+            <a href="?query={{ query }}&page=1">&laquo; first</a>
+            <a href="?query={{ query }}&page={{ recipes.previous_page_number }}">previous</a>
+        {% endif %}
+        <hr>
+        {% if recipes.has_next %}
+            <a href="?query={{ query }}&page={{ recipes.next_page_number }}">next</a>
+            <a href="?query={{ query }}&page={{ recipes.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
     </div>
 </div>
 {% endblock content %}

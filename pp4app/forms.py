@@ -52,11 +52,11 @@ class ReviewForm(forms.ModelForm):
         custom_ingredient = self.cleaned_data['custom_ingredient']
 
         if custom_utensil:
-            utensil, created = Utensil.objects.get_or_create(name=custom_utensil)
+            utensil, _ = Utensil.objects.get_or_create(name=custom_utensil)
             instance.utensils.add(utensil)
 
         if custom_ingredient:
-            ingredient, created = Ingredient.objects.get_or_create(name=custom_ingredient)
+            ingredient, _ = Ingredient.objects.get_or_create(name=custom_ingredient)
             instance.ingredients.add(ingredient)
 
         if commit:

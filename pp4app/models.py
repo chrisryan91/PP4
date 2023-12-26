@@ -8,12 +8,14 @@ from cloudinary.models import CloudinaryField
 STATUS = ((0, "DRAFT"), (1, "Published"))
 
 class Ingredient(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
     
 class Utensil(models.Model):
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
 
     def __str__(self):

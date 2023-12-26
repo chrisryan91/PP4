@@ -1,11 +1,11 @@
 body {
-    background-color: white;
+    background-color: #F2E3DB;
     font-family: initial;
 }
 
 nav {
-    background-color: #93BFCF;
-    color: white;
+    background-color: #263A29;
+    color: #F2E3DB;
     font-family: Merriweather, sans-serif;
 }
 
@@ -13,20 +13,29 @@ nav {
     font-family: Merriweather, sans-serif;
     font-size: 1.4rem;
     font-weight: 700;
-    color: white;
+    color: #F2E3DB;
 }
 
-.nav-link {
-    color: white;
+a {
+    text-decoration: none;
+    color: #41644A;
+}
+
+a:link {
     text-decoration: none;
 }
 
-.main {
-    display: flex;
+.nav-link {
+    color: #F2E3DB;
+    text-decoration: none;
 }
 
-.link {
-    margin-right: 50px;
+.container {
+    margin: auto;
+    font-family: Merriweather, sans-serif;
+    color: #41644A;
+    padding-top: 50px;
+    text-align: center;
 }
 
 .card {
@@ -48,8 +57,8 @@ nav {
 
 .text-container {
     height: 10%;
-    background-color: #93BFCF;
-    color: white;
+    background-color: #41644A;
+    color: #F2E3DB;
     padding: 8px;
     box-sizing: border-box;
     display: flex;
@@ -94,19 +103,21 @@ nav {
     font-weight: 600;
     padding: 10px;
     border-radius: 8px;
-    background-color: #93BFCF;
+    background-color: #41644A;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
 }
 
 .icon-container {
     display: flex;
+    text-decoration: none;
 }
 
 .card-text {
     margin: 0;
-    background-color: #93BFCF;
+    background-color: #41644A;
     opacity: .8;
-    color: white;
+    color: #F2E3DB;
     text-decoration: none;
     font-size: 12px;
     font-weight: 400;
@@ -118,25 +129,28 @@ nav {
 
 .card-text a {
     margin-right: 10px;
-    color: black;
+    color: #E86A33;
     text-decoration: none;
     transition: color 0.3s ease;
     z-index: 2;
+    text-decoration: none;
 }
 
 .card-text i:hover {
-    color: red;
+    color: #E86A33;
+    text-decoration: none;
 }
 
 .card-text i {
     font-size: 200%;
+    text-decoration: none;
 }
 
 
 .card-text .tooltiptext1, .card-text .tooltiptext2 {
     visibility: hidden;
     width: 80px;
-    background-color: white;
+    background-color: #F2E3DB;
     opacity: .8;
     color: black;
     text-align: center;
@@ -155,31 +169,26 @@ nav {
 
 .card-text:hover .tooltiptext1, .card-text:hover .tooltiptext2 {
     visibility: visible;
+    text-decoration: none;
 }
 
 .text {
-    background-color: #93BFCF;
+    background-color: #41644A;
     opacity: .8;
-    color: white;
+    color: #F2E3DB;
 }
 
 .text:hover {
-    color: black;
+    color: #E86A33;
 }
 
 .icon-cog {
-    color: red;
+    color: #E86A33;
 }
 
 .post-link {
     text-decoration: none;
     font-family: Merriweather, sans-serif;
-}
-
-.container {
-    font-family: Merriweather, sans-serif;
-    color: #6096B4;
-    padding-top: 50px;
 }
 
 .img-container {
@@ -190,13 +199,14 @@ nav {
 }
 
 .footer {
-    background-color: #93BFCF;
+    background-color: #263A29;
     font-family: Merriweather, sans-serif;
 }
 
 button {
     background-color: white;
     border-radius: 5px;
+    font-family: Merriweather, sans-serif;
 }
 
 .btn-like {
