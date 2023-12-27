@@ -5,7 +5,7 @@ body {
 
 nav {
     background-color: #263A29;
-    color: #F2E3DB;
+    color: white;
     font-family: Merriweather, sans-serif;
 }
 
@@ -17,6 +17,7 @@ nav {
 }
 
 a {
+    all: unset;
     text-decoration: none;
     color: #41644A;
 }
@@ -43,11 +44,9 @@ button:hover {
 }
 
 .container {
-    margin: auto;
     font-family: Merriweather, sans-serif;
     color: #41644A;
     padding-top: 50px;
-    text-align: center;
 }
 
 .card {
@@ -65,6 +64,7 @@ button:hover {
     position: relative;
     height: 90%;
     overflow: hidden;
+    border: solid 1px #41644A;
 }
 
 .text-container {
@@ -145,17 +145,17 @@ button:hover {
     text-decoration: none;
     transition: color 0.3s ease;
     z-index: 2;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .card-text i:hover {
     color: #E86A33;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .card-text i {
     font-size: 200%;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 
@@ -176,6 +176,7 @@ button:hover {
     margin-left: -60px;
     font-family: Merriweather, sans-serif;
     font-size: 75%;
+    text-decoration: none;
 }
 
 
@@ -219,10 +220,22 @@ footer p i:hover {
     color: #E86A33;
 }
 
+label {
+    font-family: Merriweather, sans-serif;
+    font-size: small;
+}
+
+select {
+    font-family: Merriweather, sans-serif;
+    font-size: small;
+}
+
 button {
     background-color: white;
     border-radius: 5px;
+    border-width: 1px;
     font-family: Merriweather, sans-serif;
+    font-size: small;
 }
 
 .btn-like {
@@ -299,3 +312,25 @@ button {
     transform: scale(0.94);
     animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
   }
+
+.masthead {
+    text-align: left !important;
+    margin-left: 50px !important;
+}
+
+.edit {
+    text-decoration: none;
+}
+
+.alert {
+    color: white;
+    background-color: #E86A33;
+}
+
+.text-container .left-content {
+    font-size: 1vw;
+}
+
+.text-container .right-content {
+    font-size: 1vw;
+}

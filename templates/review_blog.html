@@ -34,12 +34,16 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="text-container">
-                                <div>
-                                    <span id="like-count"><i class="fas fa-heart"></i>{{ review.number_of_likes }}</span>
+                            <div class="text-container d-flex align-items-center justify-content-between">
+                                <div class="left-content">
+                                    <div>
+                                        <span id="like-count"><i class="fas fa-heart"></i>{{ review.number_of_likes }}</span>
+                                    </div>
                                 </div>
-                                <div>
-                                    {{ review.created_on }} by {{ review.author }}
+                                <div class="right-content">
+                                    <div>
+                                        {{ review.created_on }} by {{ review.author }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

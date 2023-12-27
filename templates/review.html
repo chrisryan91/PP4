@@ -1,74 +1,95 @@
 {% extends 'base.html' %} {% block content %}
 
 {% load crispy_forms_tags %}
-
 <div class="masthead">
     <div class="container">
         <div class="row g-0">
             <div class="col-md-6 masthead-text">
                 <h1 class="post-title">{{ review.title }}</h1>
-                <h2 class="post-subtitle">{{ review.author }} | {{ post.created_on }}</h2>
                 <div>
-                    {% if user.is_authenticated %}
-                    <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit" name="review_id" value="{{review.slug}}">
-                            {% if user_has_upvoted %}
-                                <i class="far fa-heart"></i>
-                            {% else %}
-                                <i class="fas fa-heart"></i>
-                            {% endif %}
-                        </button>
-                    </form>
-                    {% else %}     
-                    <i class="fas fa-heart"></i>
-                    {% endif %}
-                    <span id="like-count">{{ review.number_of_likes }}</span>
+                    <div>
+                        {% if user.is_authenticated %}
+                        <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" name="review_id" value="{{review.slug}}">
+                                {% if user_has_upvoted %}
+                                    <i class="far fa-heart"></i>
+                                {% else %}
+                                    <i class="fas fa-heart"></i>
+                                {% endif %}
+                            </button>
+                        </form>
+                        {% else %}     
+                        <i class="fas fa-heart"></i>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <span id="like-count">{{ review.number_of_likes }}</span>
+                    </div>
                 </div>
-                <hr>
-                <p>
-                    {{ review.content | safe }}
-                </p>
+                <h2 class="post-subtitle">
+                    {{ review.author }}
+                </h2>
+                <h3>
+                    {{ review.created_on }}
+                </h3>         
+                {% if user.is_authenticated and user == review.author %}
+                <a href="{% url 'update_review' slug=review.slug %}">Update Review</a>
+                {% endif %}
             </div>
-            <div>
-                <p> {{ review.ingredients }} </p>
-            </div>
-            <div>
-                <p> {{ review.url }} </p>
-            </div>
-            <div class="d-nfromone d-md-block col-md-6 masthead-image">
+            <div class="col-md-6 masthead-image">
                 <div class="img-container">
                     {% if "placeholder" in review.featured_image.url %}
                     <img src="https://media.istockphoto.com/id/1134020110/vector/cutlery-restaurant-icons.jpg?s=612x612&w=0&k=20&c=udrCAY1Ru_iLEdwJK_fyuHXNQoH3y47ZCuNIr7uRwR0=" width="100%">
                     {% else %}
-                    <img src=" {{ review.featured_image.url }}" width="100%">
+                    <img src="{{ review.featured_image.url }}" width="100%">
                     {% endif %}
                 </div>
             </div>
-            {% if user.is_authenticated and user == review.author %}
-            <a href="{% url 'update_review' slug=review.slug %}">Update Review</a>
-            {% endif %}
         </div>
     </div>
+    <hr>
+    <div class="container">
+        <div  class="row g-0" >
+            <div class="col-md-6 masthead-text">
+                <div>
+                    <h2>Ingredients:</h2>
+                    <p> {{ review.ingredients }} </p>
+                </div>
+            </div>
+            <div class="col-md-6 masthead-text">
+                <h2>Utensils:</h2>
+                <p> {{ review.utensils }} </p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container">
+        <h2>Review:</h2>
+        <p>
+            {{ review.content | safe }}
+        </p>
+    </div>
+    <hr>
 </div>
 <div class="masthead">
     <div class="container">
         <div class="row">
             <div class="col-md-8 card mb-4 mt-3">
                 <h3>Comments:</h3>
-                <div class="card-body">
-                    {% for comment in comments %}
-                    <div class="comments" style="padding: 10px;">
-                        <p class="font-weight-bold">
-                            {{ comment.name }}
-                            <span class="text-muted font-weight-normal">
-                                {{ comment.created_on }}
-                            </span> wrote:
-                        </p>
-                        {{ comment.body | linebreaks }}
+                    <div class="card-body">
+                        {% for comment in comments %}
+                            <div class="comments" style="padding: 10px;">
+                                <p class="font-weight-bold">
+                                    {{ comment.name }}
+                                    <span class="text-muted font-weight-normal">
+                                        {{ comment.created_on }}
+                                    </span> wrote:
+                                </p>
+                                {{ comment.body | linebreaks }}
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-                </div>
             </div>
         </div>
             <div class="col-md-4 card mb-4  mt-3 ">
@@ -80,11 +101,11 @@
                     {% else %}
                     {% if user.is_authenticated %}
                     <h3>Leave a comment:</h3>
-                    <p>Posting as: {{ user.username }}</p>
+                    <p>Posting as: <strong>{{ user.username }}</strong></p>
                     <form method="post">
                         {{ comment_form | crispy }}
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-signup btn-lg">Submit</button>
+                        <button type="submit">Submit</button>
                     </form>
                     {% endif %}
                     {% endif %}
