@@ -1,7 +1,57 @@
+/* Global Styles */
+
+html {
+    height: 100%;
+}
+
 body {
     background-color: #F2E3DB;
     font-family: initial;
+    margin: 0;
+    padding: 0;
 }
+
+a {
+    all: unset;
+    text-decoration: none;
+    color: #41644A;
+    cursor: pointer;
+}
+
+
+a:link {
+    text-decoration: none;
+}
+
+
+button:hover {
+    background-color: #E86A33;
+}
+
+label {
+    font-family: Merriweather, sans-serif;
+    font-size: small;
+}
+
+select {
+    font-family: Merriweather, sans-serif;
+    font-size: small;
+}
+
+.btn-like {
+    color: #E84610;
+    border: none;
+    background: transparent;
+}
+
+.btn-like:hover,
+.btn-like:active {
+    color: #E84610;
+    background: transparent;
+    border: none;
+}
+
+/* base.html Styles */
 
 nav {
     background-color: #263A29;
@@ -16,20 +66,6 @@ nav {
     color: #F2E3DB;
 }
 
-a {
-    all: unset;
-    text-decoration: none;
-    color: #41644A;
-}
-
-#link h2 a:hover {
-    color: #E86A33;
-}
-
-a:link {
-    text-decoration: none;
-}
-
 .nav-link {
     color: #F2E3DB;
     text-decoration: none;
@@ -39,14 +75,37 @@ a:link {
     color: #E86A33;
 }
 
-button:hover {
-    background-color: #E86A33;
+.footer {
+    background-color: #263A29;
+    font-family: Merriweather, sans-serif;
 }
+
+footer p i:hover {
+    color: #E86A33;
+}
+
+/* index.html Styles */
+
+.homepage-image {
+    background-image: url('../ello-AEU9UZstCfs-unsplash.webp');
+    background-size: cover;
+    background-position: center;
+    height: 50vh;
+    max-width: 100%;
+}
+
+#link h2 a:hover {
+    color: #E86A33;
+}
+
+/* search.html Styles */
 
 .container {
     font-family: Merriweather, sans-serif;
     color: #41644A;
     padding-top: 50px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .card {
@@ -54,6 +113,7 @@ button:hover {
     border: none;
     background-color: transparent;
 }
+
 .card-body {
     height: 420px;
     display: flex;
@@ -66,23 +126,6 @@ button:hover {
     overflow: hidden;
     border: solid 1px #41644A;
 }
-
-.text-container {
-    height: 10%;
-    background-color: #41644A;
-    color: #F2E3DB;
-    padding: 8px;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: Merriweather, sans-serif;
-}
-
-.text-container i:first-child {
-    margin-right: 8px;
-}
-
 
 .image-container:hover .card-img-top {
     opacity: 0.25;
@@ -179,7 +222,6 @@ button:hover {
     text-decoration: none;
 }
 
-
 .card-text:hover .tooltiptext1, .card-text:hover .tooltiptext2 {
     visibility: visible;
     text-decoration: none;
@@ -199,6 +241,13 @@ button:hover {
     color: #E86A33;
 }
 
+.pag {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* review_blog.html Styles */
+
 .post-link {
     text-decoration: none;
     font-family: Merriweather, sans-serif;
@@ -211,50 +260,55 @@ button:hover {
     overflow: hidden;
 }
 
-.footer {
-    background-color: #263A29;
+.text-container .left-content {
+    font-size: 1vw;
+}
+
+.text-container .right-content {
+    font-size: 1vw;
+}
+
+.text-container {
+    height: 10%;
+    background-color: #41644A;
+    color: #F2E3DB;
+    padding: 8px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-family: Merriweather, sans-serif;
 }
 
-footer p i:hover {
-    color: #E86A33;
+.masthead {
+    text-align: left !important;
+    margin-left: 50px !important;
 }
 
-label {
+.text-container i:first-child {
+    margin-right: 8px;
+}
+
+/* submit & update review Styles */
+
+.container2 {
     font-family: Merriweather, sans-serif;
-    font-size: small;
+    color: #41644A;
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-bottom: 50px;
 }
 
-select {
-    font-family: Merriweather, sans-serif;
-    font-size: small;
+.edit {
+    text-decoration: none;
 }
 
-button {
-    background-color: white;
-    border-radius: 5px;
-    border-width: 1px;
-    font-family: Merriweather, sans-serif;
-    font-size: small;
+.alert {
+    color: white;
+    background-color: #E86A33;
 }
 
-.btn-like {
-    color: #E84610;
-    border: none;
-    background: transparent;
-}
-
-.btn-like:hover,
-.btn-like:active {
-    color: #E84610;
-    background: transparent;
-    border: none;
-}
-
-.pag {
-    font-weight: bold;
-    margin-bottom: 20px;
-}
+/* Animations */ 
 
 .animation-span {
     transform: scale(0.94);
@@ -307,30 +361,3 @@ button {
       filter: blur(0);
     }
   }
-
-  .zen-plate {
-    transform: scale(0.94);
-    animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
-  }
-
-.masthead {
-    text-align: left !important;
-    margin-left: 50px !important;
-}
-
-.edit {
-    text-decoration: none;
-}
-
-.alert {
-    color: white;
-    background-color: #E86A33;
-}
-
-.text-container .left-content {
-    font-size: 1vw;
-}
-
-.text-container .right-content {
-    font-size: 1vw;
-}
