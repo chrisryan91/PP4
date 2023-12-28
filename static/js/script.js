@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Check if the script should run on the current page
+
     if (window.location.pathname === '/submit_review/') {
         var urlInput = document.getElementById("id_url");
         var labelInput = document.getElementById("id_title");
@@ -41,4 +41,9 @@ document.addEventListener("DOMContentLoaded", function() {
             labelInput.value = storedLabel;
         }
     }
+});
+
+$(document).ready(function () {
+    $('#id_ingredients').select2();
+    $('#id_utensils').select2();
 });

@@ -8,13 +8,13 @@ class ReviewForm(forms.ModelForm):
 
     custom_utensil = forms.CharField(
         max_length=255,
-        widget=forms.TextInput(attrs={'placeholder': 'Add custom utensil'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Add utensil'}),
         required=False
     )
 
     custom_ingredient = forms.CharField(
         max_length=255,
-        widget=forms.TextInput(attrs={'placeholder': 'Add custom ingredient'}),
+        widget=forms.TextInput(attrs={'placeholder': 'Add ingredient'}),
         required=False
     )
 
@@ -47,7 +47,6 @@ class ReviewForm(forms.ModelForm):
         if isinstance(instance.featured_image, str):
             instance.featured_image = CloudinaryFileField("image").to_python(instance.featured_image)
 
-        # Handle custom utensils and ingredients
         custom_utensil = self.cleaned_data['custom_utensil']
         custom_ingredient = self.cleaned_data['custom_ingredient']
 
