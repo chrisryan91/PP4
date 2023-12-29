@@ -5,9 +5,11 @@
 <div class="container">
     <h2 class="search">Search by cuisine type, dishes or ingredients</h2>
     <hr>
-    <form method="get" action="{% url 'search' %}">
+    <form method="get" action="{% url 'search' %}" onsubmit="prepareIngredients()">
         {% csrf_token %}
-        <input type="text" name="query" required>
+        <select id="ingredientInput" multiple="multiple">
+        </select>
+        <input type="hidden" name="query" id="ingredientQuery" required>
         <button type="submit">Search</button>
     </form>
 </div>
@@ -18,7 +20,7 @@
             <h2>Search results for: {{ query }}</h2>
             {% else %}
             <h1 class="animation-span">
-                <span>What</span>
+                <span>This</span>
                 <span>is</span>
                 <span>on</span>
                 <span>the</span>
@@ -54,6 +56,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div style="visibility: hidden; width: 0px; height: 0px; position: absolute;" class="wholerecipe">{% for ingredient in recipe.recipe.ingredients %}{{ ingredient.food }},{% endfor %}</div>
                                 </div>
                             </div>
                                 {% if forloop.counter|divisibleby:4 and not forloop.last %}

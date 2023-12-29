@@ -54,12 +54,20 @@
             <div class="col-md-6 masthead-text">
                 <div>
                     <h2>Ingredients:</h2>
-                    <p> {{ review.ingredients }} </p>
+                    <ul>
+                        {% for ingredient in ingredients %}
+                            <li>{{ ingredient.name }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
             <div class="col-md-6 masthead-text">
                 <h2>Utensils:</h2>
-                <p> {{ review.utensils }} </p>
+                <ul>
+                    {% for utensil in utensils %}
+                        <li>{{ utensil.name }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

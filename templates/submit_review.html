@@ -8,6 +8,8 @@
     <div div="row">
         <div class="col-12 mt-3 left">
             <h1>Submit Review Page</h1>
+            <h2>Site's ingredients</h2>
+            <div id="ingredients"></div>
             <form method="post" action="{% url 'submit_review' %}" enctype="multipart/form-data">
                 {{ form | crispy }}
                 {% csrf_token %}

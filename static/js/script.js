@@ -4,10 +4,13 @@ document.addEventListener('DOMContentLoaded', function() {
     cardDivs.forEach(function(cardDiv) {
         cardDiv.addEventListener('mouseover', function(event) {
             var label = cardDiv.querySelector('.text').textContent;
+            var wholeRecipe = cardDiv.querySelector('.wholerecipe').textContent;
             var url = cardDiv.querySelector('a[href]').getAttribute('href');
             var image = cardDiv.querySelector('img').getAttribute('src');
 
+
             sessionStorage.setItem('modalLabel', label);
+            sessionStorage.setItem('wholeRecipe', wholeRecipe);
             sessionStorage.setItem('modalURL', url);
             sessionStorage.setItem('modalImg', image);
         });
@@ -26,12 +29,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-
     if (window.location.pathname === '/submit_review/') {
         var urlInput = document.getElementById("id_url");
         var labelInput = document.getElementById("id_title");
         var storedUrl = sessionStorage.getItem("modalURL");
         var storedLabel = sessionStorage.getItem("modalLabel");
+        var ingredientsArray = sessionStorage.getItem("wholeRecipe");
 
         if (urlInput && storedUrl) {
             urlInput.value = storedUrl;
@@ -40,10 +43,26 @@ document.addEventListener("DOMContentLoaded", function() {
         if (labelInput && storedLabel) {
             labelInput.value = storedLabel;
         }
+        
+        const ingredientsList = document.getElementById("ingredients");
+        ingredientsList.innerText = ingredientsArray.slice(0, -1) 
     }
 });
 
 $(document).ready(function () {
     $('#id_ingredients').select2();
     $('#id_utensils').select2();
+});
+
+$(document).ready(function() {
+    $('#ingredientInput').select2({
+        tags: true,
+        tokenSeparators: [','],
+        placeholder: 'Enter single ingredient and press enter!',
+    });
+
+    $('form').submit(function() {
+        var selectedIngredients = $('#ingredientInput').val();
+        $('#ingredientQuery').val(selectedIngredients.join(','));
+    });
 });

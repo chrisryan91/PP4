@@ -100,6 +100,10 @@ footer p i:hover {
 
 /* search.html Styles */
 
+#ingredientInput {
+    width: 50%;
+}
+
 .container {
     font-family: Merriweather, sans-serif;
     color: #41644A;
