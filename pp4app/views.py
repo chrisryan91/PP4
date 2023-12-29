@@ -121,8 +121,6 @@ class ReviewPost(DetailView):
         print("Comments:", context['comments'])
         context['comment_form'] = CommentForms()
         context['commented'] = False
-        context['ingredients'] = self.object.ingredients.all()
-        context['utensils'] = self.object.utensils.all()
         return context
 
     def post(self, request, *args, **kwargs):

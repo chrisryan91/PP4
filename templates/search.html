@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container">
-    <h2 class="search">Search by cuisine type, dishes or ingredients</h2>
+    <h2 class="search">Search by what ingredients you have on hand!</h2>
     <hr>
     <form method="get" action="{% url 'search' %}" onsubmit="prepareIngredients()">
         {% csrf_token %}
