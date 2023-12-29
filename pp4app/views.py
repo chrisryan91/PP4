@@ -68,6 +68,7 @@ def SubmitReview(request):
             review = form.save(commit=False)
             review.author = request.user
             review.save()
+            form.save_m2m()
             if review.featured_image:
                 print(f"Cloudinary URL: {review.featured_image.url}")
             else:
