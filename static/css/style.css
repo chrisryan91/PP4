@@ -51,6 +51,32 @@ select {
     border: none;
 }
 
+form {
+    font-family: Merriweather, sans-serif;
+}
+
+button {
+    border-radius: 20%;
+}
+
+.pag-nav {
+    background-color: #F2E3DB;
+}
+
+.page-link {
+    font-weight: bold;
+    background-color: #F2E3DB;
+    border: none;
+    text-decoration: none;
+    font-family: Merriweather, sans-serif;
+    color: #263A29;
+}
+
+.page-link:hover {
+    background-color: #F2E3DB;
+    color: #E86A33;
+}
+
 /* base.html Styles */
 
 nav {
