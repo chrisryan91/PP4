@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     var label2 = sessionStorage.getItem('modalLabel');
     var url2 = sessionStorage.getItem('modalURL');
-    var titleElement = document.getElementById('title');
+    var titleElement = document.getElementById('recipe');
 
     if (label2 && titleElement) {
         titleElement.textContent = label2;
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener("DOMContentLoaded", function() {
     if (window.location.pathname === '/submit_review/') {
         var urlInput = document.getElementById("id_url");
-        var labelInput = document.getElementById("id_title");
+        var labelInput = document.getElementById("id_recipe");
         var storedUrl = sessionStorage.getItem("modalURL");
         var storedLabel = sessionStorage.getItem("modalLabel");
         var ingredientsArray = sessionStorage.getItem("wholeRecipe");

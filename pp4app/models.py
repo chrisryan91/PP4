@@ -22,7 +22,8 @@ class Utensil(models.Model):
         return self.name
 
 class Review(models.Model):
-    title = models.CharField(max_length=100, unique=True)
+    title =  models.CharField(max_length=100, unique=True)
+    recipe = models.CharField(max_length=100, unique=False, default="default")
     url = models.URLField(blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
@@ -35,7 +36,7 @@ class Review(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     upvotes = models.ManyToManyField(User, related_name="review_likes", blank=True)
-    prep_time = models.IntegerField(help_text='Preparation time in minutes')
+    prep_time = models.IntegerField(help_text='Preparation time in minutes', blank=True, null=True)
 
     class Meta:
         ordering = ['-created_on']
@@ -48,6 +49,7 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return reverse('review_post', kwargs={'slug': self.slug})
+    
     
 class Comment(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="comments_review")

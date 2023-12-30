@@ -8,13 +8,22 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ['title', 'content', 'featured_image', 'prep_time', 'url', 'ingredients', 'utensils']
+        fields = ['title', 'recipe', 'content', 'featured_image', 'prep_time', 'url', 'ingredients', 'utensils']
         
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
 
-        self.fields['title'].widget.attrs['readonly'] = True
+        self.fields['recipe'].widget.attrs['readonly'] = True
         self.fields['url'].widget.attrs['readonly'] = True
+
+    def clean(self):
+        cleaned_data = super().clean()
+        featured_image = cleaned_data.get('featured_image')
+
+        if not featured_image:
+            raise forms.ValidationError('You must upload an image to Cloudinary.')
+
+        return cleaned_data
 
     def save(self, commit=True):
         instance = super().save(commit=False)
@@ -25,7 +34,6 @@ class ReviewForm(forms.ModelForm):
 
         if commit:
             instance.save()
-            self.save_m2m()
 
         return instance
     

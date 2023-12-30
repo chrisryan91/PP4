@@ -295,6 +295,11 @@ footer p i:hover {
 
 /* submit & update review Styles */
 
+
+.alert {
+    margin-right: 50px;
+}
+
 .container2 {
     font-family: Merriweather, sans-serif;
     color: #41644A;
