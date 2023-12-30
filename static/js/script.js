@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 $(document).ready(function () {
     $('#id_ingredients').select2();
+    console.log("consoled")
     $('#id_utensils').select2();
 });
 
@@ -66,3 +67,4 @@ $(document).ready(function() {
         $('#ingredientQuery').val(selectedIngredients.join(','));
     });
 });
+

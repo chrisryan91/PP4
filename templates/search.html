@@ -47,11 +47,13 @@
                                                             <span class="tooltiptext1">Visit Recipe</span>
                                                         </i>
                                                     </a>
+                                                    {% if user.is_authenticated %}
                                                     <a href="{% url 'submit_review' %}"  class="card-text">
                                                         <i class="fas fa-pen">
                                                             <span class="tooltiptext2">Review Recipe</span>
                                                         </i>
                                                     </a>
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>

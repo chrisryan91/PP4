@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 class ReviewForm(forms.ModelForm):
     featured_image = CloudinaryFileField(required=False)
+    new_ingredient = forms.CharField(max_length=100, required=False)
 
     class Meta:
         model = Review
@@ -12,7 +13,6 @@ class ReviewForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
-
         self.fields['recipe'].widget.attrs['readonly'] = True
         self.fields['url'].widget.attrs['readonly'] = True
 
