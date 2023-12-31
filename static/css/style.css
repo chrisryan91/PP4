@@ -5,10 +5,12 @@ html {
 }
 
 body {
-    background-color: #F2E3DB;
-    font-family: initial;
+    background-color: white;
+    font-family: Merriweather, sans-serif;
     margin: 0;
     padding: 0;
+    letter-spacing: 1.5px;
+    line-height: 35px;
 }
 
 a {
@@ -60,12 +62,12 @@ button {
 }
 
 .pag-nav {
-    background-color: #F2E3DB;
+    background-color: white;
 }
 
 .page-link {
     font-weight: bold;
-    background-color: #F2E3DB;
+    background-color: white;
     border: none;
     text-decoration: none;
     font-family: Merriweather, sans-serif;
@@ -73,7 +75,7 @@ button {
 }
 
 .page-link:hover {
-    background-color: #F2E3DB;
+    background-color: white;
     color: #E86A33;
 }
 
@@ -89,11 +91,11 @@ nav {
     font-family: Merriweather, sans-serif;
     font-size: 1.4rem;
     font-weight: 700;
-    color: #F2E3DB;
+    color: white;
 }
 
 .nav-link {
-    color: #F2E3DB;
+    color: white;
     text-decoration: none;
 }
 
@@ -122,6 +124,14 @@ footer p i:hover {
 
 #link h2 a:hover {
     color: #E86A33;
+}
+
+#link div {
+    height: 25vh;
+}
+
+#link div h3 {
+    font-size: 15px;
 }
 
 /* search.html Styles */
@@ -202,7 +212,7 @@ footer p i:hover {
     margin: 0;
     background-color: #41644A;
     opacity: .8;
-    color: #F2E3DB;
+    color: white;
     text-decoration: none;
     font-size: 12px;
     font-weight: 400;
@@ -235,7 +245,7 @@ footer p i:hover {
 .card-text .tooltiptext1, .card-text .tooltiptext2 {
     visibility: hidden;
     width: 80px;
-    background-color: #F2E3DB;
+    background-color: white;
     opacity: .8;
     color: black;
     text-align: center;
@@ -260,7 +270,7 @@ footer p i:hover {
 .text {
     background-color: #41644A;
     opacity: .8;
-    color: #F2E3DB;
+    color: white;
 }
 
 .text:hover {
@@ -276,19 +286,17 @@ footer p i:hover {
     margin-bottom: 20px;
 }
 
-/* review_blog.html Styles */
+/* review.html Styles */
 
 .post-link {
     text-decoration: none;
     font-family: Merriweather, sans-serif;
 }
 
-.img-container {
-    text-decoration: none;
-    padding-left: 20px;
-    padding-bottom: 20px;
-    overflow: hidden;
+button i {
+    font-size: small;
 }
+
 
 .text-container .left-content {
     font-size: 1vw;
@@ -301,7 +309,7 @@ footer p i:hover {
 .text-container {
     height: 10%;
     background-color: #41644A;
-    color: #F2E3DB;
+    color: white;
     padding: 8px;
     box-sizing: border-box;
     display: flex;
@@ -310,13 +318,80 @@ footer p i:hover {
     font-family: Merriweather, sans-serif;
 }
 
+.masthead-text h1 {
+    font-weight: bold;
+}
+
 .masthead {
     text-align: left !important;
     margin-left: 50px !important;
 }
 
+.details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.details1,
+.details2,
+.details3 {
+    height: 33%;
+}
+
+.details2 {
+    padding-top: 25px;
+}
+
+.details2 h1 {
+    font-size: 15px;
+}
+
+.details3 {
+    position: relative;
+}
+
+.details3 span {
+    position: absolute;
+    bottom: 0;
+}
+
+
+.container2 {
+    position: relative;
+}
+
+.container2 span {
+    position: absolute;
+    bottom: 0;
+}
+
+.container2 span h3 {
+    font-size: 15px;
+}
+
+.img-container {
+    height: 400px;
+    text-decoration: none;
+    padding: 20px;
+    padding-bottom: 20px;
+    overflow: hidden;
+}
+
 .text-container i:first-child {
     margin-right: 8px;
+}
+
+.ingredients {
+    padding-top: 25px;
+}
+
+.utensils, .ingredients {
+    padding-left: 50px;
+}
+
+#review {
+    padding-right: 50px;
 }
 
 /* submit & update review Styles */
@@ -326,12 +401,16 @@ footer p i:hover {
     margin-right: 50px;
 }
 
+.container3 {
+    font-family: Merriweather, sans-serif;
+    color: #41644A;
+    padding: 50px;
+}
+
 .container2 {
     font-family: Merriweather, sans-serif;
     color: #41644A;
-    padding-top: 50px;
-    padding-left: 50px;
-    padding-bottom: 50px;
+    padding: 50px;
 }
 
 .edit {
@@ -387,6 +466,10 @@ footer p i:hover {
   }
 
   span:nth-child(7) {
+    animation: fade-in 0.8s 0.6s forwards cubic-bezier(0.11, 0, 0.5, 0);
+  }
+
+  span:nth-child(8) {
     animation: fade-in 0.8s 0.6s forwards cubic-bezier(0.11, 0, 0.5, 0);
   }
   

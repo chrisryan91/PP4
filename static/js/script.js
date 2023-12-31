@@ -55,6 +55,13 @@ $(document).ready(function () {
     $('#id_utensils').select2();
 });
 
+$('form').submit(function() {
+    var selectedIngredients = $('#ingredientInput').val();
+    if (selectedIngredients) {
+        $('#ingredientQuery').val(selectedIngredients.join(','));
+    }
+});
+
 $(document).ready(function() {
     $('#ingredientInput').select2({
         tags: true,
@@ -67,4 +74,3 @@ $(document).ready(function() {
         $('#ingredientQuery').val(selectedIngredients.join(','));
     });
 });
-

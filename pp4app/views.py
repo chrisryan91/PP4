@@ -18,6 +18,9 @@ def Homepage(request):
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+def About(request):
+        return render(request, 'about.html')
+
 def search(request):
     recipes = []
 
@@ -171,6 +174,7 @@ class ReviewUpvote(View):
     def post(self, request, *args, **kwargs):
         review = get_object_or_404(Review, slug=self.kwargs['slug'])
 
+        # Initialize the variables with default values
         user_has_upvoted = False
         user_has_downvoted = False
 
@@ -180,22 +184,39 @@ class ReviewUpvote(View):
             if upvote_value == 1:
                 user_has_upvoted = review.upvotes.filter(id=request.user.id).exists()
                 if user_has_upvoted:
+                    # Remove upvote
                     review.upvotes.remove(request.user)
                 else:
+                    # Add upvote and remove potential downvote
                     review.upvotes.add(request.user)
-                    review.downvotes.remove(request.user)
+                    review.downvotes.remove(request.user)  # Remove potential downvote
+                    # User has clicked upvote, so set downvote status accordingly
+                    user_has_downvoted = False
             elif upvote_value == 0:
                 user_has_downvoted = review.downvotes.filter(id=request.user.id).exists()
                 if user_has_downvoted:
+                    # Remove downvote
                     review.downvotes.remove(request.user)
                 else:
+                    # Add downvote and remove potential upvote
                     review.downvotes.add(request.user)
-                    review.upvotes.remove(request.user)
+                    review.upvotes.remove(request.user)  # Remove potential upvote
+                    # User has clicked downvote, so set upvote status accordingly
+                    user_has_upvoted = False
 
+        # Calculate net votes
         net_votes = review.upvotes.count() - review.downvotes.count()
         print(f"Net votes: {net_votes}")
 
-        return redirect(reverse('review_post', kwargs={'slug': review.slug}))
+        # Pass user voting status and net votes to the template
+        context = {
+            'review': review,
+            'user_has_upvoted': user_has_upvoted,
+            'user_has_downvoted': user_has_downvoted,
+            'net_votes': net_votes,
+        }
+
+        return render(request, self.template_name, context)
     
 @method_decorator(login_required, name='dispatch')
 class UpdateReview(View):
