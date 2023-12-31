@@ -35,7 +35,8 @@ class Review(models.Model):
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    upvotes = models.ManyToManyField(User, related_name="review_likes", blank=True)
+    upvotes = models.ManyToManyField(User, related_name="review_upvotes", blank=True)
+    downvotes = models.ManyToManyField(User, related_name="review_downvotes", blank=True)
     prep_time = models.IntegerField(help_text='Preparation time in minutes', blank=True, null=True)
 
     class Meta:
@@ -44,8 +45,14 @@ class Review(models.Model):
     def __str__(self):
         return self.title
 
-    def number_of_likes(self):
+    def number_of_upvotes(self):
         return self.upvotes.count()
+
+    def number_of_downvotes(self):
+        return self.downvotes.count()
+    
+    def net_votes(self):
+        return self.upvotes.count() - self.downvotes.count()
 
     def get_absolute_url(self):
         return reverse('review_post', kwargs={'slug': self.slug})

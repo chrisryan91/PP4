@@ -37,12 +37,12 @@
                             <div class="text-container d-flex align-items-center justify-content-between">
                                 <div class="left-content">
                                     <div>
-                                        <span id="like-count"><i class="fas fa-heart"></i>{{ review.number_of_likes }}</span>
+                                        <span id="like-count"><i class="fas fa-thumbs-up"></i>{{ review.net_votes }}</span>
                                     </div>
                                 </div>
                                 <div class="right-content">
                                     <div>
-                                        {{ review.created_on }} by {{ review.author }}
+                                        {{ review.author }} | {{ review.created_on|timesince }}
                                     </div>
                                 </div>
                             </div>

@@ -120,7 +120,7 @@ class Reviews(generic.ListView):
         print(f"Sort option: {sort_option}")
 
         if sort_option == 'upvotes':
-            queryset = Review.objects.filter(status=1).annotate(like_count=Count('upvotes')).order_by('-like_count', '-created_on')
+            queryset = Review.objects.filter(status=1).annotate(net_votes_count=Count('upvotes') - Count('downvotes')).order_by('-net_votes_count', '-created_on')
         else:
             queryset = Review.objects.filter(status=1).order_by('-created_on')
 
@@ -171,14 +171,31 @@ class ReviewUpvote(View):
     def post(self, request, *args, **kwargs):
         review = get_object_or_404(Review, slug=self.kwargs['slug'])
 
-        if request.user.is_authenticated:
-            user_has_upvoted = review.upvotes.filter(id=request.user.id).exists()
-            if user_has_upvoted:
-                review.upvotes.remove(request.user)
-            else:
-                review.upvotes.add(request.user)
+        user_has_upvoted = False
+        user_has_downvoted = False
 
-        return render(request, self.template_name, {'review': review, 'user_has_upvoted': user_has_upvoted})
+        if request.user.is_authenticated:
+            upvote_value = int(request.POST.get('upvote', 0))
+
+            if upvote_value == 1:
+                user_has_upvoted = review.upvotes.filter(id=request.user.id).exists()
+                if user_has_upvoted:
+                    review.upvotes.remove(request.user)
+                else:
+                    review.upvotes.add(request.user)
+                    review.downvotes.remove(request.user)
+            elif upvote_value == 0:
+                user_has_downvoted = review.downvotes.filter(id=request.user.id).exists()
+                if user_has_downvoted:
+                    review.downvotes.remove(request.user)
+                else:
+                    review.downvotes.add(request.user)
+                    review.upvotes.remove(request.user)
+
+        net_votes = review.upvotes.count() - review.downvotes.count()
+        print(f"Net votes: {net_votes}")
+
+        return redirect(reverse('review_post', kwargs={'slug': review.slug}))
     
 @method_decorator(login_required, name='dispatch')
 class UpdateReview(View):
@@ -198,7 +215,29 @@ class UpdateReview(View):
             return redirect('blog')
         
         if form.is_valid():
-            form.save()
-            return redirect(review.get_absolute_url())
+            if form.is_valid():
+                review = form.save(commit=False)
+
+                review.ingredients.clear()
+
+                existing_ingredients = form.cleaned_data.get('ingredients')
+                review.ingredients.set(existing_ingredients)
+
+                new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
+                new_ingredient_list = [ingredient.strip() for ingredient in new_ingredient_string.split(',')]
+
+                for new_ingredient_name in new_ingredient_list:
+                    try:
+                        new_ingredient, created = Ingredient.objects.get_or_create(name=new_ingredient_name)
+                        review.ingredients.add(new_ingredient)
+                    except IntegrityError:
+                        try:
+                            new_ingredient = Ingredient.objects.get(name=new_ingredient_name)
+                        except Ingredient.DoesNotExist:
+                            new_ingredient_id = Ingredient.objects.latest('id').id + 1
+                            new_ingredient = Ingredient.objects.create(id=new_ingredient_id, name=new_ingredient_name)
+                        review.ingredients.add(new_ingredient)
+                form.save()
+                return redirect(review.get_absolute_url())
         
         return render(request, self.template_name, {'form': form, 'review': review})

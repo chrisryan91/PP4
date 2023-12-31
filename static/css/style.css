@@ -396,3 +396,11 @@ footer p i:hover {
       filter: blur(0);
     }
   }
+
+.upvoted {
+    color: green;
+}
+
+.downvoted {
+    color: red;
+}

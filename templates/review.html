@@ -9,22 +9,38 @@
                 <div>
                     <div>
                         {% if user.is_authenticated %}
-                        <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
-                            {% csrf_token %}
-                            <button type="submit" name="review_id" value="{{review.slug}}">
-                                {% if user_has_upvoted %}
-                                    <i class="far fa-heart"></i>
-                                {% else %}
-                                    <i class="fas fa-heart"></i>
-                                {% endif %}
-                            </button>
-                        </form>
-                        {% else %}     
-                        <i class="fas fa-heart"></i>
+                            <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="upvote" value="1">
+                                <button type="submit" class="{% if user_has_upvoted %}upvoted{% endif %}">
+                                    {% if user_has_upvoted %}
+                                        <i class="far fa-thumbs-up"></i>
+                                    {% else %}
+                                        <i class="fas fa-thumbs-up"></i>
+                                    {% endif %}
+                                </button>
+                            </form>
+                            <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
+                                {% csrf_token %}
+                                <input type="hidden" name="upvote" value="0">
+                                <button type="submit" class="{% if user_has_downvoted %}downvoted{% endif %}">
+                                    {% if user_has_downvoted %}
+                                        <i class="far fa-thumbs-down"></i>
+                                    {% else %}
+                                        <i class="fas fa-thumbs-down"></i>
+                                    {% endif %}
+                                </button>
+                            </form>
+                            <span>{{ review.net_votes }}</span>
+                        {% else %}
+                            <!-- Display total upvotes and downvotes without forms -->
+                            <i class="fas fa-thumbs-up"></i>
+                            <i class="fas fa-thumbs-down"></i>
+                            <span>{{  review.net_votes  }}</span>
                         {% endif %}
                     </div>
                     <div>
-                        <span id="like-count">{{ review.number_of_likes }}</span>
+                        <span id="like-count">{{ review. }}</span>
                     </div>
                 </div>
                 <h2 class="post-subtitle">
