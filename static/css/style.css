@@ -9,7 +9,6 @@ body {
     font-family: Merriweather, sans-serif;
     margin: 0;
     padding: 0;
-    letter-spacing: 1.5px;
     line-height: 35px;
 }
 
@@ -120,6 +119,7 @@ footer p i:hover {
     background-position: center;
     height: 50vh;
     max-width: 100%;
+    margin-bottom: 20px;
 }
 
 #link h2 a:hover {
@@ -155,7 +155,7 @@ footer p i:hover {
 }
 
 .card-body {
-    height: auto;
+    height: 420px;
     display: flex;
     flex-direction: column;
 }
@@ -286,6 +286,18 @@ footer p i:hover {
     margin-bottom: 20px;
 }
 
+#sortbutton {
+    font-size: 10px;
+    height: 20px;
+    text-align: center;
+    line-height: 17.5px;
+}
+
+.divend {
+    letter-spacing: .5px;
+    font-size: 10px;
+}
+
 /* Default styles for larger screens */
 .post-link {
     text-decoration: none;
@@ -323,6 +335,12 @@ button i {
 .masthead {
     text-align: left !important;
     margin-left: 50px !important;
+}
+
+.card-body1 {
+    height: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .details {
@@ -387,8 +405,19 @@ button i {
     height: auto;
 }
 
+.container1 {
+    padding-top: 0;
+    margin: 0 auto;
+    text-align: center;
+}
+
 /* Media query for smaller screens */
 @media only screen and (max-width: 768px) {
+
+    .container {
+        padding-top: 5px;
+    }
+
     .masthead {
         margin-left: 0 !important;
     }
@@ -520,3 +549,5 @@ button i {
 .downvoted {
     color: red;
 }
+
+/* Sign-up & Login */ 
