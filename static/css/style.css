@@ -155,7 +155,7 @@ footer p i:hover {
 }
 
 .card-body {
-    height: 420px;
+    height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -286,8 +286,7 @@ footer p i:hover {
     margin-bottom: 20px;
 }
 
-/* review.html Styles */
-
+/* Default styles for larger screens */
 .post-link {
     text-decoration: none;
     font-family: Merriweather, sans-serif;
@@ -296,7 +295,6 @@ footer p i:hover {
 button i {
     font-size: small;
 }
-
 
 .text-container .left-content {
     font-size: 1vw;
@@ -336,26 +334,13 @@ button i {
 .details1,
 .details2,
 .details3 {
-    height: 33%;
-}
-
-.details2 {
-    padding-top: 25px;
+    height: auto;
+    margin-bottom: 10px;
 }
 
 .details2 h1 {
     font-size: 15px;
 }
-
-.details3 {
-    position: relative;
-}
-
-.details3 span {
-    position: absolute;
-    bottom: 0;
-}
-
 
 .container2 {
     position: relative;
@@ -392,6 +377,54 @@ button i {
 
 #review {
     padding-right: 50px;
+}
+
+#comments {
+    overflow: auto;
+}
+
+#leavecomment {
+    height: auto;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+    .masthead {
+        margin-left: 0 !important;
+    }
+
+    .text-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .text-container .left-content,
+    .text-container .right-content {
+        font-size: 2vw;
+    }
+
+    .details1,
+    .details2,
+    .details3 {
+        height: auto;
+        font-size: smaller;
+    }
+
+    .details2 h1 {
+        font-size: 18px;
+    }
+
+    .img-container {
+        height: auto;
+    }
+
+    .ingredients, .utensils {
+        padding-left: 20px;
+    }
+
+    #review {
+        padding-right: 20px;
+    }
 }
 
 /* submit & update review Styles */
