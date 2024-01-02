@@ -23,9 +23,9 @@
                             <div class="card-body">
                                 <div class="image-container">
                                     {% if "placeholder" in review.featured_image_a.url %}
-                                        <img src="{{ review.featured_image_b }}" width="100%">
+                                        <img src="{{ review.featured_image_b }}">
                                     {% else %}
-                                        <img src="{{ review.featured_image_a.url }}" width="100%">
+                                        <img src="{{ review.featured_image_a.url }}">
                                     {% endif %}
                                     <a href="{% url 'review_post' review.slug %}" class="post-link">
                                         <div class="middle">

@@ -20,8 +20,8 @@ class ReviewForm(forms.ModelForm):
         instance = super().save(commit=False)
         instance.slug = slugify(instance.title)
 
-        if self.cleaned_data['featured_image_a']:
-            instance.featured_image_a = CloudinaryFileField("image").to_python(self.cleaned_data['featured_image_a'])
+        if 'featured_image_a' in self.cleaned_data and self.cleaned_data['featured_image_a']:
+            instance.featured_image_a = self.cleaned_data['featured_image_a']
         else:
             instance.featured_image_a = None
 
