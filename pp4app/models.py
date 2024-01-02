@@ -21,6 +21,13 @@ class Utensil(models.Model):
     def __str__(self):
         return self.name
 
+class CuisineType(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+
+    def __str__(self):
+        return self.name
+
 class Review(models.Model):       
     VOTE_CHOICES = (
         (0, 'Not Voted Yet'),
@@ -41,6 +48,7 @@ class Review(models.Model):
     featured_image_b = models.URLField(blank=True, null=True, max_length=5000)
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
+    cuisine_type = models.ManyToManyField(CuisineType, blank=True)
     status = models.IntegerField(choices=STATUS, default=0)
     prep_time = models.PositiveIntegerField(help_text='Preparation time in minutes', blank=True, null=True)
     up_vote = models.ManyToManyField(User, related_name='news_up_vote', blank=True)

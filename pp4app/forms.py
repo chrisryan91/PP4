@@ -9,7 +9,7 @@ class ReviewForm(forms.ModelForm):
 
     class Meta:
         model = Review
-        fields = ['title', 'recipe', 'content', 'featured_image_a', 'prep_time', 'url', 'ingredients', 'utensils', 'featured_image_b']
+        fields = ['title', 'recipe', 'content', 'cuisine_types', 'featured_image_a', 'prep_time', 'url', 'ingredients', 'utensils', 'featured_image_b']
         
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)

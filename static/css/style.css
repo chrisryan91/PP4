@@ -19,7 +19,6 @@ a {
     cursor: pointer;
 }
 
-
 a:link {
     text-decoration: none;
 }
@@ -71,7 +70,11 @@ button {
 }
 
 .navbar .nav > li > a {
-    color: #E86A33;
+    color: #E86A33 !important;
+}
+
+a.nav-item:hover {
+    color: #E86A33 !important;
 }
 
 /* base.html Styles */

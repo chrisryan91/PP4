@@ -1,9 +1,10 @@
 from django.contrib import admin
-from .models import Review, Comment, Ingredient, Utensil
+from .models import Review, Comment, Ingredient, Utensil, CuisineType
 from django_summernote.admin import SummernoteModelAdmin
 
 admin.site.register(Ingredient)
 admin.site.register(Utensil)
+admin.site.register(CuisineType)
 
 @admin.register(Review)
 class PostAdmin(SummernoteModelAdmin):
