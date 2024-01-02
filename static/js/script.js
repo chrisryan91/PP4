@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     var label2 = sessionStorage.getItem('modalLabel');
-    var url2 = sessionStorage.getItem('modalURL');
     var titleElement = document.getElementById('recipe');
 
     if (label2 && titleElement) {
@@ -32,9 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
     if (window.location.pathname === '/submit_review/') {
         var urlInput = document.getElementById("id_url");
         var labelInput = document.getElementById("id_recipe");
+        var imgInput = document.getElementById('id_featured_image_b');
         var storedUrl = sessionStorage.getItem("modalURL");
         var storedLabel = sessionStorage.getItem("modalLabel");
-        var ingredientsArray = sessionStorage.getItem("wholeRecipe");
+        var storedImg = sessionStorage.getItem("modalImg");
 
         if (urlInput && storedUrl) {
             urlInput.value = storedUrl;
@@ -43,9 +43,10 @@ document.addEventListener("DOMContentLoaded", function() {
         if (labelInput && storedLabel) {
             labelInput.value = storedLabel;
         }
-        
-        const ingredientsList = document.getElementById("ingredients");
-        ingredientsList.innerText = ingredientsArray.slice(0, -1) 
+
+        if (imgInput && storedImg) {
+            imgInput.value = storedImg;
+        }
     }
 });
 

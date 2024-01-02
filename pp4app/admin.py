@@ -7,7 +7,6 @@ admin.site.register(Utensil)
 
 @admin.register(Review)
 class PostAdmin(SummernoteModelAdmin):
-
     prepopulated_fields = {'slug': ('recipe',)}
     list_filter = ('status', 'created_on')
     list_display = ('title', 'recipe', 'slug', 'status', 'created_on')
@@ -17,11 +16,11 @@ class PostAdmin(SummernoteModelAdmin):
 
     def approve_reviews(self, request, queryset):
         queryset.update(status=1)
+
     approve_reviews.short_description = 'Approve selected reviews'
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-
     list_display = ('name', 'body', 'created_on', 'approved', 'review')
     list_filter = ('approved', 'created_on', 'review')
     search_fields = ('name', 'address', 'body')

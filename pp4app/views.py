@@ -92,10 +92,10 @@ def SubmitReview(request):
                         new_ingredient = Ingredient.objects.create(id=new_ingredient_id, name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
 
-            if review.featured_image:
-                print(f"Cloudinary URL: {review.featured_image.url}")
+            if review.featured_image_a:
+                print(f"Cloudinary URL: {review.featured_image_a.url}")
             else:
-                print("No Cloudinary URL available (featured_image is None)")
+                print("No Cloudinary URL available (featured_image_a is None)")
 
             url = form.cleaned_data.get("url")
             if url:
@@ -147,6 +147,16 @@ class ReviewPost(DetailView):
         context['commented'] = False
         context['ingredients'] = self.object.ingredients.all()
         context['utensils'] = self.object.utensils.all()
+
+        liked = False
+        disliked = False
+        if self.object.up_vote.filter(id=self.request.user.id).exists():
+            liked = True
+        elif self.object.down_vote.filter(id=self.request.user.id).exists():
+            disliked = True
+
+        context['liked'] = liked
+        context['disliked'] = disliked
         return context
 
     def post(self, request, *args, **kwargs):
@@ -166,57 +176,30 @@ class ReviewPost(DetailView):
         else:
             context['comment_form'] = comment_form
 
+        vote_type = request.POST.get('vote_type', None)
+        if vote_type == 'upvote':
+            self.object.up_vote.filter(id=request.user.id).exists() is False and self.object.up_vote.add(request.user)
+            self.object.down_vote.filter(id=request.user.id).exists() and self.object.down_vote.remove(request.user)
+        elif vote_type == 'downvote':
+            self.object.down_vote.filter(id=request.user.id).exists() is False and self.object.down_vote.add(request.user)
+            self.object.up_vote.filter(id=request.user.id).exists() and self.object.up_vote.remove(request.user)
+
         return self.render_to_response(context)
     
 class ReviewUpvote(View):
-    template_name = 'review.html'
+    def post(self, request, slug):
+        review = get_object_or_404(Review, slug=slug)
 
-    def post(self, request, *args, **kwargs):
-        review = get_object_or_404(Review, slug=self.kwargs['slug'])
+        vote_type = request.POST.get('vote_type', None)
+        if vote_type == 'upvote':
+            review.up_vote.filter(id=request.user.id).exists() is False and review.up_vote.add(request.user)
+            review.down_vote.filter(id=request.user.id).exists() and review.down_vote.remove(request.user)
 
-        # Initialize the variables with default values
-        user_has_upvoted = False
-        user_has_downvoted = False
+        elif vote_type == 'downvote':
+            review.down_vote.filter(id=request.user.id).exists() is False and review.down_vote.add(request.user)
+            review.up_vote.filter(id=request.user.id).exists() and review.up_vote.remove(request.user)
 
-        if request.user.is_authenticated:
-            upvote_value = int(request.POST.get('upvote', 0))
-
-            if upvote_value == 1:
-                user_has_upvoted = review.upvotes.filter(id=request.user.id).exists()
-                if user_has_upvoted:
-                    # Remove upvote
-                    review.upvotes.remove(request.user)
-                else:
-                    # Add upvote and remove potential downvote
-                    review.upvotes.add(request.user)
-                    review.downvotes.remove(request.user)  # Remove potential downvote
-                    # User has clicked upvote, so set downvote status accordingly
-                    user_has_downvoted = False
-            elif upvote_value == 0:
-                user_has_downvoted = review.downvotes.filter(id=request.user.id).exists()
-                if user_has_downvoted:
-                    # Remove downvote
-                    review.downvotes.remove(request.user)
-                else:
-                    # Add downvote and remove potential upvote
-                    review.downvotes.add(request.user)
-                    review.upvotes.remove(request.user)  # Remove potential upvote
-                    # User has clicked downvote, so set upvote status accordingly
-                    user_has_upvoted = False
-
-        # Calculate net votes
-        net_votes = review.upvotes.count() - review.downvotes.count()
-        print(f"Net votes: {net_votes}")
-
-        # Pass user voting status and net votes to the template
-        context = {
-            'review': review,
-            'user_has_upvoted': user_has_upvoted,
-            'user_has_downvoted': user_has_downvoted,
-            'net_votes': net_votes,
-        }
-
-        return render(request, self.template_name, context)
+        return HttpResponseRedirect(reverse('review_post', args=[slug]))
     
 @method_decorator(login_required, name='dispatch')
 class UpdateReview(View):

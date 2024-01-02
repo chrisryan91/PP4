@@ -4,33 +4,26 @@ from cloudinary.forms import CloudinaryFileField
 from django.utils.text import slugify
 
 class ReviewForm(forms.ModelForm):
-    featured_image = CloudinaryFileField(required=False)
+    featured_image_a = CloudinaryFileField(required=False)
     new_ingredient = forms.CharField(max_length=100, required=False)
 
     class Meta:
         model = Review
-        fields = ['title', 'recipe', 'content', 'featured_image', 'prep_time', 'url', 'ingredients', 'utensils']
+        fields = ['title', 'recipe', 'content', 'featured_image_a', 'prep_time', 'url', 'ingredients', 'utensils', 'featured_image_b']
         
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
         self.fields['recipe'].widget.attrs['readonly'] = True
         self.fields['url'].widget.attrs['readonly'] = True
 
-    def clean(self):
-        cleaned_data = super().clean()
-        featured_image = cleaned_data.get('featured_image')
-
-        if not featured_image:
-            raise forms.ValidationError('You must upload an image to Cloudinary.')
-
-        return cleaned_data
-
     def save(self, commit=True):
         instance = super().save(commit=False)
         instance.slug = slugify(instance.title)
 
-        if isinstance(instance.featured_image, str):
-            instance.featured_image = CloudinaryFileField("image").to_python(instance.featured_image)
+        if self.cleaned_data['featured_image_a']:
+            instance.featured_image_a = CloudinaryFileField("image").to_python(self.cleaned_data['featured_image_a'])
+        else:
+            instance.featured_image_a = None
 
         if commit:
             instance.save()

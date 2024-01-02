@@ -21,8 +21,14 @@ class Utensil(models.Model):
     def __str__(self):
         return self.name
 
-class Review(models.Model):
-    title =  models.CharField(max_length=100, unique=True)
+class Review(models.Model):       
+    VOTE_CHOICES = (
+        (0, 'Not Voted Yet'),
+        (1, 'Upvote'),
+        (2, 'Downvote'),
+    )
+        
+    title = models.CharField(max_length=100, unique=True)
     recipe = models.CharField(max_length=100, unique=False, default="default")
     url = models.URLField(blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -31,28 +37,29 @@ class Review(models.Model):
     utensils = models.ManyToManyField(Utensil, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
-    featured_image = CloudinaryField("image", default="placeholder")
+    featured_image_a = CloudinaryField("image", default="placeholder")
+    featured_image_b = models.URLField(blank=True, null=True, max_length=5000)
     excerpt = models.TextField(blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
-    upvotes = models.ManyToManyField(User, related_name="review_upvotes", blank=True)
-    downvotes = models.ManyToManyField(User, related_name="review_downvotes", blank=True)
-    prep_time = models.IntegerField(help_text='Preparation time in minutes', blank=True, null=True)
+    prep_time = models.PositiveIntegerField(help_text='Preparation time in minutes', blank=True, null=True)
+    up_vote = models.ManyToManyField(User, related_name='news_up_vote', blank=True)
+    down_vote = models.ManyToManyField(User, related_name='news_down_vote', blank=True)
 
-    class Meta:
+    class Meta:   
         ordering = ['-created_on']
+
+    def number_of_up_votes(self):
+        return self.up_vote.count()
+
+    def number_of_down_votes(self):
+        return self.down_vote.count()
+    
+    def total_votes(self):
+        return self.up_vote.count() - self.down_vote.count()
 
     def __str__(self):
         return self.title
-
-    def number_of_upvotes(self):
-        return self.upvotes.count()
-
-    def number_of_downvotes(self):
-        return self.downvotes.count()
-    
-    def net_votes(self):
-        return self.upvotes.count() - self.downvotes.count()
 
     def get_absolute_url(self):
         return reverse('review_post', kwargs={'slug': self.slug})

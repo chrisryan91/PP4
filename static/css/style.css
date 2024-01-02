@@ -122,12 +122,23 @@ footer p i:hover {
     margin-bottom: 20px;
 }
 
+#link {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.int {
+    width: 75%;
+}
+
 #link h2 a:hover {
     color: #E86A33;
 }
 
 #link div {
     height: 25vh;
+    margin: auto;
+    text-align: center;
 }
 
 #link div h3 {
@@ -298,7 +309,8 @@ footer p i:hover {
     font-size: 10px;
 }
 
-/* Default styles for larger screens */
+/* Review.html */
+
 .post-link {
     text-decoration: none;
     font-family: Merriweather, sans-serif;
@@ -395,6 +407,7 @@ button i {
 
 #review {
     padding-right: 50px;
+    padding-bottom: 50px;
 }
 
 #comments {
@@ -409,51 +422,6 @@ button i {
     padding-top: 0;
     margin: 0 auto;
     text-align: center;
-}
-
-/* Media query for smaller screens */
-@media only screen and (max-width: 768px) {
-
-    .container {
-        padding-top: 5px;
-    }
-
-    .masthead {
-        margin-left: 0 !important;
-    }
-
-    .text-container {
-        flex-direction: column;
-        height: auto;
-    }
-
-    .text-container .left-content,
-    .text-container .right-content {
-        font-size: 2vw;
-    }
-
-    .details1,
-    .details2,
-    .details3 {
-        height: auto;
-        font-size: smaller;
-    }
-
-    .details2 h1 {
-        font-size: 18px;
-    }
-
-    .img-container {
-        height: auto;
-    }
-
-    .ingredients, .utensils {
-        padding-left: 20px;
-    }
-
-    #review {
-        padding-right: 20px;
-    }
 }
 
 /* submit & update review Styles */
@@ -542,12 +510,60 @@ button i {
     }
   }
 
-.upvoted {
-    color: green;
-}
-
-.downvoted {
-    color: red;
-}
-
 /* Sign-up & Login */ 
+
+.select2 {
+    width: 300px;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+
+    .container {
+        padding-top: 5px;
+    }
+
+    .masthead {
+        margin-left: 0 !important;
+    }
+
+    .text-container {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .text-container .left-content,
+    .text-container .right-content {
+        font-size: 2vw;
+    }
+
+    .details1,
+    .details2,
+    .details3 {
+        height: auto;
+        font-size: smaller;
+    }
+
+    .details2 h1 {
+        font-size: 18px;
+    }
+
+    .img-container {
+        height: auto;
+    }
+
+    .ingredients, .utensils {
+        padding-left: 20px;
+    }
+
+    #review {
+        padding-right: 20px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .select2 {
+        width: 80vw !important;
+        padding-bottom: 10px;
+    }
+}

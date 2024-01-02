@@ -14,25 +14,29 @@
                                 {% if user.is_authenticated %}
                                     <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
                                         {% csrf_token %}
-                                        <input type="hidden" name="upvote" value="1">
-                                        <button type="submit" class="{% if user_has_upvoted %}upvoted{% endif %}">
-                                            {% if user_has_upvoted %}
+                                        <input type="hidden" name="vote_type" value="upvote">
+                                        {% if user_has_upvoted %}
+                                        <button type="submit" name="review_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
                                                 <i class="far fa-thumbs-up upvoted"></i>
-                                            {% else %}
-                                                <i class="fas fa-thumbs-up"></i>
-                                            {% endif %}
                                         </button>
+                                            {% else %}
+                                        <button type="submit" name="review_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
+                                                <i class="far fa-thumbs-up"></i>
+                                        </button>
+                                            {% endif %}
                                     </form>
                                     <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
                                         {% csrf_token %}
-                                        <input type="hidden" name="upvote" value="0">
-                                        <button type="submit" class="{% if user_has_downvoted %}downvoted{% endif %}">
+                                        <input type="hidden" name="vote_type" value="downvote">
                                             {% if user_has_downvoted %}
+                                            <button type="submit" name="blog_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
                                                 <i class="far fa-thumbs-down downvoted"></i>
+                                            </button>
                                             {% else %}
-                                                <i class="fas fa-thumbs-down"></i>
+                                            <button type="submit" name="blog_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
+                                                <i class="far fa-thumbs-down"></i>
+                                            </button>
                                             {% endif %}
-                                        </button>
                                     </form>
                                 {% else %}
                                     <i class="fas fa-thumbs-up"></i>
@@ -42,7 +46,7 @@
                         </div>
                     </div>
                     <div class="details2">
-                        <h1>Upvotes: {{ review.net_votes }} </h1>
+                        <h1>Upvotes: {{ review.total_votes }} </h1>
                         <h1>Prep time: {{ review.prep_time }} minutes</h1>
                         <p>{{ review.excerpt }}... </p>
                     </div>
@@ -51,10 +55,10 @@
             </div>
             <div class="col-md-6 masthead-image">
                 <div class="img-container">
-                    {% if "placeholder" in review.featured_image.url %}
-                        <img src="https://media.istockphoto.com/id/1134020110/vector/cutlery-restaurant-icons.jpg?s=612x612&w=0&k=20&c=udrCAY1Ru_iLEdwJK_fyuHXNQoH3y47ZCuNIr7uRwR0=" width="100%">
+                    {% if "placeholder" in review.featured_image_a.url %}
+                        <img src="{{ review.featured_image_b }}" width="100%">
                     {% else %}
-                        <img src="{{ review.featured_image.url }}" width="100%">
+                        <img src="{{ review.featured_image_a.url }}" width="100%">
                     {% endif %}
                 </div>
             </div>
