@@ -15,7 +15,7 @@
                                     <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="vote_type" value="upvote">
-                                        {% if user_has_upvoted %}
+                                        {% if liked %}
                                         <button type="submit" name="review_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
                                                 <i class="far fa-thumbs-up upvoted"></i>
                                         </button>
@@ -28,7 +28,7 @@
                                     <form class="d-inline" action="{% url 'review_upvote' review.slug %}" method="POST">
                                         {% csrf_token %}
                                         <input type="hidden" name="vote_type" value="downvote">
-                                            {% if user_has_downvoted %}
+                                            {% if disliked %}
                                             <button type="submit" name="blog_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
                                                 <i class="far fa-thumbs-down downvoted"></i>
                                             </button>

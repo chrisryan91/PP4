@@ -122,8 +122,8 @@ class Reviews(generic.ListView):
         sort_option = self.request.GET.get('sort', '-created_on')
         print(f"Sort option: {sort_option}")
 
-        if sort_option == 'upvotes':
-            queryset = Review.objects.filter(status=1).annotate(net_votes_count=Count('upvotes') - Count('downvotes')).order_by('-net_votes_count', '-created_on')
+        if sort_option == 'total_votes':
+            queryset = Review.objects.filter(status=1).annotate(net_votes_count=Count('up_vote') - Count('down_vote')).order_by('-net_votes_count', '-created_on')
         else:
             queryset = Review.objects.filter(status=1).order_by('-created_on')
 

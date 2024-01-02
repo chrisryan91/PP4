@@ -12,7 +12,7 @@
                         <label for="sort">Sort by:</label>
                         <select name="sort" id="sort">
                             <option value="" {% if current_sort == '' %}selected{% endif %}>Latest</option>
-                            <option value="upvotes" {% if current_sort == 'upvotes' %}selected{% endif %}>Upvotes</option>
+                            <option value="total_votes" {% if current_sort == 'total_votes' %}selected{% endif %}>Total Votes</option>
                         </select>
                         <button type="submit" id="sortbutton">Sort</button>
                     </form>
@@ -40,7 +40,7 @@
                                 <div class="text-container d-flex align-items-center justify-content-between" >
                                     <div class="left-content">
                                         <div>
-                                            <span id="like-count" class="divend"><i class="fas fa-thumbs-up"></i>{{ review.net_votes }}</span>
+                                            <span id="like-count" class="divend"><i class="fas fa-thumbs-up"></i>{{ review.total_votes }}</span>
                                         </div>
                                     </div>
                                     <div class="right-content">
