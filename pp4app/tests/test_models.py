@@ -51,8 +51,8 @@ class ReviewModelTest(TestCase):
 
     def test_review_total_votes(self):
         second_user = User.objects.create_user(
-            username='testuser2',
-            password='testpassword'
+            username='Joe',
+            password='Chef'
         )
         self.review.up_vote.add(self.user)
         self.review.down_vote.add(second_user)
@@ -62,12 +62,12 @@ class ReviewModelTest(TestCase):
     def test_comment_creation(self):
         comment = Comment.objects.create(
             review=self.review,
-            name='Test Commenter',
-            email='test@example.com',
-            body='Test Comment Body'
+            name='Leo C',
+            email='cleo@gmail.com',
+            body='... blah blah blah...'
         )
 
         self.assertEqual(comment.review, self.review)
-        self.assertEqual(comment.name, 'Test Commenter')
-        self.assertEqual(comment.email, 'test@example.com')
-        self.assertEqual(comment.body, 'Test Comment Body')
+        self.assertEqual(comment.name, 'Leo C')
+        self.assertEqual(comment.email, 'cleo@gmail.com')
+        self.assertEqual(comment.body, '... blah blah blah...')

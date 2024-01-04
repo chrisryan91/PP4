@@ -54,13 +54,7 @@ $(document).ready(function () {
     $('#id_ingredients').select2();
     console.log("consoled")
     $('#id_utensils').select2();
-});
-
-$('form').submit(function() {
-    var selectedIngredients = $('#ingredientInput').val();
-    if (selectedIngredients) {
-        $('#ingredientQuery').val(selectedIngredients.join(','));
-    }
+    $('#id_cuisine_type').select2();
 });
 
 $(document).ready(function() {
@@ -73,5 +67,18 @@ $(document).ready(function() {
     $('form').submit(function() {
         var selectedIngredients = $('#ingredientInput').val();
         $('#ingredientQuery').val(selectedIngredients.join(','));
+    });
+});
+
+$(document).ready(function() {
+    $('#id_new_ingredient').select2({
+        tags: true,
+        tokenSeparators: [','],
+        placeholder: 'Enter new ingredient and press enter!',
+    });
+
+    $('form').submit(function() {
+        var newIngredients = $('#id_new_ingredient').val();
+        $('#id_new_ingredient').val(newIngredients.join(','));
     });
 });
