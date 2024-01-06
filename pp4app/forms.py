@@ -16,8 +16,9 @@ class ReviewForm(forms.ModelForm):
         self.fields['recipe'].widget.attrs['readonly'] = True
         self.fields['url'].widget.attrs['readonly'] = True
 
-    def save(self, commit=True):
+    def save(self, commit=True, user=None):
         instance = super().save(commit=False)
+        instance.author = user
         instance.slug = slugify(instance.title)
 
         if 'featured_image_a' in self.cleaned_data and self.cleaned_data['featured_image_a']:

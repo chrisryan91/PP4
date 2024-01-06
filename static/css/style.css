@@ -5,8 +5,10 @@ html {
 }
 
 body {
-    background-color: white;
-    font-family: Merriweather, sans-serif;
+    background-image: url('../marshal-quast-v69MsNF7FAU-unsplash.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
     margin: 0;
     padding: 0;
     line-height: 35px;

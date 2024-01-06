@@ -41,7 +41,6 @@ class Review(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="reviews")
     ingredients = models.ManyToManyField(Ingredient, blank=True)
-    # new_ingredient = models.CharField(max_length=100)
     utensils = models.ManyToManyField(Utensil, blank=True)
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
@@ -71,14 +70,14 @@ class Review(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('review_post', kwargs={'slug': self.slug})
+        return reverse('update_review', kwargs={'slug': self.slug})
     
     
 class Comment(models.Model):
     review = models.ForeignKey(Review, on_delete=models.CASCADE, related_name="comments_review")
     name = models.CharField(max_length=80)
     email = models.EmailField()
-    body = models.TextField()
+    body = models.TextField(max_length=1000)
     created_on = models.DateTimeField(default=timezone.now)
     approved = models.BooleanField(default=False)
     

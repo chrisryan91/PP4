@@ -11,12 +11,11 @@ from .models import Review, Ingredient, Utensil
 from .forms import CommentForms, ReviewForm
 import requests
 import os
+from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def Homepage(request):
     return render(request, 'index.html')
-
-from django.shortcuts import render
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 def About(request):
         return render(request, 'about.html')
@@ -174,6 +173,7 @@ class ReviewPost(DetailView):
             context['commented'] = True
             context['comment_form'] = CommentForms()
         else:
+            print("Invalid comment form:", comment_form.errors)
             context['comment_form'] = comment_form
 
         vote_type = request.POST.get('vote_type', None)
@@ -183,6 +183,8 @@ class ReviewPost(DetailView):
         elif vote_type == 'downvote':
             self.object.down_vote.filter(id=request.user.id).exists() is False and self.object.down_vote.add(request.user)
             self.object.up_vote.filter(id=request.user.id).exists() and self.object.up_vote.remove(request.user)
+
+        print("Context:", context)
 
         return self.render_to_response(context)
     
@@ -199,6 +201,9 @@ class ReviewUpvote(View):
             review.down_vote.filter(id=request.user.id).exists() is False and review.down_vote.add(request.user)
             review.up_vote.filter(id=request.user.id).exists() and review.up_vote.remove(request.user)
 
+        generated_url = reverse('review_post', args=[slug])
+        print("Generated URL:", generated_url)
+        
         return HttpResponseRedirect(reverse('review_post', args=[slug]))
     
 @method_decorator(login_required, name='dispatch')
@@ -219,8 +224,9 @@ class UpdateReview(View):
             return redirect('blog')
         
         if form.is_valid():
-            if form.is_valid():
-                review = form.save(commit=False)
+                
+                updated_review = form.save(commit=False)
+                updated_review.author = request.user
 
                 review.ingredients.clear()
 
@@ -241,7 +247,8 @@ class UpdateReview(View):
                             new_ingredient_id = Ingredient.objects.latest('id').id + 1
                             new_ingredient = Ingredient.objects.create(id=new_ingredient_id, name=new_ingredient_name)
                         review.ingredients.add(new_ingredient)
-                form.save()
-                return redirect(review.get_absolute_url())
+                updated_review.save()
+                return redirect(reverse('blog'))
+            
         
         return render(request, self.template_name, {'form': form, 'review': review})
