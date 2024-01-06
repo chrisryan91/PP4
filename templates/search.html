@@ -3,7 +3,14 @@
 {% block content %}
 
 <div class="container">
-    <h2 class="search">Search by the ingredients you already have </h2>
+    <h1 class="animation-span">
+        <span>What</span>
+        <span>is</span>
+        <span>on</span>
+        <span>the</span>
+        <span>menu</span>
+        <span>tonight?</span>
+    </h1>
     <form method="get" action="{% url 'search' %}">
         {% csrf_token %}
         <select id="ingredientInput" multiple="multiple">
@@ -18,14 +25,7 @@
             {% if query != None %}
             <h2>Search results for: {{ query }}</h2>
             {% else %}
-            <h1 class="animation-span">
-                <span>What</span>
-                <span>is</span>
-                <span>on</span>
-                <span>the</span>
-                <span>menu</span>
-                <span>tonight?</span>
-            </h1>
+            <h2 class="search">Search by the ingredients you already have</h2>
             {% endif %}
             {% if recipes %}
             <div class="container-fluid">
@@ -57,7 +57,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div style="visibility: hidden; width: 0px; height: 0px; position: absolute;" class="wholerecipe">{% for ingredient in recipe.recipe.ingredients %}{{ ingredient.food }},{% endfor %}</div>
                                 </div>
                             </div>
                                 {% if forloop.counter|divisibleby:4 and not forloop.last %}

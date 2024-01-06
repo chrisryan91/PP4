@@ -4,11 +4,10 @@
 <div class="masthead">
     <div class="container2">
         <div class="row g-0">
-            <div class="col-md-6 masthead-text">
+            <div class="col-md-4 masthead-text">
                 <div class="details">
                     <div class="details1">
-                        <h1 class="post-title">{{ review.title }}</h1>
-                        <h2 class="post-subtitle">by {{ review.author }}</h2>
+                        <h1 class="post-title">{{ review.title }} | {{ review.author }}</h1>
                         <div class="voting-section">
                             <div class="user-actions">
                                 {% if user.is_authenticated %}
@@ -53,32 +52,7 @@
                     <div class="details3">Link to original recipe - <strong>{{ review.recipe }}</strong>- to be found <a href="{{ review.url }}"><u>here!</u></a></div>
                 </div>
             </div>
-            <div class="col-md-6 masthead-image">
-                <div class="img-container">
-                    {% if "placeholder" in review.featured_image_a.url %}
-                        <img src="{{ review.featured_image_b }}" width="100%">
-                    {% else %}
-                        <img src="{{ review.featured_image_a.url }}" width="100%">
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <hr>
-    <div class="container2">
-        <div class="row g-0" >
-            <h1>Review:</h1>
-            <div class="col-md-6 masthead-text" id="review">
-                <p>
-                    {{ review.content | safe }}
-                </p>
-                <span>
-                    <h3>
-                        {{ review.created_on }} | {% if user.is_authenticated and user == review.author %}<a href="{% url 'update_review' slug=review.slug %}">Update Review</a>{% endif %}
-                    </h3>
-                </span>
-            </div>
-            <div class="col-md-6 masthead-text" id="ingredient-utensil">
+            <div class="col-md-4 masthead-image">
                 <div class="utensils">
                     <h2>Utensils:</h2>
                     <ul>
@@ -95,6 +69,33 @@
                         {% endfor %}
                     </ul>
                 </div>
+            </div>
+            <div class="col-md-4 masthead-image">
+                <div class="img-container">
+                    {% if "placeholder" in review.featured_image_a.url %}
+                        <object data="{{ review.featured_image_b }}" type="image/png">
+                            <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Kitties">
+                        </object>
+                    {% else %}
+                        <img src="{{ review.featured_image_a.url }}" width="100%">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="container2">
+        <div class="row g-0" >
+            <h2>Review:</h2>
+            <div id="review">
+                <p>
+                    {{ review.content | safe }}
+                </p>
+                <span>
+                    <h3>
+                        {{ review.created_on }} | {% if user.is_authenticated and user == review.author %}<a href="{% url 'update_review' slug=review.slug %}">Update Review</a>{% endif %}
+                    </h3>
+                </span>
             </div>
         </div>
     </div>

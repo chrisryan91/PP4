@@ -8,7 +8,7 @@ html {
 }
 
 body {
-    background-image: url('../toa-heftiba-KN4ampW-QOI-unsplash.webp');
+    background-image: url('../toa-heftiba-KN4ampW-QOI-unsplash.jpg');
     background-size: cover;
     background-position: center center;
     margin: 0;
@@ -80,11 +80,11 @@ button {
 }
 
 .navbar .nav > li > a {
-    color: red !important;
+    color: black !important;
 }
 
 a.nav-item:hover {
-    color: red !important;
+    color: black !important;
 }
 
 /* base.html Styles */
@@ -118,7 +118,7 @@ nav {
 }
 
 footer p i:hover {
-    color: red;
+    color: black;
 }
 
 /* index.html Styles */
@@ -138,7 +138,7 @@ footer p i:hover {
 }
 
 #link h2 a:hover {
-    color: red;
+    color: black;
 }
 
 #link div {
@@ -213,6 +213,7 @@ footer p i:hover {
 }
 
 .middle {
+    width: 75%;
     transition: .5s ease;
     opacity: 0;
     position: absolute;
@@ -223,8 +224,8 @@ footer p i:hover {
     text-align: center;
     color: black;
     text-decoration: none;
-    font-size: 20px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 400;
     padding: 10px;
     border-radius: 8px;
     background-color: black;
@@ -253,7 +254,7 @@ footer p i:hover {
 
 .card-text a {
     margin-right: 10px;
-    color: red;
+    color: black;
     text-decoration: none;
     transition: color 0.3s ease;
     z-index: 2;
@@ -261,7 +262,7 @@ footer p i:hover {
 }
 
 .card-text i:hover {
-    color: red;
+    color: white;
     text-decoration: none !important;
 }
 
@@ -302,12 +303,8 @@ footer p i:hover {
     color: white;
 }
 
-.text:hover {
-    color: red;
-}
-
 .icon-cog {
-    color: red;
+    color: black;
 }
 
 .pag {
@@ -393,7 +390,7 @@ button i {
 }
 
 .details2 h1 {
-    font-size: 15px;
+    font-size: 10px;
 }
 
 .container2 {
@@ -474,6 +471,21 @@ button i {
 .alert {
     color: white;
     background-color: black;
+}
+
+/* About.html */
+
+.container3 {
+    font-family: Merriweather, sans-serif;
+    color: black;
+    padding-top: 50px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.container3 p {
+    font-size: 15px;
+    font-weight: 800;
 }
 
 /* Animations */ 
@@ -594,11 +606,7 @@ button i {
     }
 }
 
-.btnburger, p a {
-    transform: translate(-5%, -5%); 
-}
-
-.btnburger:hover i, a:hover i{ 
+.btnburger:hover i, a:hover i, .nav-item:hover .nav-link{ 
     animation:  shake 0.8s  ; 
   }
 
