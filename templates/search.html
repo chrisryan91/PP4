@@ -3,9 +3,7 @@
 {% block content %}
 
 <div class="container">
-    <hr>
     <h2 class="search">Search by the ingredients you already have </h2>
-    <hr>
     <form method="get" action="{% url 'search' %}">
         {% csrf_token %}
         <select id="ingredientInput" multiple="multiple">

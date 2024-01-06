@@ -1,5 +1,7 @@
 /* Global Styles */
 
+@import url('https://fonts.googleapis.com/css2?family=Alice&family=Merriweather:wght@300&display=swap');
+
 html {
     height: 100%;
     width: 100%;
@@ -93,8 +95,9 @@ nav {
 }
 
 .brand {
-    font-family: Merriweather, sans-serif;
+    font-family: Alice, sans-serif;
     font-size: 1.4rem;
+    font-size: larger;
     font-weight: 700;
     color: black;
 }
@@ -127,6 +130,7 @@ footer p i:hover {
 
 #top {
     font-size: 65px;
+    font-family: Alice, sans-serif;
 }
 
 .int {
@@ -147,6 +151,11 @@ footer p i:hover {
 }
 
 /* search.html Styles */
+
+.search {
+    font-family: Alice, sans-serif;
+    font-weight: bold;
+}
 
 #ingredientInput {
     width: 50%;
@@ -472,6 +481,8 @@ button i {
 .animation-span {
     transform: scale(0.94);
     animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+    font-family: Alice, sans-serif;
+    font-weight: bold;
   }
 
   @keyframes scale {
@@ -582,3 +593,27 @@ button i {
         padding-bottom: 10px;
     }
 }
+
+.btnburger, p a {
+    transform: translate(-5%, -5%); 
+}
+
+.btnburger:hover i, a:hover i{ 
+    animation:  shake 0.8s  ; 
+  }
+
+@keyframes shake{ 
+0%{ 
+    transform: translateX(0) 
+} 
+25%{ 
+    transform: translateX(5px); 
+} 
+    
+50%{ 
+    transform: translateX(-5px); 
+} 
+100%{ 
+    transform: translateX(0px); 
+} 
+} 
