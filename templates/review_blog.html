@@ -4,7 +4,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 mt-3 left">
+        <div class="col-12 mt-4 left">
             <div class="row">
                 <div class="container1">
                     <form method="get" action="{% url 'reviews' %}">
@@ -18,13 +18,13 @@
                     </form>
                 </div>
                     {% for review in review_list %}
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <div class="image-container">
                                     {% if "placeholder" in review.featured_image_a.url %}
                                         <object data="{{ review.featured_image_b }}" type="image/png">
-                                            <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Stack Overflow logo and icons and such">
+                                            <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Kitties">
                                         </object>
                                     {% else %}
                                         <img src="{{ review.featured_image_a.url }}">
@@ -54,7 +54,7 @@
                             </div>
                         </div>
                     </div>
-                        {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                        {% if forloop.counter|divisibleby:3 and not forloop.last %}
                             </div><div class="row">
                         {% endif %}
                     {% endfor %}

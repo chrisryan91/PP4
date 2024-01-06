@@ -3,31 +3,26 @@
 {% block content %}
 <div class="container">
     <div>
-        <h1 class="animation-span">
-            <span>Wasteless</span>
-            <span>Table:</span>
-            <span>Ingredient</span>
-            <span>Search</span>
-            <span>&</span>
-            <span>Reviews</span>
+        <hr>
+        <h1 class="animation-span" id="top">
+            <span><strong>Wasteless</strong></span>
+            <span><strong>Plate</strong></span>
         </h1>
         <hr>
-        <div class="row">
+        <div class="row" id="indexrow">
             <div class="col-md-6 align-items-center" id="link">
                 <div class="mid">
                     <div class="int">                    
-                        <h2><a href="{% url 'search' %}">Search</a></h2>
-                        <h3>Designed to combat food waste, our search feature allows you to input available ingredients, unlocking a realm of recipes tailored to your pantry. Throw nothing away!</h3></div>
-                </div>
-                <hr>
-                <div class="mid">
-                    <div class="int">                    
-                        <h2><a href="{% url 'review_blog' %}">View Blog</a></h2>
-                        <h3>Discover our blog, where insightful reviews not only guide your culinary journey but also contribute to minimizing food waste. Our contributors share honest critiques and celebrate sustainable practices</h3></div>
+                        <h2><a href="{% url 'search' %}"><strong>Search</strong></a></h2>
+                        <h3><strong>Designed to combat food waste, our search feature allows you to input available ingredients, unlocking a realm of recipes tailored to your pantry. Throw nothing away!</strong></h3></div>
                 </div>
             </div>
-            <div class="col-md-6" id="link2">
-                <div class="homepage-image">
+                <div class="col-md-6" id="link">
+                    <div class="mid">
+                        <div class="int">                    
+                            <h2><a href="{% url 'review_blog' %}"><strong>View Blog</strong></a></h2>
+                            <h3><strong>Discover our blog, where insightful reviews not only guide your culinary journey but also contribute to minimizing food waste. Our contributors share honest critiques and celebrate sustainable practices</strong></h3></div>
+                    </div>
                 </div>
             </div>
         </div>
