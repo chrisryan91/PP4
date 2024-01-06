@@ -7,16 +7,16 @@
         <div class="col-12 mt-4 left">
             <div class="row">
                 <div class="container1">
-                    <form method="get" action="{% url 'reviews' %}">
-                        <h1>Recipe Reviews</h1>
-                        <label for="sort">Sort by:</label>
-                        <select name="sort" id="sort">
-                            <option value="" {% if current_sort == '' %}selected{% endif %}>Latest</option>
-                            <option value="total_votes" {% if current_sort == 'total_votes' %}selected{% endif %}>Total Votes</option>
-                        </select>
-                        <button type="submit" id="sortbutton">Sort</button>
-                    </form>
+                    <h1 class="reviewheading">Recipe Reviews</h1>
                 </div>
+                <form method="get" action="{% url 'reviews' %}">
+                    <label for="sort">Sort by:</label>
+                    <select name="sort" id="sort">
+                        <option value="" {% if current_sort == '' %}selected{% endif %}>Latest</option>
+                        <option value="total_votes" {% if current_sort == 'total_votes' %}selected{% endif %}>Total Votes</option>
+                    </select>
+                    <button type="submit" id="sortbutton">Sort</button>
+                </form>
                     {% for review in review_list %}
                     <div class="col-md-4">
                         <div class="card">
