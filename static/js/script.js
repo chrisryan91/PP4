@@ -51,17 +51,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
 $(document).ready(function () {
     $('#id_ingredients').select2();
-    console.log("consoled");
 
     $('#id_utensils').select2();
-    console.log("got");
+
+    $('#id_cuisine').select2();
 });
 
 $(document).ready(function() {
     $('#ingredientInput').select2({
         tags: true,
         tokenSeparators: [','],
-        placeholder: 'Enter single ingredient and press enter!',
+        placeholder: 'Enter ingredients and press search!',
     });
 
     $('form').submit(function() {
@@ -70,15 +70,8 @@ $(document).ready(function() {
     });
 });
 
-// $(document).ready(function() {
-//     $('#id_new_ingredient').select2({
-//         tags: true,
-//         tokenSeparators: [','],
-//         placeholder: 'Enter new ingredient and press enter!',
-//     });
-
-//     $('form').submit(function() {
-//         var newIngredients = $('#id_new_ingredient').val();
-//         $('#id_new_ingredient').val(newIngredients.join(','));
-//     });
-// });
+setTimeout(function() {
+    let messages = document.getElementById("msg");
+    let alert = new bootstrap.Alert(messages);
+    alert.close();
+}, 1500);
