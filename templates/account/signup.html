@@ -4,14 +4,14 @@
     {% trans "Signup" %}
 {% endblock head_title %}
 {% block content %}
-<div class="container3">
+<div class="container4">
     <div class="row">
         <div class="col-md-8 mt-3 offset-md-2">
             {% element h1 %}
             {% trans "Sign Up" %}
         {% endelement %}
         <p>
-            {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}
+            {% blocktrans %}Already have an account? Then please <a href="{{ login_url }}"><u>sign in</u></a>.{% endblocktrans %}
         </p>
         {% url 'account_signup' as action_url %}
         {% element form form=form method="post" action=action_url tags="entrance,signup" %}

@@ -8,12 +8,16 @@ html {
 }
 
 body {
-    background-image: url('../toa-heftiba-KN4ampW-QOI-unsplash.jpg');
+    background-image: url('../toa-heftiba-KN4ampW-QOI-unsplash.webp');
     background-size: cover;
     background-position: center center;
     margin: 0;
     padding: 0;
     line-height: 35px;
+}
+
+h1, h2 {
+    font-family: Alice, sans-serif;
 }
 
 a {
@@ -386,11 +390,10 @@ button i {
 .details2,
 .details3 {
     height: auto;
-    margin-bottom: 10px;
 }
 
 .details2 h1 {
-    font-size: 10px;
+    font-size: 15px;
 }
 
 .container2 {
@@ -427,12 +430,33 @@ button i {
 }
 
 #review {
+    font-weight: bold;
     padding-right: 50px;
     padding-bottom: 50px;
 }
 
+#review h2 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
 #comments {
     overflow: auto;
+    padding-top: 10px;
+}
+
+.comments h2, .commentitle {
+    font-family: Alice, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.comments h3 {
+    font-size: 15px;
+}
+
+.comments p {
+    font-size: 15px;
 }
 
 #leavecomment {
@@ -445,6 +469,21 @@ button i {
     text-align: center;
 }
 
+.post-title1 {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.post-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.details1 h2{
+    font-size: 20px;
+    font-weight: bold;
+}
+
 /* submit & update review Styles */
 
 
@@ -452,10 +491,11 @@ button i {
     margin-right: 50px;
 }
 
-.container3 {
+.container4 {
+    padding-top: 150px;
     font-family: Merriweather, sans-serif;
     color: black;
-    padding: 50px;
+    font-weight: bold;
 }
 
 .container2 {
@@ -478,6 +518,7 @@ button i {
 .container3 {
     font-family: Merriweather, sans-serif;
     color: black;
+    width: 75%;
     padding-top: 50px;
     margin: 0 auto;
     text-align: center;

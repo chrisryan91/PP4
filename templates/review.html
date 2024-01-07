@@ -4,10 +4,11 @@
 <div class="masthead">
     <div class="container2">
         <div class="row g-0">
-            <div class="col-md-4 masthead-text">
+            <div class="col-md-4 masthead-text" id="info">
                 <div class="details">
                     <div class="details1">
-                        <h1 class="post-title">{{ review.title }} | {{ review.author }}</h1>
+                        <h1 class="post-title1">{{ review.title }}</h1>
+                        <h2>{{ review.author }}</h2>
                         <div class="voting-section">
                             <div class="user-actions">
                                 {% if user.is_authenticated %}
@@ -47,14 +48,13 @@
                     <div class="details2">
                         <h1>Upvotes: {{ review.total_votes }} </h1>
                         <h1>Prep time: {{ review.prep_time }} minutes</h1>
-                        <p>{{ review.excerpt }}... </p>
                     </div>
                     <div class="details3">Link to original recipe - <strong>{{ review.recipe }}</strong>- to be found <a href="{{ review.url }}"><u>here!</u></a></div>
                 </div>
             </div>
             <div class="col-md-4 masthead-image">
                 <div class="utensils">
-                    <h2>Utensils:</h2>
+                    <h1 class="post-title">Utensils:</h1>
                     <ul>
                         {% for utensil in utensils %}
                             <li>{{ utensil.name }}</li>
@@ -62,7 +62,7 @@
                     </ul>
                 </div>
                 <div class="ingredients">            
-                    <h2>Ingredients:</h2>
+                    <h1 class="post-title">Ingredients:</h1>
                     <ul>
                         {% for ingredient in ingredients %}
                             <li>{{ ingredient.name }}</li>
@@ -86,8 +86,8 @@
     <hr>
     <div class="container2">
         <div class="row g-0" >
-            <h2>Review:</h2>
             <div id="review">
+                <h2>Review:</h2>
                 <p>
                     {{ review.content | safe }}
                 </p>
@@ -104,15 +104,15 @@
 <div class="masthead">
     <div class="container2">
         <div class="row">
-            <div class="col-md-8 card mb-4 mt-3" id="comments">
-                <h1>Comments:</h1>
+            <div class="col-md-8 card mb-4 mt-3" class="comments">
+                <h2 class="commentitle">Comments:</h2>
                 {% if comments %}
                     <div class="card-body1">
                         {% for comment in comments %}
-                            <div class="comments" style="padding-top: 10px;">
-                                <h4 class="font-weight-bold">
+                            <div class="comments">
+                                <h3>
                                     <strong>{{ comment.name }}</strong> wrote:
-                                </h4>
+                                </h3>
                                 <p>{{ comment.body | linebreaks }}</p>
                                 <span2 class="text-muted font-weight-normal">
                                     <strong></strong>{{ comment.created_on }}
@@ -129,8 +129,8 @@
                     </div>
                 {% endif %}
                 {% if user.is_authenticated %}
-                    <div>
-                        <h3>Leave a comment:</h3>
+                    <div class="comments">
+                        <h2>Leave a comment:</h2>
                         <p>Posting as: <strong>{{ user.username }}</strong></p>
                         <form method="post">
                             {{ comment_form | crispy }}
