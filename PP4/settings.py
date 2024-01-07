@@ -29,7 +29,7 @@ app_id = os.environ.get("EDA_APP_ID")
 app_key = os.environ.get("EDA_APP_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "portfolio-project-four.herokuapp.com", "portfolio-project-four-1f2f0bc1d6a0.herokuapp.com"]
 

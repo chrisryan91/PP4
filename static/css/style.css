@@ -492,7 +492,9 @@ button i {
 }
 
 .container4 {
-    padding-top: 150px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 50px;
     font-family: Merriweather, sans-serif;
     color: black;
     font-weight: bold;
