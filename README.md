@@ -120,12 +120,24 @@ Live Website here: []()
 </details>
 
 <details>
-<summary>Users & Tasks Screenshots</summary>
+<summary>Users & Tasks Screenshots 1</summary>
 <br>
 
-![Users & Tasks Screenshots 1](static/readme_images/)
+![Users & Tasks Screenshots 1](static/readme_images/zentablestasks1.png)
+
+</details>
+
+<details>
+<summary>Users & Tasks Screenshots 2</summary>
+<br>
 
 ![Users & Tasks Screenshots 2](static/readme_images/zentablestasks2.png)
+
+</details>
+
+<details>
+<summary>Users & Tasks Screenshots 3</summary>
+<br>
 
 ![Users & Tasks Screenshots 3](static/readme_images/zentablestasks3.png)
 </details>

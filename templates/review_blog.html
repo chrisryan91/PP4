@@ -7,7 +7,9 @@
         <div class="col-12 mt-4 left">
             <div class="row">
                 <div class="container1">
-                    <h1 class="reviewheading">Recipe Reviews</h1>
+                    <div class="headingmid">
+                        <h1  class="reviewheading">Recipe Reviews</h1>
+                    </div>
                 </div>
                 <form method="get" action="{% url 'reviews' %}">
                     <label for="sort">Sort by:</label>
@@ -23,17 +25,12 @@
                             <div class="card-body">
                                 <div class="image-container">
                                     {% if "placeholder" in review.featured_image_a.url %}
-                                        <object data="{{ review.featured_image_b }}" type="image/png">
-                                            <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Kitties">
-                                        </object>
+                                        <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Kitties">
                                     {% else %}
                                         <img src="{{ review.featured_image_a.url }}">
                                     {% endif %}
                                     <a href="{% url 'review_post' review.slug %}" class="post-link">
                                         <div class="middle">
-                                            <h3 class="text">
-                                                {{ review.title }}
-                                            </h3>
                                             <h4 class="card-text"><i class="fas fa-book"><span class="tooltiptext1">Visit Review</span></i>
                                             </h4>
                                         </div>
@@ -41,8 +38,8 @@
                                 </div>
                                 <div class="text-container d-flex align-items-center justify-content-between" >
                                     <div class="left-content">
-                                        <div>
-                                            <span id="like-count" class="divend"><i class="fas fa-thumbs-up"></i>{{ review.total_votes }}</span>
+                                        <div class="divend">
+                                            <strong>{{ review.title }}</strong> <span id="like-count" class="divend"><i class="fas fa-thumbs-up"></i>{{ review.total_votes }}</span>
                                         </div>
                                     </div>
                                     <div class="right-content">

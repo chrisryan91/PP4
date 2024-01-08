@@ -61,7 +61,7 @@ $(document).ready(function() {
     $('#ingredientInput').select2({
         tags: true,
         tokenSeparators: [','],
-        placeholder: 'Enter ingredients and press search!',
+        placeholder: 'Enter ingredients!',
     });
 
     $('form').submit(function() {

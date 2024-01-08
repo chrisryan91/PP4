@@ -21,7 +21,7 @@
 </div>
 <div class="container">
     <div div="row">
-        <div class="col-12 mt-3 left">
+        <div class="col-12 mt-4 left">
             {% if query != None %}
             <h2>Search results for: {{ query }}</h2>
             {% else %}
@@ -30,16 +30,15 @@
             {% if recipes %}
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12 mt-3 left">
+                    <div class="col-12 mt-4 left">
                         <div class="row">
                             {% for recipe in recipes %}
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="image-container">
                                             <img src="{{ recipe.recipe.image }}" class="card-img-top">
                                             <div class="middle">
-                                                <div class="text">{{ recipe.recipe.label }}</div>
                                                 <div class="icon-container">
                                                     <a href="{{ recipe.recipe.url }}" class="card-text" target="_blank">
                                                         <i class="fas fa-book">
@@ -56,10 +55,13 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="text-container">
+                                            <div class="text"> {{ recipe.recipe.label }}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                                {% if forloop.counter|divisibleby:3 and not forloop.last %}
                                     </div><div class="row">
                                 {% endif %}
                             {% endfor %}
