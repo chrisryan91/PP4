@@ -8,7 +8,7 @@ html {
 }
 
 body {
-    background-image: url('https://res.cloudinary.com/dm06dbeze/image/upload/v1704622960/static/toa-heftiba-KN4ampW-QOI-unsplash.716974ae7a7e.webp');
+    background-image: url(../imageedit_2_9471879740.png);
     background-size: cover;
     background-position: center center;
     margin: 0;
@@ -142,8 +142,8 @@ footer p i:hover {
 
 .mid {
     width: 75%;
-    border-radius: 5%;
-    background:rgba(255,255,255, 0.4);
+    /* border-radius: 5%;
+    background:rgba(255,255,255, 0.4); */
 }
 
 #link h2 a:hover {
@@ -162,7 +162,7 @@ footer p i:hover {
 /* search.html Styles */
 
 .search {
-    background:rgba(255,255,255, 0.4);
+    /* background:rgba(255,255,255, 0.4); */
     font-family: Alice, sans-serif;
     font-weight: bold;
     border-radius: 5%;
@@ -350,7 +350,7 @@ footer p i:hover {
 .reviewheading {
     font-family: Merriweather, sans-serif;
     font-weight: bold;
-    background:rgba(255,255,255, 0.4);
+    /* background:rgba(255,255,255, 0.4); */
     border-radius: 10%;
 }
 
@@ -563,7 +563,7 @@ button i {
 .animation-span {
     text-align: center;
     margin: 0 auto;
-    background:rgba(255,255,255, 0.4);
+    /* background:rgba(255,255,255, 0.4); */
     border-radius: 10%;
     width: fit-content;
     transform: scale(0.94);
