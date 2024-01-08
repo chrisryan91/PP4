@@ -8,6 +8,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Review, Ingredient, Utensil
+from django import forms
+from django.core.validators import RegexValidator
 from .forms import CommentForms, ReviewForm
 import requests
 import os
@@ -20,29 +22,37 @@ def Homepage(request):
 def About(request):
         return render(request, 'about.html')
 
+class SearchForm(forms.Form):
+    query = forms.CharField(validators=[RegexValidator(regex="^[a-zA-Z]+$", message="Invalid search query. Only letters are allowed.")])
+
 def search(request):
     recipes = []
+    query = ''
+    error_message = None
 
     if request.method == 'POST':
-        query = request.POST.get('query')
-        recipes = get_recipes(query)
-
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            recipes = get_recipes(query)
     elif request.method == 'GET':
-        query = request.GET.get('query')
-        page = request.GET.get('page', 1)
-
-        if query:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
             recipes = get_recipes(query)
 
             paginator = Paginator(recipes, 16)
+            page = request.GET.get('page', 1)
             try:
                 recipes = paginator.page(page)
             except PageNotAnInteger:
                 recipes = paginator.page(1)
             except EmptyPage:
                 recipes = paginator.page(paginator.num_pages)
+        else:
+            error_message = "Invalid search query. Only letters are allowed."
 
-    return render(request, 'search.html', {'query': query, 'recipes': recipes})
+    return render(request, 'search.html', {'form': form, 'query': query, 'recipes': recipes, 'error_message': error_message})
 
 def get_recipes(query):
     api_url = 'https://api.edamam.com/api/recipes/v2'

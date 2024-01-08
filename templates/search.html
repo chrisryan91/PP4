@@ -22,11 +22,14 @@
 <div class="container">
     <div div="row">
         <div class="col-12 mt-4 left">
-            {% if query != None %}
-            <h2>Search results for: {{ query }}</h2>
-            {% else %}
-            <h2 class="search">Search by the ingredients you already have</h2>
-            {% endif %}
+            <div class="col-12 mt-4 left">
+                {% if query %}
+                    <h2>Search results for: {{ query }}</h2>
+                {% else %}
+                    <h2 class="search">Search by the ingredients you already have</h2>
+                {% endif %}
+                <!-- Other content goes here -->
+            </div>
             {% if recipes %}
             <div class="container-fluid">
                 <div class="row">
