@@ -72,19 +72,25 @@ Live Website here: []()
 <details>
 <summary>Initial Agile Screenshot</summary>
 <br>
+
 ![Initial Agile Screenshot](static/readme_images/project_agile_initial_screenshot.png)
+
 </details>
 
 <details>
 <summary>Midway Agile Screenshot</summary>
 <br>
+
 ![Midway Agile Screenshot](static/readme_images/project_agile_screenshot.png)
+
 </details>
 
 <details>
 <summary>Final Agile Screenshot</summary>
 <br>
+
 ![Final Agile Screenshot](static/readme_images/ZenTableAgileView.png)
+
 </details>
 
 #### Process
@@ -108,14 +114,19 @@ Live Website here: []()
 <details>
 <summary>MoSCoW Prioritisation Screenshot</summary>
 <br>
+
 ![MoSCoW Prioritisation Screenshot](static/readme_images/ZenTableMoSCoW.png)
+
 </details>
 
 <details>
 <summary>Users & Tasks Screenshots</summary>
 <br>
-![Users & Tasks Screenshots 1](static/readme_images/zentablestasks1.png)
+
+![Users & Tasks Screenshots 1](static/readme_images/)
+
 ![Users & Tasks Screenshots 2](static/readme_images/zentablestasks2.png)
+
 ![Users & Tasks Screenshots 3](static/readme_images/zentablestasks3.png)
 </details>
 
