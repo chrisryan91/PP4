@@ -3,14 +3,25 @@ from .models import Review, Comment, Ingredient, Utensil
 from cloudinary.forms import CloudinaryFileField
 from django.utils.text import slugify
 
+
 class ReviewForm(forms.ModelForm):
     featured_image_a = CloudinaryFileField(required=False)
     new_ingredient = forms.CharField(max_length=100, required=False)
 
     class Meta:
         model = Review
-        fields = ['title', 'recipe', 'content', 'cuisine_type', 'new_ingredient', 'featured_image_a', 'prep_time', 'url', 'ingredients', 'utensils']
-        
+        fields = [
+            'title',
+            'recipe',
+            'content',
+            'cuisine_type',
+            'new_ingredient',
+            'featured_image_a',
+            'prep_time',
+            'url',
+            'ingredients',
+            'utensils']
+
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
         self.fields['recipe'].widget.attrs['readonly'] = True
@@ -21,7 +32,8 @@ class ReviewForm(forms.ModelForm):
         instance.author = user
         instance.slug = slugify(instance.title)
 
-        if 'featured_image_a' in self.cleaned_data and self.cleaned_data['featured_image_a']:
+        if 'featured_image_a' in \
+                self.cleaned_data and self.cleaned_data['featured_image_a']:
             instance.featured_image_a = self.cleaned_data['featured_image_a']
         else:
             instance.featured_image_a = None
@@ -30,7 +42,8 @@ class ReviewForm(forms.ModelForm):
             instance.save()
 
         return instance
-    
+
+
 class CommentForms(forms.ModelForm):
     class Meta:
         model = Comment

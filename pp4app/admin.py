@@ -6,6 +6,7 @@ admin.site.register(Ingredient)
 admin.site.register(Utensil)
 admin.site.register(CuisineType)
 
+
 @admin.register(Review)
 class PostAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('recipe',)}
@@ -19,6 +20,7 @@ class PostAdmin(SummernoteModelAdmin):
         queryset.update(status=1)
 
     approve_reviews.short_description = 'Approve selected reviews'
+
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
