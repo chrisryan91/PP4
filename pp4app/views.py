@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.views.generic import DetailView
 from django.utils.decorators import method_decorator
 from django.db.models import Count
@@ -9,34 +10,34 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Review, Ingredient, Utensil
 from django import forms
+from .forms import ReviewForm, CommentForms
 from django.core.validators import RegexValidator
-from .forms import CommentForms, ReviewForm
 import requests
 import os
-from django.shortcuts import render
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 def Homepage(request):
     return render(request, 'index.html')
 
+
 def About(request):
-        return render(request, 'about.html')
+    return render(request, 'about.html')
+
 
 class SearchForm(forms.Form):
-    query = forms.CharField(validators=[RegexValidator(regex="^[a-zA-Z]+$", message="Invalid search query. Only letters are allowed.")])
+    query = forms.CharField(
+        validators=[
+            RegexValidator(
+                regex="^[a-zA-Z]+$", message="Only letters are allowed.")])
+
 
 def search(request):
     recipes = []
     query = ''
     error_message = None
 
-    if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            query = form.cleaned_data['query']
-            recipes = get_recipes(query)
-    elif request.method == 'GET':
-        form = SearchForm(request.GET)
+    if request.method == 'POST' or request.method == 'GET':
+        form = SearchForm(request.POST or request.GET)
         if form.is_valid():
             query = form.cleaned_data['query']
             recipes = get_recipes(query)
@@ -45,14 +46,18 @@ def search(request):
             page = request.GET.get('page', 1)
             try:
                 recipes = paginator.page(page)
-            except PageNotAnInteger:
+            except (PageNotAnInteger, EmptyPage):
                 recipes = paginator.page(1)
-            except EmptyPage:
-                recipes = paginator.page(paginator.num_pages)
         else:
             error_message = "Invalid search query. Only letters are allowed."
+            messages.error(request, error_message)
 
-    return render(request, 'search.html', {'form': form, 'query': query, 'recipes': recipes, 'error_message': error_message})
+    return render(request, 'search.html', {
+        'form': form,
+        'query': query,
+        'recipes': recipes,
+        'error_message': error_message})
+
 
 def get_recipes(query):
     api_url = 'https://api.edamam.com/api/recipes/v2'
@@ -74,6 +79,7 @@ def get_recipes(query):
     else:
         return []
 
+
 def SubmitReview(request):
     if request.method == "POST":
         form = ReviewForm(request.POST, request.FILES)
@@ -87,18 +93,24 @@ def SubmitReview(request):
             review.ingredients.set(existing_ingredients)
 
             new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
-            new_ingredient_list = [ingredient.strip() for ingredient in new_ingredient_string.split(',')]
+            new_ingredient_list = [
+                ingredient.strip()
+                for ingredient in new_ingredient_string.split(',')]
 
             for new_ingredient_name in new_ingredient_list:
                 try:
-                    new_ingredient, created = Ingredient.objects.get_or_create(name=new_ingredient_name)
+                    new_ingredient, created = Ingredient.objects.get_or_create(
+                        name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
                 except IntegrityError:
                     try:
-                        new_ingredient = Ingredient.objects.get(name=new_ingredient_name)
+                        new_ingredient = Ingredient.objects.get(
+                            name=new_ingredient_name)
                     except Ingredient.DoesNotExist:
-                        new_ingredient_id = Ingredient.objects.latest('id').id + 1
-                        new_ingredient = Ingredient.objects.create(id=new_ingredient_id, name=new_ingredient_name)
+                        new_ingredient_id = Ingredient.objects.latest(
+                            'id').id + 1
+                        new_ingredient = Ingredient.objects.create(
+                            id=new_ingredient_id, name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
 
             if review.featured_image_a:
@@ -114,13 +126,15 @@ def SubmitReview(request):
             return redirect('review_blog')
         else:
             print(form.errors)
-    
     else:
-        
         form = ReviewForm()
         print(form.errors)
 
-    return render(request, 'submit_review.html', {'form': form, 'ingredients': Ingredient.objects.all(), 'utensils': Utensil.objects.all()})
+    return render(request, 'submit_review.html', {
+        'form': form,
+        'ingredients': Ingredient.objects.all(),
+        'utensils': Utensil.objects.all()})
+
 
 class Reviews(generic.ListView):
     model = Review
@@ -132,7 +146,13 @@ class Reviews(generic.ListView):
         print(f"Sort option: {sort_option}")
 
         if sort_option == 'total_votes':
-            queryset = Review.objects.filter(status=1).annotate(net_votes_count=Count('up_vote') - Count('down_vote')).order_by('-net_votes_count', '-created_on')
+            queryset = Review.objects.filter(
+                status=1).annotate(
+                    net_votes_count=Count(
+                        'up_vote') - Count(
+                            'down_vote')).order_by(
+                                '-net_votes_count',
+                                '-created_on')
         else:
             queryset = Review.objects.filter(status=1).order_by('-created_on')
 
@@ -143,6 +163,7 @@ class Reviews(generic.ListView):
         context['current_sort'] = self.request.GET.get('sort', '')
         return context
 
+
 class ReviewPost(DetailView):
     model = Review
     template_name = 'review.html'
@@ -150,7 +171,9 @@ class ReviewPost(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments_review.filter(approved=True).order_by('created_on')
+        context[
+            'comments'] = self.object.comments_review.filter(
+                approved=True).order_by('created_on')
         print("Comments:", context['comments'])
         context['comment_form'] = CommentForms()
         context['commented'] = False
@@ -188,34 +211,46 @@ class ReviewPost(DetailView):
 
         vote_type = request.POST.get('vote_type', None)
         if vote_type == 'upvote':
-            self.object.up_vote.filter(id=request.user.id).exists() is False and self.object.up_vote.add(request.user)
-            self.object.down_vote.filter(id=request.user.id).exists() and self.object.down_vote.remove(request.user)
+            self.object.up_vote.filter(
+                id=request.user.id).exists() is False \
+                and self.object.up_vote.add(request.user)
+            self.object.down_vote.filter(id=request.user.id).exists() and \
+                self.object.down_vote.remove(request.user)
         elif vote_type == 'downvote':
-            self.object.down_vote.filter(id=request.user.id).exists() is False and self.object.down_vote.add(request.user)
-            self.object.up_vote.filter(id=request.user.id).exists() and self.object.up_vote.remove(request.user)
+            self.object.down_vote.filter(
+                id=request.user.id).exists() is False \
+                and self.object.down_vote.add(request.user)
+            self.object.up_vote.filter(id=request.user.id).exists() and \
+                self.object.up_vote.remove(request.user)
 
         print("Context:", context)
 
         return self.render_to_response(context)
-    
+
+
 class ReviewUpvote(View):
     def post(self, request, slug):
         review = get_object_or_404(Review, slug=slug)
 
         vote_type = request.POST.get('vote_type', None)
         if vote_type == 'upvote':
-            review.up_vote.filter(id=request.user.id).exists() is False and review.up_vote.add(request.user)
-            review.down_vote.filter(id=request.user.id).exists() and review.down_vote.remove(request.user)
+            review.up_vote.filter(id=request.user.id).exists() is False \
+                and review.up_vote.add(request.user)
+            review.down_vote.filter(id=request.user.id).exists() \
+                and review.down_vote.remove(request.user)
 
         elif vote_type == 'downvote':
-            review.down_vote.filter(id=request.user.id).exists() is False and review.down_vote.add(request.user)
-            review.up_vote.filter(id=request.user.id).exists() and review.up_vote.remove(request.user)
+            review.down_vote.filter(id=request.user.id).exists() \
+                is False and review.down_vote.add(request.user)
+            review.up_vote.filter(id=request.user.id).exists() \
+                and review.up_vote.remove(request.user)
 
         generated_url = reverse('review_post', args=[slug])
         print("Generated URL:", generated_url)
-        
+
         return HttpResponseRedirect(reverse('review_post', args=[slug]))
-    
+
+
 @method_decorator(login_required, name='dispatch')
 class UpdateReview(View):
     template_name = 'update_review.html'
@@ -223,7 +258,8 @@ class UpdateReview(View):
     def get(self, request, slug):
         review = get_object_or_404(Review, slug=slug, author=request.user)
         form = ReviewForm(instance=review)
-        return render(request, self.template_name, {'form': form, 'review': review})
+        return render(
+            request, self.template_name, {'form': form, 'review': review})
 
     def post(self, request, slug):
         review = get_object_or_404(Review, slug=slug, author=request.user)
@@ -232,33 +268,39 @@ class UpdateReview(View):
         if 'delete' in request.POST:
             review.delete()
             return redirect('blog')
-        
+
         if form.is_valid():
-                
-                updated_review = form.save(commit=False)
-                updated_review.author = request.user
+            updated_review = form.save(commit=False)
+            updated_review.author = request.user
 
-                review.ingredients.clear()
+            review.ingredients.clear()
 
-                existing_ingredients = form.cleaned_data.get('ingredients')
-                review.ingredients.set(existing_ingredients)
+            existing_ingredients = form.cleaned_data.get('ingredients')
+            review.ingredients.set(existing_ingredients)
 
-                new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
-                new_ingredient_list = [ingredient.strip() for ingredient in new_ingredient_string.split(',')]
+            new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
+            new_ingredient_list = [
+                ingredient.strip() for
+                ingredient in new_ingredient_string.split(',')]
 
-                for new_ingredient_name in new_ingredient_list:
+            for new_ingredient_name in new_ingredient_list:
+                try:
+                    new_ingredient = Ingredient.objects.get_or_create(
+                        name=new_ingredient_name)
+                    review.ingredients.add(new_ingredient)
+                except IntegrityError:
                     try:
-                        new_ingredient, created = Ingredient.objects.get_or_create(name=new_ingredient_name)
-                        review.ingredients.add(new_ingredient)
-                    except IntegrityError:
-                        try:
-                            new_ingredient = Ingredient.objects.get(name=new_ingredient_name)
-                        except Ingredient.DoesNotExist:
-                            new_ingredient_id = Ingredient.objects.latest('id').id + 1
-                            new_ingredient = Ingredient.objects.create(id=new_ingredient_id, name=new_ingredient_name)
-                        review.ingredients.add(new_ingredient)
-                updated_review.save()
-                return redirect(reverse('blog'))
-            
-        
-        return render(request, self.template_name, {'form': form, 'review': review})
+                        new_ingredient = Ingredient.objects.get(
+                            name=new_ingredient_name)
+                    except Ingredient.DoesNotExist:
+                        new_ingredient_id = Ingredient.objects.latest(
+                            'id').id + 1
+                        new_ingredient = Ingredient.objects.create(
+                            id=new_ingredient_id,
+                            name=new_ingredient_name)
+                    review.ingredients.add(new_ingredient)
+            updated_review.save()
+            return redirect(reverse('blog'))
+
+        return render(
+            request, self.template_name, {'form': form, 'review': review})

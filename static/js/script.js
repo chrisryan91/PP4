@@ -1,5 +1,10 @@
+/*jshint esversion: 6 */
+/*jshint esversion: 6, jquery: true */
+/*jshint esversion: 6, browser: true */
+/*global bootstrap:false */
+
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("loaded")
+    console.log("loaded");
     var cardDivs = document.querySelectorAll('.card');
 
     cardDivs.forEach(function(cardDiv) {
@@ -61,7 +66,7 @@ $(document).ready(function() {
     $('#ingredientInput').select2({
         tags: true,
         tokenSeparators: [','],
-        placeholder: 'Enter ingredients!',
+        placeholder: 'Enter ingredients',
     });
 
     $('form').submit(function() {
