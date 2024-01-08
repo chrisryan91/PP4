@@ -116,10 +116,6 @@ nav {
     text-decoration: none;
 }
 
-.nav-item a:hover {
-    color: #E86A33;
-}
-
 .footer {
     color: black;
     font-weight: 600;
@@ -287,7 +283,6 @@ footer p i:hover {
     text-decoration: none !important;
 }
 
-
 .card-text .tooltiptext1, .card-text .tooltiptext2 {
     visibility: hidden;
     width: 80px;
@@ -342,6 +337,14 @@ footer p i:hover {
 }
 
 /* Review.html */
+
+.upvoted {
+    color: red;
+}
+
+.downvoted {
+    color: red;
+}
 
 .headingmid {
     width: 25%;
@@ -544,6 +547,10 @@ button i {
     font-weight: bold;
 }
 
+#div_id_utensils {
+    padding-bottom: 15px;
+}
+
 /* About.html */
 
 .container3 {
@@ -558,6 +565,12 @@ button i {
 .container3 p {
     font-size: 15px;
     font-weight: 800;
+}
+
+/* Login, Signout and Register HTML */
+
+form ul li {
+    font-size: 10px;
 }
 
 /* Animations */ 
@@ -688,7 +701,7 @@ button i {
     }
 }
 
-.btnburger:hover i, a:hover i, .nav-item:hover .nav-link{ 
+.btnburger:hover i, .nav-item:hover .nav-link, .btn-like:hover i{ 
     animation:  shake 0.8s  ; 
   }
 

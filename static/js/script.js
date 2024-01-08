@@ -54,7 +54,7 @@ $(document).ready(function () {
 
     $('#id_utensils').select2();
 
-    $('#id_cuisine').select2();
+    $('#id_cuisine_type').select2();
 });
 
 $(document).ready(function() {
