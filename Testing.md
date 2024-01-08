@@ -105,9 +105,23 @@ If logged in:
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
 | Form Input | Enter Ingredient | Select2 targets the element and saves it in a tag | Works |
-| Form Input | Enter anything other than a string with letters | Invalid data | Works |
-| Form Button | Click Search | Tags get converted to CSV string and returns recipes | Works |
+| Form Button | Enter anything other than a string with letters | Invalid data message | Works |
+| Form Button | Click Search with valid | Tags get converted to CSV string and returns recipes | Works |
+| Form Button | Click Search with data with no results | "No results" renders in template | Works |
 
+| Element | Action | Expectation | Result|
+|---------|--------|-------------|-------|
+| Card Div | Hover | Div appears with anchored icon | Works |
+| Card Div Icon | Hover | Text appears with external link to review | Works |
+| Card Div Icon | Click | New tab opens with link to recipe | Works |
+
+If logged in:
+
+| Element | Action | Expectation | Result|
+|---------|--------|-------------|-------|
+| Card Div | Hover | Div appears with second anchored icon | Works |
+| Card Div Icon | Hover | Text appears with internal link to review recipe | Works |
+| Card Div Icon | Click | Redirect to submit review page | Works |
 
 ### Submit Review Page
 
