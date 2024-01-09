@@ -12,6 +12,7 @@ from .models import Review, Ingredient, Utensil
 from django import forms
 from .forms import ReviewForm, CommentForms
 from django.core.validators import RegexValidator
+from django.http import HttpResponseNotFound
 import requests
 import os
 
@@ -22,6 +23,24 @@ def Homepage(request):
 
 def About(request):
     return render(request, 'about.html')
+
+
+def bad_request(request, exception):
+    print(f"Bad Request Exception: {exception}")
+    return render(request, 'templates/400.html', status=400)
+
+
+def permission_denied(request, exception):
+    print(f"Exception: {exception}")
+    return render(request, 'templates/403.html', status=403)
+
+
+def page_not_found(request, *args, **kwargs):
+    return render(request, '404.html', status=400)
+
+
+def server_error(request):
+    return render(request, 'templates/500.html', status=500)
 
 
 class SearchForm(forms.Form):

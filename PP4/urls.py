@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from pp4app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,3 +23,8 @@ urlpatterns = [
     path('', include("pp4app.urls")),
     path('accounts/', include('allauth.urls')),
 ]
+
+handler400 = views.bad_request
+handler403 = views.permission_denied
+handler404 = views.page_not_found
+handler500 = views.server_error
