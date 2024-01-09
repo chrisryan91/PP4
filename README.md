@@ -51,9 +51,17 @@ Live Website here: []()
     - Environment Variables
 - Credits
 
-### User Experience
+## Overview
 
-## User Stories
+## Process
+
+### Research
+
+### Design
+
+### Development
+
+### User Stories
 
 - As a site user, I can search for so that I can find a recipe to eat.
 - As a site user, I can search with ingredients, tag names or cuisine types so that I can find a list of recipes.
@@ -214,7 +222,7 @@ I initially had the prioritisation of what features I needed to implement writte
 
 </details>
 
-Again, using GitHub projects to help maintain the direction of my project, I created another board with Tasks to help visualise what I needed to do to complete my user stories. 
+Again, using GitHub projects to help maintain the direction of my project, I created another board with Tasks to help visualise what I needed to do to complete my user stories.
 
 <details>
 <summary>Users & Tasks Screenshots 1</summary>
@@ -241,39 +249,120 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 </details>
 
-#### Process
-- Problem Statement
-- Research
-- Design
-- Development
-- Data Models
-
-### Features
-- CRUD Functionality
-- Authentication and Authorisation
-- Navigation
-- Recipe Search
-- Add User
-- Recipe Blog
-- Add review
-- Add comments
-- About
-
-### Roadmap
-
-### Bugs
-
-### Technologies Used
-- Core Development Technologies
-- Libraries, Frameworks and Packages
-- Python/Django packages
-- Infrastructural Technologies
+### Data Models
 
 
-### Testing
+
+## Features
+
+### CRUD Functionality
+
+### Authentication and Authorisation
+
+### Navigation
+
+### Recipe Search
+
+### Add User
+
+### Recipe Blog
+
+### Add review
+
+### Add comments
+
+### About
+
+### Features Left to Implement
+
+## Bugs
+
+### Fixed bugs and how I fixed them
+
+### Known bugs unfixed
+
+## Technologies Used
+
+### Core Development Technologies
+
+- [Django](https://www.djangoproject.com/) was used a full-stack framework.
+- [JavaScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/)
+- [jQuery](https://jquery.com/)
+- [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+- [HTML](https://html.spec.whatwg.org/multipage/)
+- [Django Templating Language](https://docs.djangoproject.com/en/4.2/ref/templates/language/) for building pages
+
+### Libraries, Frameworks and Packages
+
+- [Edamam](https://www.edamam.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Select2](https://select2.org/)
+
+
+### Python/Django packages
+
+- [Gunicorn](https://pypi.org/project/gunicorn/)
+
+- [psycopg2](https://pypi.org/project/psycopg2/)
+
+- [Coverage](https://pypi.org/project/coverage/)
+
+- [crispy_forms](https://django-crispy-forms.readthedocs.io/en/latest/)
+
+- [django_summernote](https://pypi.org/project/django-summernote/)
+
+  
+### Infrastructural Technologies
+
+- [PostgreSQL](https://www.postgresql.org/)
+- [Heroku](https://www.heroku.com/home)
+- [Cloudinary](https://cloudinary.com/)
+
+## Testing
 
 Full testing: [Testing.md](Testing.md)
 
-### Deployment 
+## Deployment 
 
-### Credits
+### Local Deployment
+
+1. Find the repository on Github.
+2. Click the "Codd" button and copy the URL.
+3. Open the terminal in your IDE and open a session in the directory you want to use.
+4. Type "git clone" followed by the URL into the terminal.
+5. Type "pip install -r requirements.txt" in the terminal.
+6. Set the the correct environment variables in an env.py file.
+7. Once connected to your database, run migrations by typing "python manage.py migrate" into the terminal
+8. Type "python manage.py createsuperuser" in the terminal and follow the prompts
+9. Three .txt files are included to populate the database: ingredients.txt, utensils.txt, cuisine-types.txt.
+10. Type "python manage.py runserver" in the terminal and open in browser.
+
+### Heroku 
+
+1. Login to Heroku.
+2. Create a new app.
+3. Connect to your GitHub repository.
+4. In Heroku settings, set up environment variables in the Config Vars section in the settings tab.
+5. Click on the deploy tab, and enable automatic deploys from your GitHub repository.
+6. Click the "Deploy Branch" button the deploy the app.
+7. Once fully deployed, click "Open App".
+
+### Environment Variables
+
+- Create an env.py file for local deployment in the root of the directory of the project.
+- Set the environment variables in this file.
+
+In env.py file:
+- DATABASE_URL
+- CLOUDINARY_URL
+- EDA_APP_ID
+- EDA_APP_KEY
+- SECRET_KEY
+
+In Django settings:
+- SECRET_KEY
+- DEBUG
+
+- For Heroku deployment, set the environment variables in the Heroku dashboard or the Heroku CLI
+
+## Credits

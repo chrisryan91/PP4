@@ -4,21 +4,22 @@
 /*global bootstrap:false */
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("loaded");
-    var cardDivs = document.querySelectorAll('.card');
-
-    cardDivs.forEach(function(cardDiv) {
-        cardDiv.addEventListener('mouseover', function(event) {
-            var label = cardDiv.querySelector('.text').textContent;
-            var url = cardDiv.querySelector('a[href]').getAttribute('href');
-            var image = cardDiv.querySelector('img').getAttribute('src');
-
-
-            sessionStorage.setItem('modalLabel', label);
-            sessionStorage.setItem('modalURL', url);
-            sessionStorage.setItem('modalImg', image);
+    if (window.location.pathname === '/search/')  {
+        var cardDivs = document.querySelectorAll('.card');
+    
+        cardDivs.forEach(function(cardDiv) {
+            cardDiv.addEventListener('mouseover', function(event) {
+                var label = cardDiv.querySelector('.text').textContent;
+                var url = cardDiv.querySelector('a[href]').getAttribute('href');
+                var image = cardDiv.querySelector('img').getAttribute('src');
+    
+    
+                sessionStorage.setItem('modalLabel', label);
+                sessionStorage.setItem('modalURL', url);
+                sessionStorage.setItem('modalImg', image);
+            });
         });
-    });
+    }
 });
 
 
