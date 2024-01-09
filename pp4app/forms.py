@@ -2,6 +2,7 @@ from django import forms
 from .models import Review, Comment, Ingredient, Utensil
 from cloudinary.forms import CloudinaryFileField
 from django.utils.text import slugify
+from allauth.account.forms import SignupForm
 
 
 class ReviewForm(forms.ModelForm):
@@ -51,3 +52,8 @@ class CommentForms(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+class CustomSignupForm(SignupForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomSignupForm, self).__init__(*args, **kwargs)
+        self.fields.pop('email')

@@ -10,7 +10,7 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Review, Ingredient, Utensil
 from django import forms
-from .forms import ReviewForm, CommentForms
+from .forms import ReviewForm, CommentForms, CustomSignupForm
 from django.core.validators import RegexValidator
 from django.http import HttpResponseNotFound
 import requests
@@ -27,12 +27,12 @@ def About(request):
 
 def bad_request(request, exception):
     print(f"Bad Request Exception: {exception}")
-    return render(request, 'templates/400.html', status=400)
+    return render(request, '400.html', status=400)
 
 
 def permission_denied(request, exception):
     print(f"Exception: {exception}")
-    return render(request, 'templates/403.html', status=403)
+    return render(request, '403.html', status=403)
 
 
 def page_not_found(request, *args, **kwargs):
@@ -40,7 +40,12 @@ def page_not_found(request, *args, **kwargs):
 
 
 def server_error(request):
-    return render(request, 'templates/500.html', status=500)
+    return render(request, '500.html', status=500)
+
+
+def register(request):
+    form = CustomSignupForm()
+    return render(request, 'account/signup.html', {'form': form})
 
 
 class SearchForm(forms.Form):

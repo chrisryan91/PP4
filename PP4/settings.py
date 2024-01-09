@@ -122,6 +122,10 @@ else:
     "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
+ACCOUNT_FORMS = {
+    'signup': 'pp4app.forms.CustomSignupForm',
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
