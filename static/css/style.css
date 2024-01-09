@@ -157,14 +157,20 @@ footer p i:hover {
     font-size: 15px;
 }
 
+.indexicon {
+    font-size: 20px;
+}
+
 /* Search.html Styles */
 .search {
     font-family: Alice, sans-serif;
     font-weight: bold;
+    font-size: 150% !important;
 }
 
 .select2-search__field {
     width: 400px !important;
+    font-size: 150%;
 }
 
 #ingredientInput {
@@ -177,6 +183,7 @@ footer p i:hover {
     padding-top: 50px;
     margin: 0 auto;
     text-align: center;
+    font-size: 150%; !important
 }
 
 .card {
@@ -455,12 +462,12 @@ button i {
     font-weight: bold;
 }
 
-#comments {
+#comments1 {
     overflow: auto;
     padding-top: 10px;
 }
 
-.comments h2, .commentitle {
+.commentitle {
     font-family: Alice, sans-serif;
     font-size: 20px;
     font-weight: bold;
@@ -564,6 +571,7 @@ form ul li {
 .animation-span {
     text-align: center;
     margin: 0 auto;
+    padding-bottom: 20px;
     width: fit-content;
     transform: scale(0.94);
     animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
@@ -689,7 +697,7 @@ span:nth-child(8) {
     }
 }
 
-.btnburger:hover i, .nav-item:hover .nav-link, .btn-like:hover i {
+.btnburger:hover i, .nav-item:hover .nav-link, .btn-like:hover i, a:hover i {
     animation: shake 0.8s;
 }
 

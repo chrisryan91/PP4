@@ -15,20 +15,19 @@
         {% csrf_token %}
         <select id="ingredientInput" multiple="multiple">
         </select>
-        <input type="hidden" name="query" id="ingredientQuery" required>
+        <input type="hidden" name="query" id="ingredientQuery">
         <button type="submit">Search</button>
     </form>
 </div>
 <div class="container">
-    <div div="row">
+    <div class="row">
         <div class="col-12 mt-4 left">
             <div class="col-12 mt-4 left">
                 {% if query %}
                     <h2>Search results for: {{ query }}</h2>
                 {% else %}
-                    <h2 class="search">Search by the ingredients you already have</h2>
+                    <h2 class="search">Search by the ingredients you already have <i class="fas fa-search indexicon"></i></h2>
                 {% endif %}
-                <!-- Other content goes here -->
             </div>
             {% if recipes %}
             <div class="container-fluid">
@@ -40,7 +39,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="image-container">
-                                            <img src="{{ recipe.recipe.image }}" class="card-img-top">
+                                            <img src="{{ recipe.recipe.image }}" alt="Placeholder image for {{ recipe.review.label }}" class="card-img-top">
                                             <div class="middle">
                                                 <div class="icon-container">
                                                     <a href="{{ recipe.recipe.url }}" class="card-text" target="_blank">
@@ -70,6 +69,7 @@
                             {% endfor %}
                         </div>
                     </div>
+                </div>
             </div>
             {% endif %}
         </div>

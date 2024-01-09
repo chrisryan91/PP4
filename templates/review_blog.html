@@ -3,72 +3,72 @@
 {% block content %}
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12 mt-4 left">
-            <div class="row">
-                <div class="container1">
-                    <div class="headingmid">
-                        <h1  class="reviewheading">Recipe Reviews</h1>
+        <div class="row">
+            <div class="col-12 mt-4 left">
+                <div class="row">
+                    <div class="container1">
+                        <div class="headingmid">
+                            <h1 class="reviewheading">Recipe Reviews</h1>
+                        </div>
                     </div>
-                </div>
-                <form method="get" action="{% url 'reviews' %}">
-                    <label for="sort">Sort by:</label>
-                    <select name="sort" id="sort">
-                        <option value="" {% if current_sort == '' %}selected{% endif %}>Latest</option>
-                        <option value="total_votes" {% if current_sort == 'total_votes' %}selected{% endif %}>Total Votes</option>
-                    </select>
-                    <button type="submit" id="sortbutton">Sort</button>
-                </form>
-                    {% for review in review_list %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="image-container">
-                                    {% if "placeholder" in review.featured_image_a.url %}
-                                        <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Kitties">
-                                    {% else %}
-                                        <img src="{{ review.featured_image_a.url }}">
-                                    {% endif %}
-                                    <a href="{% url 'review_post' review.slug %}" class="post-link">
-                                        <div class="middle">
-                                            <h4 class="card-text"><i class="fas fa-book"><span class="tooltiptext1">Visit Review</span></i>
-                                            </h4>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div class="text-container d-flex align-items-center justify-content-between" >
-                                    <div class="left-content">
-                                        <div class="divend">
-                                            <strong>{{ review.title }}</strong> <span id="like-count" class="divend"><i class="fas fa-thumbs-up"></i>{{ review.total_votes }}</span>
-                                        </div>
+                    <form method="get" action="{% url 'reviews' %}">
+                        <label for="sort">Sort by:</label>
+                        <select name="sort" id="sort">
+                            <option value="" {% if current_sort == '' %}selected{% endif %}>Latest</option>
+                            <option value="total_votes" {% if current_sort == 'total_votes' %}selected{% endif %}>Total Votes</option>
+                        </select>
+                        <button type="submit" id="sortbutton">Sort</button>
+                    </form>
+                        {% for review in review_list %}
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="image-container">
+                                        {% if "placeholder" in review.featured_image_a.url %}
+                                            <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Kitties">
+                                        {% else %}
+                                            <img src="{{ review.featured_image_a.url }}" alt="Image for {{ review.label }}">
+                                        {% endif %}
+                                        <a href="{% url 'review_post' review.slug %}" class="post-link">
+                                            <div class="middle">
+                                                <h4 class="card-text"><i class="fas fa-book"><span class="tooltiptext1">Visit Review</span></i></h4>
+                                            </div>
+                                        </a>
                                     </div>
-                                    <div class="right-content">
-                                        <div class="divend">
-                                            {{ review.author }} | {{ review.created_on|timesince }}
+                                    <div class="text-container d-flex align-items-center justify-content-between" >
+                                        <div class="left-content">
+                                            <div class="divend">
+                                                <strong>{{ review.title }}</strong> <span class="divend"><i class="fas fa-thumbs-up"></i>{{ review.total_votes }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="right-content">
+                                            <div class="divend">
+                                                {{ review.author }} | {{ review.created_on|timesince }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                        {% if forloop.counter|divisibleby:3 and not forloop.last %}
-                            </div><div class="row">
-                        {% endif %}
-                    {% endfor %}
+                            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                                </div><div class="row">
+                            {% endif %}
+                        {% endfor %}
+                </div>
             </div>
-        </div>
-    {% if is_paginated %}
-    <nav aria-label="Page navigation" class="pag-nav">
-        <ul class="pagination justify-content-center">
-            {% if page_obj.has_previous %}
-            <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
-            {% endif %}
-            {% if page_obj.has_next %}
-            <li><a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-    {% endif %}
+        {% if is_paginated %}
+        <nav aria-label="Page navigation" class="pag-nav">
+            <ul class="pagination justify-content-center">
+                {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
+                {% endif %}
+                {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </div>
 </div>
 
 {%endblock%}

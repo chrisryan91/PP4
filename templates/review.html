@@ -16,11 +16,11 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="vote_type" value="upvote">
                                         {% if liked %}
-                                        <button type="submit" name="review_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
+                                        <button type="submit" name="review_id" value="{{ review.slug }}" class="btn-like">
                                                 <i class="far fa-thumbs-up upvoted"></i>
                                         </button>
                                             {% else %}
-                                        <button type="submit" name="review_id" value="{{ review.slug }}" id="btn-like" class="btn-like">
+                                        <button type="submit" name="review_id" value="{{ review.slug }}" class="btn-like">
                                                 <i class="far fa-thumbs-up"></i>
                                         </button>
                                             {% endif %}
@@ -77,7 +77,7 @@
                             <img src="https://cdn.freecodecamp.org/curriculum/cat-photo-app/relaxing-cat.jpg" alt="Kitties">
                         </object>
                     {% else %}
-                        <img src="{{ review.featured_image_a.url }}" width="100%">
+                        <img src="{{ review.featured_image_a.url }}" alt="placehold for {{ review.label }}" width="100%">
                     {% endif %}
                 </div>
             </div>
@@ -92,9 +92,7 @@
                     {{ review.content | safe }}
                 </p>
                 <span>
-                    <h3>
                         {{ review.created_on }} | {% if user.is_authenticated and user == review.author %}<a href="{% url 'update_review' slug=review.slug %}">Update Review</a>{% endif %}
-                    </h3>
                 </span>
             </div>
         </div>
@@ -104,7 +102,7 @@
 <div class="masthead">
     <div class="container2">
         <div class="row">
-            <div class="col-md-8 card mb-4 mt-3" class="comments">
+            <div class="col-md-8 card mb-4 mt-3" class="comments1">
                 <h2 class="commentitle">Comments:</h2>
                 {% if comments %}
                     <div class="card-body1">
@@ -142,6 +140,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 {% endblock content %}
