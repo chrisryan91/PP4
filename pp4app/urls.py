@@ -1,4 +1,5 @@
 from . import views
+from allauth.account.views import LogoutView
 from django.urls import path
 
 urlpatterns = [
@@ -13,6 +14,7 @@ urlpatterns = [
     path('blog/', views.Reviews.as_view(), name='reviews'),
     path('accounts/signup/', views.CustomSignupView.as_view(), name='signup'),
     path('accounts/login/', views.CustomLoginView.as_view(), name='login'),
+    path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
     path('<path:unmatched_path>/', views.page_not_found, name='custom_404_unmatched'),
     path('<slug:slug>/', views.ReviewPost.as_view(), name='review_post'),
     path('', views.Homepage, name='home'),

@@ -54,6 +54,7 @@ class CustomLoginView(LoginView):
     form_class = CustomLoginForm
 
 
+
 class SearchForm(forms.Form):
     query = forms.CharField(
         validators=[

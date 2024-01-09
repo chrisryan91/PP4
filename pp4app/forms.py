@@ -61,6 +61,8 @@ class CustomSignupForm(SignupForm):
         super(CustomSignupForm, self).__init__(*args, **kwargs)
 
 
+
 class CustomLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
+
