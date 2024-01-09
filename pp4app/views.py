@@ -315,20 +315,13 @@ class UpdateReview(View):
                 ingredient in new_ingredient_string.split(',')]
 
             for new_ingredient_name in new_ingredient_list:
-                try:
-                    new_ingredient = Ingredient.objects.get_or_create(
-                        name=new_ingredient_name)
+                new_ingredient, created = Ingredient.objects.get_or_create(name=new_ingredient_name)
+                
+                if not created:
+                    # If the ingredient already exists, no need to create it again
                     review.ingredients.add(new_ingredient)
-                except IntegrityError:
-                    try:
-                        new_ingredient = Ingredient.objects.get(
-                            name=new_ingredient_name)
-                    except Ingredient.DoesNotExist:
-                        new_ingredient_id = Ingredient.objects.latest(
-                            'id').id + 1
-                        new_ingredient = Ingredient.objects.create(
-                            id=new_ingredient_id,
-                            name=new_ingredient_name)
+                else:
+                    # If it's a new ingredient, add it to the review
                     review.ingredients.add(new_ingredient)
             
             updated_review.status = 0
