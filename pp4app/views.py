@@ -330,6 +330,9 @@ class UpdateReview(View):
                             id=new_ingredient_id,
                             name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
+            
+            updated_review.status = 0
+            
             updated_review.save()
             return redirect(reverse('blog'))
 
