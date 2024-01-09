@@ -1,8 +1,9 @@
 from django import forms
 from .models import Review, Comment, Ingredient, Utensil
+from django.contrib.auth.forms import AuthenticationForm
 from cloudinary.forms import CloudinaryFileField
 from django.utils.text import slugify
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, LoginForm
 
 
 class ReviewForm(forms.ModelForm):
@@ -54,6 +55,12 @@ class CommentForms(forms.ModelForm):
         super().__init__(*args, **kwargs)
 
 class CustomSignupForm(SignupForm):
+    email = forms.EmailField(required=False, widget=forms.HiddenInput())
+
     def __init__(self, *args, **kwargs):
         super(CustomSignupForm, self).__init__(*args, **kwargs)
-        self.fields.pop('email')
+
+
+class CustomLoginForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(CustomLoginForm, self).__init__(*args, **kwargs)

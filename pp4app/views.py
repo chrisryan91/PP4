@@ -10,9 +10,11 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from .models import Review, Ingredient, Utensil
 from django import forms
-from .forms import ReviewForm, CommentForms, CustomSignupForm
+from .forms import ReviewForm, CommentForms, CustomSignupForm, CustomLoginForm
 from django.core.validators import RegexValidator
 from django.http import HttpResponseNotFound
+from django.contrib.auth.views import LoginView
+from allauth.account.views import SignupView
 import requests
 import os
 
@@ -42,10 +44,14 @@ def page_not_found(request, *args, **kwargs):
 def server_error(request):
     return render(request, '500.html', status=500)
 
+class CustomSignupView(SignupView):
+    template_name = 'account/signup.html'
+    form_class = CustomSignupForm
 
-def register(request):
-    form = CustomSignupForm()
-    return render(request, 'account/signup.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    template_name = 'account/login.html'
+    form_class = CustomLoginForm
 
 
 class SearchForm(forms.Form):

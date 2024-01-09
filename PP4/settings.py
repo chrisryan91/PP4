@@ -124,7 +124,14 @@ else:
 
 ACCOUNT_FORMS = {
     'signup': 'pp4app.forms.CustomSignupForm',
+    'login': 'pp4app.forms.CustomLoginForm',
 }
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
