@@ -116,7 +116,6 @@
                                     <strong></strong>{{ comment.created_on }}
                                 </span2> 
                                 {% if user.is_authenticated and user.username == comment.name %}
-                                Hello
                                 <form method="post" action="{% url 'delete_comment' comment.id %}">
                                     {% csrf_token %}
                                     <button type="submit">Delete</button>

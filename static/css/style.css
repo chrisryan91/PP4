@@ -74,6 +74,9 @@ form {
 
 /* Button Styles */
 button {
+    height: fit-content;
+    width: fit-content;
+    font-size: 10px;
     background-color: black;
     color: white;
     border-radius: 20%;
@@ -535,6 +538,14 @@ button i {
     padding-left: 15px;
     padding-right: 15px;
     padding-top: 50px;
+    font-family: Merriweather, sans-serif;
+    color: black;
+    font-weight: bold;
+}
+
+.container6 {
+    padding-left: 15px;
+    padding-right: 15px;
     font-family: Merriweather, sans-serif;
     color: black;
     font-weight: bold;

@@ -4,9 +4,10 @@ Wasteless Table is an online tool and blog that encourages users to avoid discar
 
 Ireland is estimated to generate 1.1 million tonnes of food waste per year, according to the [Environmental Protection Agency](https://www.epa.ie/publications/circular-economy/resources/nature-and-extent-update-15th-June.pdf)
 
-![alt text]()
 
-Live Website here: []()
+Live Website here: [Wasteless Table](https://portfolio-project-four-1f2f0bc1d6a0.herokuapp.com/)
+
+![alt text]()
 
 ## Table of Contents
 - Project Overview
@@ -193,7 +194,7 @@ Similarly, at the start of development, I never realised how useful of a tool Gi
 <summary>Initial Agile Screenshot</summary>
 <br>
 
-![Initial Agile Screenshot](static/readme_images/project_agile_initial_screenshot.png)
+![Initial Agile Screenshot](static/readme_images/agile/project_agile_initial_screenshot.png)
 
 </details>
 
@@ -201,7 +202,7 @@ Similarly, at the start of development, I never realised how useful of a tool Gi
 <summary>Midway Agile Screenshot</summary>
 <br>
 
-![Midway Agile Screenshot](static/readme_images/project_agile_screenshot.png)
+![Midway Agile Screenshot](static/readme_images/agile/project_agile_initial_screenshot.png)
 
 </details>
 
@@ -209,7 +210,7 @@ Similarly, at the start of development, I never realised how useful of a tool Gi
 <summary>Final Agile Screenshot</summary>
 <br>
 
-![Final Agile Screenshot](static/readme_images/ZenTableAgileView.png)
+![Final Agile Screenshot](static/readme_images/agile/ZenTableAgileView.png)
 
 
 I initially had the prioritisation of what features I needed to implement written down. I was recommended to use GitHub projects for this too so using the User Stories I created a new board to help visualise what did and what did not need to be prioritised. 
@@ -218,7 +219,7 @@ I initially had the prioritisation of what features I needed to implement writte
 <summary>MoSCoW Prioritisation Screenshot</summary>
 <br>
 
-![MoSCoW Prioritisation Screenshot](static/readme_images/ZenTableMoSCoW.png)
+![MoSCoW Prioritisation Screenshot](static/readme_images/agile/ZenTableMoSCoW.png)
 
 </details>
 
@@ -228,7 +229,7 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 <summary>Users & Tasks Screenshots 1</summary>
 <br>
 
-![Users & Tasks Screenshots 1](static/readme_images/zentablestasks1.png)
+![Users & Tasks Screenshots 1](static/readme_images/agile/zentablestasks1.png)
 
 </details>
 
@@ -236,7 +237,7 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 <summary>Users & Tasks Screenshots 2</summary>
 <br>
 
-![Users & Tasks Screenshots 2](static/readme_images/zentablestasks2.png)
+![Users & Tasks Screenshots 2](static/readme_images/agile/zentabletasks2.png)
 
 </details>
 
@@ -244,7 +245,7 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 <summary>Users & Tasks Screenshots 3</summary>
 <br>
 
-![Users & Tasks Screenshots 3](static/readme_images/zentablestasks3.png)
+![Users & Tasks Screenshots 3](static/readme_images/agile/zentabletasks3.png)
 </details>
 
 </details>
@@ -305,7 +306,7 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 <summary>Data Model Diagram</summary>
 <br>
 
-![Users & Tasks Screenshots 3](static/readme_images/datamodel.png)
+![Data Model Diagram](static/readme_images/datamodel.png)
 </details>
 
 
@@ -323,35 +324,147 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 ### Authentication and Authorisation
 
+**Django All Auth** is used for backend authentication
 
+- Users can create an account in the sign-up page.
+- Users can sign-in to their account to leave comments, posts and likes using the sign-in page.
+- Users can login back into their account using the login page.
+- Only authorised users can visit the submit review page and update review page.
+
+### Navigation
+
+<details>
+<summary>Navbar</summary>
+<br>
+
+![Navbar](static/readme_images/screenshots/navbar_lg.png)
+</details>
+
+<details>
+<summary>Navbar</summary>
+<br>
+
+![Navbar](static/readme_images/screenshots/navbar_sm.png)
+</details>
+
+<details>
+<summary>Footer</summary>
+<br>
+
+![Footer](static/readme_images/screenshots/search_img.png)
+</details>
+
+### Recipe Search
+
+<details>
+<summary>Recipe Search</summary>
+<br>
+
+![Search Page](static/readme_images/screenshots/search_img.png)
+</details>
+
+<details>
+<summary>Search Results</summary>
+<br>
+
+![Search Results](static/readme_images/screenshots/searchresults_img.png)
+</details>
+
+### Sign up
 
 <details>
 <summary>Sign-Up Page</summary>
 <br>
 
-![Sign-Up Page]()
+![Sign-Up Page](static/readme_images/screenshots/signup_lg.png)
 </details>
+
+### Login & Logout
 
 <details>
 <summary>Login Page</summary>
 <br>
 
-![Login Page]()
+![Login Page](static/readme_images/screenshots/login-img.png)
 </details>
 
-### Navigation
+<details>
+<summary>Logout Page</summary>
+<br>
 
-### Recipe Search
-
-### Add User
+![Login Page](static/readme_images/screenshots/logout_sm.png)
+</details>
 
 ### Recipe Blog
 
-### Add review
+<details>
+<summary>Recipe Blog A</summary>
+<br>
+
+![Recipe Blog A](static/readme_images/screenshots/review_img_a.png)
+</details>
+
+<details>
+<summary>Recipe Blog B</summary>
+<br>
+
+![Recipe Blog B](static/readme_images/screenshots/review_img_b.png)
+</details>
+
+<details>
+<summary>Recipe Blog C</summary>
+<br>
+
+![Recipe Blog C](static/readme_images/screenshots/review_img_c.png)
+</details>
+
+### Submit & Update review
+
+<details>
+<summary>Submit Review</summary>
+<br>
+
+![Submit Review](static/readme_images/screenshots/submitreview_img.png)
+</details>
+
+<details>
+<summary>Update Review 1</summary>
+<br>
+
+![Update Review 1](static/readme_images/screenshots/updatereview_img.png)
+</details>
+
+<details>
+<summary>Update Review 2</summary>
+<br>
+
+![Update Review 2](static/readme_images/screenshots/updatereview_img.png)
+</details>
 
 ### Add comments
 
+<details>
+<summary>Added Comment</summary>
+<br>
+
+![Added Comment](static/readme_images/screenshots/reviewcomment_img.png)
+</details>
+
+<details>
+<summary>Comments</summary>
+<br>
+
+![Comments](static/readme_images/screenshots/reviewcomments_img.png)
+</details>
+
 ### About
+
+<details>
+<summary>About</summary>
+<br>
+
+![About](static/readme_images/screenshots/about_img.png)
+</details>
 
 ### Features Left to Implement
 
