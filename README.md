@@ -251,13 +251,93 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 ### Data Models
 
+#### PP4APP
+
+**Review** represents a single recipe review. It's contains all the information for a specific review review on the review blog. It includes information such as:
+
+- id
+- title
+- url
+- slug
+- author
+- ingredients
+- utensils
+- updated_on
+- content
+- featured_image_a
+- featured_image_b
+- excerpt
+- created_on
+- cuisine_type
+- status
+- prep_time
+- up_vote
+- down_vote
+
+**Ingredient** is a table containing a list of ingredients. It is in a many to many relationship with the review table. It contains a list of ingredients for each of our recipes:
+
+- id
+- name
+
+**Utensil** is a table containing a list of utensils. It is in a many to many relationship with with our review table. It contains a list of utensils that can be associated with each review:
+
+- id
+- name
+
+**CuisineType** is a table containing different cuisine types. It is in a many to one relationship with out review table. It contains the cuisine type to be associated with each review: 
+
+- id
+- name
+- slug
+  
+**Comment** is a table to hold our comments. Each comment is in a one to one relationship with our review table as each comment is associated with one recipe:
+
+- id
+- review
+- name
+- email
+- body
+- created_on
+- approved
+
+
+<details>
+<summary>Data Model Diagram</summary>
+<br>
+
+![Users & Tasks Screenshots 3](static/readme_images/datamodel.png)
+</details>
 
 
 ## Features
 
 ### CRUD Functionality
 
+**Create:** Any registered user can leave a review on a recipe provided by the API. A form is rendered on the submit review page to create a recipe review. The form is submitted and before it appears as published, it must be reviewed by the admin to monitor content.
+
+**Read:** Any user of the website irrespective of registration status can read the reviews or comments posted once they have been published by the admin.
+
+**Update:** If the user who wrote a specific post has logged in and is viewing a post they wrote, a button appears with the option to update the form. The clickable link will take them to an update review page with a form rendered allowing them to update their review. Update functionality is not yet available for comments. 
+
+**Delete:** Similarly, if a user who wrote a specific post has logged in and is viewing a post they wrote, a button appears with the option to update the form. The clickable link will take them to an update review page. Alongside a button to update review, there is also a button to delete the post entirely. Delete functionality is extended to comment posts as if a logged in user has written a comment, a button appears to delete the comment.
+
 ### Authentication and Authorisation
+
+
+
+<details>
+<summary>Sign-Up Page</summary>
+<br>
+
+![Sign-Up Page]()
+</details>
+
+<details>
+<summary>Login Page</summary>
+<br>
+
+![Login Page]()
+</details>
 
 ### Navigation
 

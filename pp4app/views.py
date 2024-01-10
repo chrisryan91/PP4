@@ -12,7 +12,7 @@ from .models import Review, Ingredient, Utensil, Comment
 from django import forms
 from .forms import ReviewForm, CommentForms, CustomSignupForm, CustomLoginForm
 from django.core.validators import RegexValidator
-from django.http import HttpResponseNotFound
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from allauth.account.views import SignupView
 import requests
@@ -114,59 +114,63 @@ def get_recipes(query):
 
 
 def SubmitReview(request):
-    if request.method == "POST":
-        form = ReviewForm(request.POST, request.FILES)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.author = request.user
-            review.save()
-            form.save_m2m()
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            form = ReviewForm(request.POST, request.FILES)
+            if form.is_valid():
+                review = form.save(commit=False)
+                review.author = request.user
+                review.save()
+                form.save_m2m()
 
-            existing_ingredients = form.cleaned_data.get('ingredients')
-            review.ingredients.set(existing_ingredients)
+                existing_ingredients = form.cleaned_data.get('ingredients')
+                review.ingredients.set(existing_ingredients)
 
-            new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
-            new_ingredient_list = [
-                ingredient.strip()
-                for ingredient in new_ingredient_string.split(',')]
+                new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
+                new_ingredient_list = [
+                    ingredient.strip()
+                    for ingredient in new_ingredient_string.split(',')]
 
-            for new_ingredient_name in new_ingredient_list:
-                try:
-                    new_ingredient, created = Ingredient.objects.get_or_create(
-                        name=new_ingredient_name)
-                    review.ingredients.add(new_ingredient)
-                except IntegrityError:
+                for new_ingredient_name in new_ingredient_list:
                     try:
-                        new_ingredient = Ingredient.objects.get(
+                        new_ingredient, created = Ingredient.objects.get_or_create(
                             name=new_ingredient_name)
-                    except Ingredient.DoesNotExist:
-                        new_ingredient_id = Ingredient.objects.latest(
-                            'id').id + 1
-                        new_ingredient = Ingredient.objects.create(
-                            id=new_ingredient_id, name=new_ingredient_name)
-                    review.ingredients.add(new_ingredient)
+                        review.ingredients.add(new_ingredient)
+                    except IntegrityError:
+                        try:
+                            new_ingredient = Ingredient.objects.get(
+                                name=new_ingredient_name)
+                        except Ingredient.DoesNotExist:
+                            new_ingredient_id = Ingredient.objects.latest(
+                                'id').id + 1
+                            new_ingredient = Ingredient.objects.create(
+                                id=new_ingredient_id, name=new_ingredient_name)
+                        review.ingredients.add(new_ingredient)
 
-            if review.featured_image_a:
-                print(f"Cloudinary URL: {review.featured_image_a.url}")
+                if review.featured_image_a:
+                    print(f"Cloudinary URL: {review.featured_image_a.url}")
+                else:
+                    print("No Cloudinary URL available (featured_image_a is None)")
+
+                url = form.cleaned_data.get("url")
+                if url:
+                    request.session["modalURL"] = url
+                    print(f"Session modalURL set to: {url}")
+
+                return redirect('review_blog')
             else:
-                print("No Cloudinary URL available (featured_image_a is None)")
-
-            url = form.cleaned_data.get("url")
-            if url:
-                request.session["modalURL"] = url
-                print(f"Session modalURL set to: {url}")
-
-            return redirect('review_blog')
+                print(form.errors)
         else:
+            form = ReviewForm()
             print(form.errors)
-    else:
-        form = ReviewForm()
-        print(form.errors)
 
-    return render(request, 'submit_review.html', {
-        'form': form,
-        'ingredients': Ingredient.objects.all(),
-        'utensils': Utensil.objects.all()})
+        return render(request, 'submit_review.html', {
+            'form': form,
+            'ingredients': Ingredient.objects.all(),
+            'utensils': Utensil.objects.all()})
+    
+    else:
+        return redirect('login')
 
 
 class Reviews(generic.ListView):
