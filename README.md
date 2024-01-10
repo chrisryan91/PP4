@@ -99,9 +99,55 @@ Some text and icons are animated. In-fact there was more JavaScript interactivit
 
 While the [EDAMAM API](https://www.edamam.com/) is a useful tool, it is unable to return the exact steps involved in making the recipe as it did not hold the copyright to the recipes. It returns a lot - labels, images, ingredients, nutritional value - but the exact steps involved in making the recipe were not returned. Given this fact I linked the external URL to the recipe card div which is opened in a new tab. The steps to how the recipes are made are not held on my blog - that is unless a User writing a review wants to include them. Given the fact this blog is focused on ingredients in particular, in my submit review form, there are sections for ingredients and utensils, but not for the exact steps to making the recipe. The blog post is a review - with hints, tips and tricks.
 
-### Research
+For research, I visited other recipe websites and blogs. Some of them I found very cluttered and while the design was nicely styled there was just too much content on the webpage. There could often be too many links both internally and externally. Given this, I was happy to give all my content the breathing space that it needed. This includes forms. The reviews that are submitted and published are given space when rendered on the HTML page. I just wanted to reviews to speak for themselves as much as possible. I wanted to minimise links and reduce content to a minimum for styling purposes and to reduce user interactions/friction.
 
 ### Development
+
+#### Wireframes
+
+Wireframes were developed at the outset of my project. The general framework for how the website should be structured has remained the same. These served as a basis for my design from the beginning and prevented me from deviating too far in another direction. I created them partly because I understood that could could easily be made responsive to smaller screen sizes with bootstrap.
+
+<details>
+<summary>Search Page Initial Wireframe</summary>
+<br>
+
+![Search Page Initial Wireframe](static/readme_images/wireframes/New%20Wireframe%201.png)
+
+</details>
+
+<details>
+<summary>Search Results Initial Wireframe</summary>
+<br>
+
+![Search Results Initial Wireframe](static/readme_images/wireframes/New%20Wireframe%201%20copy.png)
+
+</details>
+
+<details>
+<summary>Submit Review Wireframe</summary>
+<br>
+
+![Submit Review Wireframe](static/readme_images/wireframes/New%20Wireframe%201%20copy%204.png)
+
+</details>
+
+<details>
+<summary>Review List Wireframe</summary>
+<br>
+
+![Review List Wireframe](static/readme_images/wireframes/New%20Wireframe%201%20copy%202.png)
+
+</details>
+
+<details>
+<summary>Recipe Review Wireframe</summary>
+<br>
+
+![Recipe Review Wireframe](static/readme_images/wireframes/New%20Wireframe%201%20copy%203.png)
+
+</details>
+
+#### GitHub Projects
 
 The three screenshots below were taken at the start of development, the midway point and at the final stage. They show three columns - to do, in progress and completed. Only over the course of the few weeks developing the project did the lessons on Agile development begin to really make sense. In completing my own project, I recognised mistakes I had made in the planning process and how my development process had to completely change given the timeframe that the project needed to be completed in. The lessons on Agile development - and the entire point of the Agile manifesto - began to really make sense. 
 
@@ -130,7 +176,7 @@ Similarly, at the start of development, I never realised how useful of a tool Gi
 ![Final Agile Screenshot](static/readme_images/agile/ZenTableAgileView.png)
 
 
-I initially had the prioritisation of what features I needed to implement written down. I was recommended to use GitHub projects for this too so using the User Stories I created a new board to help visualise what did and what did not need to be prioritised.
+I initially had the prioritisation of what features I needed to implement written down. I was recommended to use GitHub projects for this too so using the User Stories I created a new board to help visualise what did and what did not need to be prioritised. This MoSCoW prioritisation board on GitHub projects was created halfway through the project and not at the beginning.
 
 <details>
 <summary>MoSCoW Prioritisation Screenshot</summary>
@@ -385,11 +431,13 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 1. The ability to edit and delete comments has not yet been implemented. I would also like comments to be upvoted and downvote. They could be sorted by upvotes/downvotes like reddit.
 2. I was in two minds about the feasibility of creating some kind of user dashboard so users could potentially update all their content from the one place. I was not confident that I would get it done on time but it was certainly the next feature I would want to add. At present CRUD operations are present but for a user it would be more manageable to have them in one place.
-3. 
+3. Email confirmation in login and sign-up processes
+4. Social Media sign-in
 
 ## Technologies Used
 
 ### Core Development Technologies
+
 
 - [Django](https://www.djangoproject.com/) was used a full-stack framework.
 - [JavaScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/)
@@ -398,7 +446,9 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 - [HTML](https://html.spec.whatwg.org/multipage/)
 - [Django Templating Language](https://docs.djangoproject.com/en/4.2/ref/templates/language/) for building pages
 
+
 ### Libraries, Frameworks and Packages
+
 
 - [Edamam](https://www.edamam.com/)
 - [Bootstrap](https://getbootstrap.com/)
@@ -407,22 +457,21 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 ### Python/Django packages
 
+
 - [Gunicorn](https://pypi.org/project/gunicorn/)
-
 - [psycopg2](https://pypi.org/project/psycopg2/)
-
 - [Coverage](https://pypi.org/project/coverage/)
-
 - [crispy_forms](https://django-crispy-forms.readthedocs.io/en/latest/)
-
 - [django_summernote](https://pypi.org/project/django-summernote/)
-
+  
   
 ### Infrastructural Technologies
+
 
 - [PostgreSQL](https://www.postgresql.org/)
 - [Heroku](https://www.heroku.com/home)
 - [Cloudinary](https://cloudinary.com/)
+
 
 ## Testing
 
@@ -472,3 +521,4 @@ In Django settings:
 - For Heroku deployment, set the environment variables in the Heroku dashboard or the Heroku CLI
 
 ## Credits
+
