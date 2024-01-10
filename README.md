@@ -7,39 +7,41 @@ Live Website here: [Wasteless Table](https://portfolio-project-four-1f2f0bc1d6a0
 ![alt text]()
 
 ## Table of Contents
-- Concept
-- Development
-    - User Stories
-    - Design
-    - Wireframes
-    - GitHub Projects
-    - Database
-- Features
-    - Crud Functionality
-    - Authentication & Authorisation
-    - Navigation
-    - Homepage
-    - Recipe Search
-    - Register
-    - Login & Logout
-    - Recipe Blog
-    - Review Post
-    - Comments
-    - Submit Review
-    - Update Review
-    - About
-    - Features to Impement
-- Technologies Used
-    - Core Development Technologies
-    - Libraries, Frameworks and Packages
-    - Python & Django Packages
-    - Infrastructural Technologies
-- Testing
-- Deployment
-    - Local Deployment
-    - Heroku Deployment
-    - Environment Variables
-- Credits
+- [Wasteless Table: Ingredient Search \& Recipe Reviews](#wasteless-table-ingredient-search--recipe-reviews)
+  - [Table of Contents](#table-of-contents)
+  - [Concept](#concept)
+  - [Development](#development)
+    - [User Stories](#user-stories)
+    - [Wireframes](#wireframes)
+    - [Design](#design)
+    - [GitHub Projects](#github-projects)
+    - [Database and Data Models](#database-and-data-models)
+  - [Features](#features)
+    - [CRUD Functionality](#crud-functionality)
+    - [Authentication and Authorisation](#authentication-and-authorisation)
+    - [Navigation](#navigation)
+    - [Homepage](#homepage)
+    - [Recipe Search](#recipe-search)
+    - [Sign up](#sign-up)
+    - [Login \& Logout](#login--logout)
+    - [Review Blog](#review-blog)
+    - [Recipe Post](#recipe-post)
+    - [Comments](#comments)
+    - [Submit Review](#submit-review)
+    - [Update Review](#update-review)
+    - [About](#about)
+    - [Features Left to Implement](#features-left-to-implement)
+  - [Technologies Used](#technologies-used)
+    - [Core Development Technologies](#core-development-technologies)
+    - [Libraries, Frameworks and Packages](#libraries-frameworks-and-packages)
+    - [Python/Django packages](#pythondjango-packages)
+    - [Infrastructural Technologies](#infrastructural-technologies)
+  - [Testing](#testing)
+  - [Deployment](#deployment)
+    - [Local Deployment](#local-deployment)
+    - [Heroku](#heroku)
+    - [Environment Variables](#environment-variables)
+  - [Credits](#credits)
 
 ## Concept
 
@@ -50,7 +52,7 @@ Last September I was staying in a remote guesthouse with very little ingredients
 
 Ireland is estimated to generate 1.1 million tonnes of food waste per year, according to the [Environmental Protection Agency](https://www.epa.ie/publications/circular-economy/resources/nature-and-extent-update-15th-June.pdf)
 
-## Design and Development
+## Development
 
 ### User Stories
 
@@ -155,6 +157,7 @@ Similarly, at the start of development, I never realised how useful of a tool Gi
 
 ![Final Agile Screenshot](static/readme_images/agile/ZenTableAgileView.png)
 
+</details>
 
 I initially had the prioritisation of what features I needed to implement written down. I was recommended to use GitHub projects for this too so using the User Stories I created a new board to help visualise what did and what did not need to be prioritised. This MoSCoW prioritisation board on GitHub projects was created halfway through the project and not at the beginning.
 
@@ -190,6 +193,7 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 ![Users & Tasks Screenshots 3](static/readme_images/agile/zentabletasks3.png)
 </details>
+
 
 ### Database and Data Models
 
@@ -293,7 +297,7 @@ The **Footer** is also carried across all pages. It has a transparent background
 <summary>Footer</summary>
 <br>
 
-![Footer](static/readme_images/screenshots/search_img.png)
+![Footer](static/readme_images/screenshots/footer.png)
 </details>
 
 ### Homepage
@@ -487,7 +491,7 @@ The **About** page consists of information regarding the importance of Ending Fo
 2. I was in two minds about the feasibility of creating some kind of user dashboard so users could potentially update all their content from the one place. I was not confident that I would get it done on time but it was certainly the next feature I would want to add. At present CRUD operations are present but for a user it would be more manageable to have them in one place.
 3. Email confirmation in login and sign-up processes.
 4. Social Media sign-in.
-5. 
+5. Search feature on the review blog to search for reviews rather than recipes
 
 ## Technologies Used
 

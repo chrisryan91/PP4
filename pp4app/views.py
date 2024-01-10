@@ -248,20 +248,6 @@ class ReviewPost(DetailView):
             print("Invalid comment form:", comment_form.errors)
             context['comment_form'] = comment_form
 
-        vote_type = request.POST.get('vote_type', None)
-        if vote_type == 'upvote':
-            self.object.up_vote.filter(
-                id=request.user.id).exists() is False \
-                and self.object.up_vote.add(request.user)
-            self.object.down_vote.filter(id=request.user.id).exists() and \
-                self.object.down_vote.remove(request.user)
-        elif vote_type == 'downvote':
-            self.object.down_vote.filter(
-                id=request.user.id).exists() is False \
-                and self.object.down_vote.add(request.user)
-            self.object.up_vote.filter(id=request.user.id).exists() and \
-                self.object.up_vote.remove(request.user)
-
         print("Context:", context)
 
         return self.render_to_response(context)
