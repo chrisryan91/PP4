@@ -11,7 +11,7 @@
                             <h1 class="reviewheading">Recipe Reviews</h1>
                         </div>
                     </div>
-                    <form method="get" action="{% url 'reviews' %}">
+                    <form method="get" action="{% url 'blog' %}">
                         <label for="sort">Sort by:</label>
                         <select name="sort" id="sort">
                             <option value="" {% if current_sort == '' %}selected{% endif %}>Latest</option>

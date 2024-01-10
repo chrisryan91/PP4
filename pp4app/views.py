@@ -8,7 +8,7 @@ from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views import generic, View
 from django.http import HttpResponseRedirect
-from .models import Review, Ingredient, Utensil
+from .models import Review, Ingredient, Utensil, Comment
 from django import forms
 from .forms import ReviewForm, CommentForms, CustomSignupForm, CustomLoginForm
 from django.core.validators import RegexValidator
@@ -54,12 +54,14 @@ class CustomLoginView(LoginView):
     form_class = CustomLoginForm
 
 
-
 class SearchForm(forms.Form):
     query = forms.CharField(
         validators=[
             RegexValidator(
-                regex="^[a-zA-Z]+$", message="Only letters are allowed.")])
+                regex="^[a-zA-Z, ]+$",
+                message="Only letters, commas, and spaces are allowed."
+            )]
+    )
 
 
 def search(request):
@@ -174,7 +176,6 @@ class Reviews(generic.ListView):
 
     def get_queryset(self):
         sort_option = self.request.GET.get('sort', '-created_on')
-        print(f"Sort option: {sort_option}")
 
         if sort_option == 'total_votes':
             queryset = Review.objects.filter(
@@ -186,6 +187,8 @@ class Reviews(generic.ListView):
                                 '-created_on')
         else:
             queryset = Review.objects.filter(status=1).order_by('-created_on')
+
+        print(f"queryset: {queryset}")  # Corrected position
 
         return queryset
 
@@ -229,9 +232,10 @@ class ReviewPost(DetailView):
         comment_form = CommentForms(data=request.POST)
 
         if comment_form.is_valid():
-            comment_form.instance.email = request.user.email
-            comment_form.instance.name = request.user.username
             comment = comment_form.save(commit=False)
+            comment.email = request.user.email
+            comment.name = request.user.username
+            comment.user = request.user
             comment.review = self.object
             comment.save()
             context['commented'] = True
@@ -284,6 +288,7 @@ class ReviewUpvote(View):
 
 @method_decorator(login_required, name='dispatch')
 class UpdateReview(View):
+
     template_name = 'update_review.html'
 
     def get(self, request, slug):
@@ -315,19 +320,34 @@ class UpdateReview(View):
                 ingredient in new_ingredient_string.split(',')]
 
             for new_ingredient_name in new_ingredient_list:
-                new_ingredient, created = Ingredient.objects.get_or_create(name=new_ingredient_name)
-                
-                if not created:
-                    # If the ingredient already exists, no need to create it again
+                try:
+                    new_ingredient = Ingredient.objects.get_or_create(
+                        name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
-                else:
-                    # If it's a new ingredient, add it to the review
+                except IntegrityError:
+                    try:
+                        new_ingredient = Ingredient.objects.get(
+                            name=new_ingredient_name)
+                    except Ingredient.DoesNotExist:
+                        new_ingredient_id = Ingredient.objects.latest(
+                            'id').id + 1
+                        new_ingredient = Ingredient.objects.create(
+                            id=new_ingredient_id,
+                            name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
-            
-            updated_review.status = 0
-            
             updated_review.save()
             return redirect(reverse('blog'))
 
         return render(
             request, self.template_name, {'form': form, 'review': review})
+    
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+
+    if request.method == 'POST' and request.user.username == comment.name:
+        comment.delete()
+        messages.success(request, 'Comment deleted successfully')
+    else:
+        messages.error(request, 'You do not have permission to delete this comment')
+
+    return redirect('review_post', slug=comment.review.slug)

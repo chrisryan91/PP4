@@ -175,6 +175,10 @@ footer p i:hover {
     font-size: 150%;
 }
 
+.select2 {
+    width: fit-content !important;
+}
+
 #ingredientInput {
     width: 50%;
 }
@@ -185,7 +189,7 @@ footer p i:hover {
     padding-top: 50px;
     margin: 0 auto;
     text-align: center;
-    font-size: 150%; !important
+    font-size: 150% !important;
 }
 
 .card {
@@ -197,7 +201,7 @@ footer p i:hover {
 
 .card-body {
     border-radius: 2%;
-    background-color: black;
+    background-color: white;
     height: 420px;
 }
 
@@ -314,10 +318,11 @@ footer p i:hover {
 }
 
 .text {
-    background-color: black;
-    opacity: .8;
-    color: white;
-    font-size: 15px;
+    width: 100%;
+    background-color: transparent;
+    opacity: 15px;
+    color: black;
+    font-size: 8px;
 }
 
 .icon-cog {
@@ -325,6 +330,8 @@ footer p i:hover {
 }
 
 .pag {
+    text-align: center;
+    margin: 0 auto;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -342,6 +349,11 @@ footer p i:hover {
 }
 
 /* Review.html Styles */
+
+.row {
+    background-color: transparent;
+}
+
 .upvoted {
     color: red;
 }
@@ -382,8 +394,8 @@ button i {
 
 .text-container {
     height: 15%;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     padding: 8px;
     box-sizing: border-box;
     display: flex;
@@ -470,12 +482,14 @@ button i {
 #comments1 {
     overflow: auto;
     padding-top: 10px;
+    background-color: transparent;
 }
 
 .commentitle {
     font-family: Alice, sans-serif;
     font-size: 20px;
     font-weight: bold;
+    background-color: transparent;
 }
 
 .comments h3 {
@@ -488,6 +502,7 @@ button i {
 
 #leavecomment {
     height: auto;
+    background-color: transparent;
 }
 
 .container1 {
@@ -670,6 +685,10 @@ span:nth-child(8) {
     .text-container .left-content,
     .text-container .right-content {
         font-size: 2vw;
+    }
+
+    .text {
+        font-size: 8px;
     }
 
     .details1,
