@@ -52,139 +52,56 @@ Live Website here: [Wasteless Table](https://portfolio-project-four-1f2f0bc1d6a0
     - Environment Variables
 - Credits
 
-## Overview
-
 ## Process
 
-### Research
+### Concept
 
-### Design
+When researching Application Programming Interfaces (APIs), I chanced upon an interesting Recipe Search API provided by [EDAMAM](https://www.edamam.com/). The provider offers different APIs but the Recipe Search was useful in developing my idea as it could be the basis of where I retrieved recipes from for my blog. If offers 2.3 million different recipes, 500+ web resources and many different types of filters. 
 
-### Development
+Last September I was staying in a remote guesthouse with very little ingredients and I was wondering what recipes I could make with what little I had. Given the location of the guesthouse, I could not make it to the nearest shop or supermarket. I was reminded of this time when I found the EDAMAM API and read the documentation regarding it's filtering system. It server as the basis of my blog concept. As well as this I have a very bad habit of throwing food away. I do not use things up and often forget I have food stuff lying around - oftentimes I buy an ingredient when I already have some. I've been scolded in the past by this from friends who chastise me for my wastefulness.
+
+I decided to combine these general ideas and concepts when considering what I should build for my project.
 
 ### User Stories
 
-- As a site user, I can search for so that I can find a recipe to eat.
-- As a site user, I can search with ingredients, tag names or cuisine types so that I can find a list of recipes.
+1. As a site user, I can search for so that I can find a recipe to eat.
+2. As a site user, I can search with ingredients, tag names or cuisine types so that I can find a list of recipes.
+3. As a site user I can see my user profile so that I can see my details.
+4. As a site user I can view a list of paginated recipes so that select the recipe details.
+5. As a user I can submit recipe reviews so that the admin can add a recipe review to the blog.
+6. As a site user I can register an account so that I can leave a comment, rating and like.
+7. As a Site User I can click on a recipe so that I can see the details.
+8. As a site administrator I can approve posts so that the blog is populated.
+9. As a site administrator I can create, read, update and delete so that the blog's content can be managed.
+10. As a site administrator I can approve or disapprove comments and recipes so that I can filter content.
+11. As a site user and administrator I can view the comments on a recipe so that see what is being talked about.
+12. As a site user and administrator I can view the rating and number of likes/upvotes on each recipe so that I can determine the best and popular ones.
 
-I implemented a search functionality on my website that allows users to search for recipes using a list of ingredients. The search also returns recipes based on cuisine type or dish name. A used who has reviewed the ingredients they have in their kitchen would want to input them one by one so the search functionality allows the inputs of tag names.
+User Stories are tested in: [Testing.md](Testing.md)
+
+### Design
+
+My design ideas went through two major iterations. Firstly, I chose a colour scheme to carry throughout the website. Towards the end of development the design ideas I had needed to be revised as the website's design had not come out how I envisioned it. I wanted the design to be unobtrusive, calming and easy on the eyes. It needed to be fresh - and I thought what better way to evoke that than fresh vegetables. I found a [background](https://unsplash.com/photos/closeup-photo-of-sliced-spring-onion-KN4ampW-QOI) that was plain but contained the green colours of fresh vegetables. 
+
+Another reason that the design necessitated plainness was that the images returned from the API could be of any colour. Similarly, the images uploaded by users reviewing certain recipes could be of any colour too. This meant that the design of the website should not impede or clash with the returned and uploaded images. For this reason, I kept the main colours of the website white and black. I made the header and footer transparent. I adjusted the opacity of the background image so if black text appeared in-front of shaded parts of the image the text could remain legible.
+
+The two font styles that are carried through the website are [Alice](https://fonts.google.com/specimen/Alice/about) and [Merriweather](https://fonts.google.com/specimen/Merriweather/about). Alice is defined by Google Fonts as "eclectic and quaint, old-fashioned, having widened proportions, open aperture, and soft rounded features; perfect for long meditative text-setting and headlines." I found it to be suitable for headings and titles. Merriweather is a Font I've become accustomed to using over the past few months and considered it appropriate for elements with longer text. I agree with Google when they say it is "a text face that is pleasant to read on screens."
+
+Some text and icons are animated. In-fact there was more JavaScript interactivity and CSS styling in the original iteration of the website but my tutor advise me that I was creating a suboptimal experience by creating too much user friction. That made complete sense to me so I removed modal interactions. In the image below, a link to both the external review and to the submit review page are accessed by Hovering over the image. Originally, these two anchored icons appeared alongside the name of the review. I was advised to keep user interactions as low as possible. In my original idea, a user would need to hover over each image just to see the name of the recipe. Now the recipe label is rendered below the image.
 
 <details>
-<summary>User Story 1 & 2</summary>
+<summary>Hover Item</summary>
 <br>
 
-![User Story 1 & 2]()
+![Hover Tag](static/readme_images/screenshots/reviewhover_img.png)
 
 </details>
 
-- As a site user I can see my user profile so that I can see my details.
+While the [EDAMAM API](https://www.edamam.com/) is a useful tool, it is unable to return the exact steps involved in making the recipe as it did not hold the copyright to the recipes. It returns a lot - labels, images, ingredients, nutritional value - but the exact steps involved in making the recipe were not returned. Given this fact I linked the external URL to the recipe card div which is opened in a new tab. The steps to how the recipes are made are not held on my blog - that is unless a User writing a review wants to include them. Given the fact this blog is focused on ingredients in particular, in my submit review form, there are sections for ingredients and utensils, but not for the exact steps to making the recipe. The blog post is a review - with hints, tips and tricks.
 
-I have not yet achieved this capability on the website. Users can sign-in, login and if authenticated, leave reviews and comments. CRUD functionality is implemented with a link to Update Review if the user is the author of the review. I considered a dashboard for the user of some kind to not be a minimal viable product so it was not my focus.
+### Research
 
-<details>
-<summary>User Story 3</summary>
-<br>
-
-![User Story 3]()
-
-</details>
-
-- As a site user I can view a list of paginated recipes so that select the recipe details.
-
-I implemented pagination for the list of recipes to enhance user experience and page loading speed. Django's built-in pagination features to split the recipe list into manageable pages was used to do this.
-
-<details>
-<summary>User Story 4</summary>
-<br>
-
-![User Story 4]()
-
-</details>
-
-- As a user I can submit recipe reviews so that the admin can add a recipe review to the blog.
-
-I created a database model for storing recipe reviews, associating them with specific recipes and users. I used a form for users to submit reviews for recipes. This is initially not published. It is the admins task to review the entry before publishing.
-
-<details>
-<summary>User Story 4</summary>
-<br>
-
-![User Story 4]()
-
-</details>
-
-- As a site user I can register an account so that I can leave a comment, rating and like.
-
-I integrated Django's built-in authentication views and forms for user registration. Users can register with an account name and password. I have not yet given the user the ability to set up an account with an email. Users can be managed from the admin panel.
-
-<details>
-<summary>User Story 5</summary>
-<br>
-
-![User Story 5]()
-
-</details>
-
-- As a Site User I can click on a recipe so that I can see the details.
-
-I developed a detailed view for each recipe, allowing users to click and view comprehensive details. A URL routing mechanism was used to handle recipe-specific views. By clicking a recipe, the user is taken to the entire blog post containing the review and comment features.
-
-<details>
-<summary>User Story 6</summary>
-<br>
-
-![User Story 6]()
-
-</details>
-
-- As a site administrator I can approve posts so that the blog is populated.
-
-I used Django's admin interface to manage and approve recipe posts. I had to create custom admin views to maintain the posts. The admin has the ability to review the recipe, ingredients, utensils and images of the post before publishing.
-
-<details>
-<summary>User Story 7</summary>
-<br>
-
-![User Story 7]()
-
-</details>
-
-- As a site administrator I can create, read, update and delete so that the blog's content can be managed.
-
-I developed views and forms for creating, reading, updating, and deleting recipes. Appropriate access controls were used to ensure only authorized users can perform these actions.
-
-<details>
-<summary>User Story 8</summary>
-<br>
-
-![User Story 8]()
-
-</details>
-
-- As a site administrator I can approve or disapprove comments and recipes so that I can filter content.
-
-The approval system was extended to handle both comments and recipes. Similarly providing admin tools the functionality to easily approve or disapprove content.
-
-<details>
-<summary>User Story 9</summary>
-<br>
-
-![User Story 9]()
-
-</details>
-
-- As a site user and administrator I can view the comments on a recipe so that see what is being talked about.
-- As a site user and administrator I can view the rating and number of likes/upvotes on each recipe so that I can determine the best and popular ones.
-
-Views were used to display comments associated with each recipe. The comments and user who wrote it is rendered in the template. Similarly the overall rating and number of likes/upvotes for each recipe was displayed for anybody to see..
-
-<details>
-<summary>User Story 10 & 11</summary>
-<br>
-
-![User Story 10 & 11]()
-
-</details>
+### Development
 
 The three screenshots below were taken at the start of development, the midway point and at the final stage. They show three columns - to do, in progress and completed. Only over the course of the few weeks developing the project did the lessons on Agile development begin to really make sense. In completing my own project, I recognised mistakes I had made in the planning process and how my development process had to completely change given the timeframe that the project needed to be completed in. The lessons on Agile development - and the entire point of the Agile manifesto - began to really make sense. 
 
@@ -213,7 +130,7 @@ Similarly, at the start of development, I never realised how useful of a tool Gi
 ![Final Agile Screenshot](static/readme_images/agile/ZenTableAgileView.png)
 
 
-I initially had the prioritisation of what features I needed to implement written down. I was recommended to use GitHub projects for this too so using the User Stories I created a new board to help visualise what did and what did not need to be prioritised. 
+I initially had the prioritisation of what features I needed to implement written down. I was recommended to use GitHub projects for this too so using the User Stories I created a new board to help visualise what did and what did not need to be prioritised.
 
 <details>
 <summary>MoSCoW Prioritisation Screenshot</summary>
@@ -246,8 +163,6 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 <br>
 
 ![Users & Tasks Screenshots 3](static/readme_images/agile/zentabletasks3.png)
-</details>
-
 </details>
 
 ### Data Models
@@ -468,11 +383,9 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 ### Features Left to Implement
 
-## Bugs
-
-### Fixed bugs and how I fixed them
-
-### Known bugs unfixed
+1. The ability to edit and delete comments has not yet been implemented. I would also like comments to be upvoted and downvote. They could be sorted by upvotes/downvotes like reddit.
+2. I was in two minds about the feasibility of creating some kind of user dashboard so users could potentially update all their content from the one place. I was not confident that I would get it done on time but it was certainly the next feature I would want to add. At present CRUD operations are present but for a user it would be more manageable to have them in one place.
+3. 
 
 ## Technologies Used
 
