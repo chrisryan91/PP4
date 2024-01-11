@@ -23,10 +23,6 @@
     - [Python](#python)
     - [Django Extensions](#django-extensions)
   - [Lighthouse Testing](#lighthouse-testing)
-    - [Performance](#performance)
-    - [Accessibility](#accessibility)
-    - [Best Practises](#best-practises)
-    - [SEO](#seo)
   - [Automated Testing](#automated-testing)
   - [Manual Testing](#manual-testing)
     - [Header](#header)
@@ -514,6 +510,8 @@ class ReviewUpvote(View):
 
 ### HTML
 
+
+
 ### CSS
 
 I have one single CSS file for the application. It passes through W3S CSS validator.
@@ -588,13 +586,7 @@ I installed [Django Extensions](https://github.com/django-extensions/django-exte
 
 ## Lighthouse Testing
 
-### Performance
 
-### Accessibility
-
-### Best Practises
-
-### SEO
 
 ## Automated Testing
 

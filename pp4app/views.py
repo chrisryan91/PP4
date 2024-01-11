@@ -265,9 +265,7 @@ class ReviewUpvote(View):
             review.up_vote.filter(id=request.user.id).exists() \
                 and review.up_vote.remove(request.user)
 
-        print("Slug:", slug)
         generated_url = reverse('review_post', args=[slug])
-        print("Generated URL:", generated_url)
 
         return redirect(generated_url)
 

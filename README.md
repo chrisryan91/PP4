@@ -4,7 +4,7 @@ Wasteless Table is an online tool and blog that encourages users to avoid discar
 
 Live Website here: [Wasteless Table](https://portfolio-project-four-1f2f0bc1d6a0.herokuapp.com/)
 
-![alt text]()
+![Wasteless Plate](static/readme_images/airesp.png)
 
 ## Table of Contents
 - [Wasteless Table: Ingredient Search \& Recipe Reviews](#wasteless-table-ingredient-search--recipe-reviews)
@@ -532,8 +532,8 @@ Full testing: [Testing.md](Testing.md)
 
 ### Local Deployment
 
-1. Find the repository on Github.
-2. Click the "Codd" button and copy the URL.
+1. Find the repository on GitHub.
+2. Click the **Code** button and copy the URL.
 3. Open the terminal in your IDE and open a session in the directory you want to use.
 4. Type "git clone" followed by the URL into the terminal.
 5. Type "pip install -r requirements.txt" in the terminal.
