@@ -177,7 +177,7 @@ I looked for different methods of displaying recipes in repeating card. I was go
 
 
 <details>
-<summary>User Story 5</summary>
+<summary>User Story 4</summary>
 <br>
 
 ```        
@@ -194,6 +194,7 @@ I looked for different methods of displaying recipes in repeating card. I was go
         </nav>
         {% endif %}
 ```
+</details>
 
 ## User Story 5
 

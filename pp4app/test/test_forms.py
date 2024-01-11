@@ -65,7 +65,6 @@ class ReviewFormTest(TestCase):
         }
 
         self.client.login(username='testuser', password='testpassword')
-
         form = ReviewForm(data=data)
 
         self.assertTrue(form.is_valid())
@@ -93,13 +92,10 @@ class CommentFormsTest(TestCase):
         data = {'body': '... blah blah blah... '}
 
         form = CommentForms(data=data)
-
         self.assertTrue(form.is_valid())
 
     def test_comment_form_empty_data(self):
         data = {}
-
-
         form = CommentForms(data=data)
 
         self.assertFalse(form.is_valid())
@@ -111,7 +107,6 @@ class CommentFormsTest(TestCase):
         data = {'body': long_body}
 
         form = CommentForms(data=data)
-
         self.assertFalse(form.is_valid())
         self.assertIn('body', form.errors.keys())
 

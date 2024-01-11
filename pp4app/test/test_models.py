@@ -87,7 +87,7 @@ class ReviewModelTest(TestCase):
         self.assertEqual(str(self.review), 'Delicious Stir Fry')
 
     def test_get_absolute_url(self):
-        expected_url = f'/review/{self.review.slug}/'
+        expected_url = f'/update_review/{self.review.slug}/'
         self.assertEqual(self.review.get_absolute_url(), expected_url)
 
 class CommentModelTest(TestCase):
@@ -131,6 +131,5 @@ class CommentModelTest(TestCase):
             body='Worst recipe ever'
         )
 
-        # Check the __str__ representation
         expected_str = f"Comment {comment.body} by {comment.name}"
         self.assertEqual(str(comment), expected_str)

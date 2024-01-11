@@ -1,11 +1,12 @@
 import unittest
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
 from django.http import HttpRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from ..views import search, get_recipes, Reviews
 from ..forms import ReviewForm, CommentForms
 from ..models import Review, Comment, Ingredient, Utensil, CuisineType, Comment, User
+from django.contrib.messages import get_messages
 from unittest.mock import patch
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -31,16 +32,16 @@ class AboutTest(TestCase):
 
 class TestSearchView(TestCase):
     def setUp(self):
-        self.ingredient = Ingredient.objects.create(name='00 Flower')
+        self.ingredient = Ingredient.objects.create(name='Flour')
         self.utensil = Utensil.objects.create(name='Whisk')
         self.user = User.objects.create_user(username='Alix', password='Bread')
         self.review = Review.objects.create(title='Best Bread', recipe='Sourdough Bread', author=self.user, status=1, slug='Best-Bread')
 
     def test_search_view_with_results(self):
-        response = self.client.get(reverse('search'), {'query': '00 Flower'})
+        response = self.client.get(reverse('search'), {'query': 'Flour'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
-        self.assertContains(response, '00 Flower')
+        self.assertContains(response, 'Flour')
 
     def test_search_view_without_results(self):
         response = self.client.get(reverse('search'), {'query': 'Rare Ingredient'})
@@ -59,19 +60,19 @@ class SearchViewTest(TestCase):
         self.factory = RequestFactory()
 
     def test_search_view_post(self):
-        request = self.factory.post('/search_url/', {'query': 'search_query'})
+        request = self.factory.post('/search', {'query': 'search'})
 
         with patch('pp4app.views.get_recipes') as mock_get_recipes:
             mock_get_recipes.return_value = [{'recipe_name': 'Croque Madame'}, {'recipe_name': 'Pasta Alla Norma'}]
             response = search(request)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<h2>Search results for: search_query</h2>')
+        self.assertContains(response, '<h2>Search results for: search</h2>')
 
-        mock_get_recipes.assert_called_once_with('search_query')
+        mock_get_recipes.assert_called_once_with('search')
 
     def test_search_view_get(self):
-        request = self.factory.get('/search_url/', {'query': 'search_query'})
+        request = self.factory.get('/search/', {'query': 'search'})
 
         with patch('pp4app.views.get_recipes') as mock_get_recipes:
             mock_get_recipes.return_value = [{'recipe_name': 'Croque Madame'}, {'recipe_name': 'Pasta Alla Norma'}]
@@ -79,8 +80,8 @@ class SearchViewTest(TestCase):
             response = search(request)
 
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, '<h2>Search results for: search_query</h2>')
-        mock_get_recipes.assert_called_once_with('search_query')
+        self.assertContains(response, '<h2>Search results for: search</h2>')
+        mock_get_recipes.assert_called_once_with('search')
 
 class GetRecipesTest(unittest.TestCase):
     @patch('pp4app.views.requests.get')
@@ -138,7 +139,7 @@ class ReviewsViewTest(TestCase):
             )
 
     def test_reviews_view_default_sort(self):
-        url = reverse('reviews')
+        url = reverse('review_blog')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'review_blog.html')
@@ -152,7 +153,7 @@ class ReviewsViewTest(TestCase):
         self.assertEqual(paginator.count, 7)
 
     def test_reviews_view_custom_sort(self):
-        url = reverse('reviews')
+        url = reverse('review_blog')
         custom_sort_url = f'{url}?sort=total_votes'
         response = self.client.get(custom_sort_url)
         self.assertEqual(response.status_code, 200)
@@ -164,7 +165,7 @@ class ReviewsViewTest(TestCase):
         self.assertQuerysetEqual(response.context['review_list'], expected_reviews, transform=lambda x: x)
 
     def test_reviews_view_context_data(self):
-        url = reverse('reviews')
+        url = reverse('review_blog')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
@@ -381,7 +382,145 @@ class UpdateReviewTestCasePost(TestCase):
 
         response = self.client.post(url, invalid_form_data)
 
-
         self.assertEqual(response.status_code, 200)
         updated_review = Review.objects.get(id=review.id)
         self.assertNotEqual(updated_review.title, '')
+
+class DeleteCommentViewTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser',
+            password='testpassword'
+        )
+
+        self.review = Review.objects.create(
+            title='Test Review',
+            content='This is a test review',
+            author=self.user,
+            slug=slugify('Test Review')
+        )
+
+        self.comment = Comment.objects.create(
+            review=self.review,
+            name='testuser',
+            body='This is a test comment'
+        )
+
+        self.client = Client()
+
+    def test_delete_comment_success(self):
+        self.client.login(username='testuser', password='testpassword')
+
+        url = reverse('delete_comment', kwargs={'comment_id': self.comment.id})
+
+        response = self.client.post(url)
+
+        self.assertEqual(Comment.objects.filter(id=self.comment.id).exists(), False)
+
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn('Comment deleted successfully', messages)
+
+        self.assertRedirects(response, reverse('review_post', kwargs={'slug': self.review.slug}))
+
+    def test_delete_comment_permission_denied(self):
+        other_user = User.objects.create_user(
+            username='otheruser',
+            password='otherpassword'
+        )
+
+        self.client.login(username='otheruser', password='otherpassword')
+        url = reverse('delete_comment', kwargs={'comment_id': self.comment.id})
+        response = self.client.post(url)
+        self.assertEqual(Comment.objects.filter(id=self.comment.id).exists(), True)
+
+    
+        messages = [m.message for m in get_messages(response.wsgi_request)]
+        self.assertIn('You do not have permission to delete this comment', messages)
+        self.assertRedirects(response, reverse('review_post', kwargs={'slug': self.review.slug}))
+
+class CustomSignupViewTest(TestCase):
+    def setUp(self):
+        self.user_data = {
+            'username': 'testuser',
+            'password1': 'TestPassword123!',
+            'password2': 'TestPassword123!',
+        }
+
+        self.client = Client()
+
+    def test_signup_view_get(self):
+        url = reverse('account_signup')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account/signup.html')
+
+    def test_signup_view_post_success(self):
+        url = reverse('account_signup')
+        response = self.client.post(url, data=self.user_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'index.html')
+
+        self.assertTrue(User.objects.filter(username=self.user_data['username']).exists())
+
+    def test_signup_view_post_failure(self):
+        self.user_data['password2'] = 'DifferentPassword123!'
+
+        url = reverse('account_signup')
+        response = self.client.post(url, data=self.user_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account/signup.html')
+
+        self.assertFalse(User.objects.filter(username=self.user_data['username']).exists())
+
+class CustomLoginViewTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser',
+            password='TestPassword123!'
+        )
+
+        self.client = Client()
+
+    def test_login_view_get(self):
+        url = reverse('account_login')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account/login.html')
+
+    def test_login_view_post_success(self):
+        url = reverse('account_login')
+        login_data = {
+            'login': self.user.username,
+            'password': 'TestPassword123!'
+        }
+        response = self.client.post(url, data=login_data, follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account/login.html')
+
+    def test_login_view_post_failure(self):
+        url = reverse('account_login')
+        login_data = {
+            'login': self.user.username,
+            'password': 'IncorrectPassword123!'
+        }
+        response = self.client.post(url, data=login_data)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account/login.html')
+
+class ErrorViewsTest(TestCase):
+    def test_bad_request_view(self):
+        response = self.client.get('/400/')
+        self.assertEqual(response.status_code, 400)
+
+
+    def test_permission_denied_view(self):
+        response = self.client.get('/403/')
+        self.assertEqual(response.status_code, 403)
+
+    def test_page_not_found_view(self):
+        response = self.client.get('/nonexistent-page/')
+        self.assertEqual(response.status_code, 404)
+
+    def test_server_error_view(self):
+        response = self.client.get('/500/')
+        self.assertEqual(response.status_code, 500)

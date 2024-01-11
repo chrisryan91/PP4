@@ -27,21 +27,21 @@ def About(request):
     return render(request, 'about.html')
 
 
-def bad_request(request, exception):
-    print(f"Bad Request Exception: {exception}")
+def bad_request(request, exception=None):
+    print(f"Request to /400/ - User: {request.user}")
     return render(request, '400.html', status=400)
 
-
-def permission_denied(request, exception):
-    print(f"Exception: {exception}")
+def permission_denied(request, exception=None):
+    print(f"Request to /403/ - User: {request.user}")
     return render(request, '403.html', status=403)
 
 
 def page_not_found(request, *args, **kwargs):
-    return render(request, '404.html', status=400)
+    return render(request, '404.html', status=404)
 
 
-def server_error(request):
+def server_error(request, exception=None):
+    print(f"Request to /500/ - User: {request.user}")
     return render(request, '500.html', status=500)
 
 class CustomSignupView(SignupView):
@@ -192,7 +192,7 @@ class Reviews(generic.ListView):
         else:
             queryset = Review.objects.filter(status=1).order_by('-created_on')
 
-        print(f"queryset: {queryset}")  # Corrected position
+        print(f"queryset: {queryset}") 
 
         return queryset
 
@@ -311,9 +311,13 @@ class UpdateReview(View):
 
             for new_ingredient_name in new_ingredient_list:
                 try:
-                    new_ingredient = Ingredient.objects.get_or_create(
+                    new_ingredient, created = Ingredient.objects.get_or_create(
                         name=new_ingredient_name)
-                    review.ingredients.add(new_ingredient)
+
+                    # Check if the object was created or retrieved
+                    if created:
+                        # If created, add it to the review's ingredients
+                        review.ingredients.add(new_ingredient)
                 except IntegrityError:
                     try:
                         new_ingredient = Ingredient.objects.get(
@@ -325,6 +329,7 @@ class UpdateReview(View):
                             id=new_ingredient_id,
                             name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
+
             updated_review.save()
             return redirect(reverse('blog'))
 
