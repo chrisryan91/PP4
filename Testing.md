@@ -514,7 +514,23 @@ class ReviewUpvote(View):
 
 ### HTML
 
+- The signup page that is part of Django templates rendered a few issues in the HTML checker as seen below. As they were not my own, I decided against creating a custom form as the current one works fine. The errors remain.
 
+- Other than the signup page, no issues were found in the HTML.
+
+<details>
+<summary>Sign-Up Page W3 HTML Checker</summary>
+<br>
+
+![Sign Up Page](static/readme_images/csshtmljsvalid/signup_html_check.png)
+</details>
+
+<details>
+<summary>HTML Validation</summary>
+<br>
+
+![HTML Validation](static/readme_images/csshtmljsvalid/html%20checker.png)
+</details>
 
 ### CSS
 
@@ -903,14 +919,14 @@ Similarly, when I created some tests for some of the messages, the tests were ru
 <summary>Middleware Testing Bug</summary>
 <br>
 
-![Middleware Testing Bug 2](static/readme_images/bugs/message%20bug.png)
+![Middleware Testing Bug 2](static/readme_images/bugs/)
 </details> 
 
 <details>
 <summary>Middleware Testing Bug</summary>
 <br>
 
-![Middleware Testing Bug 1](static/readme_images/bugs/middleware%20bug.png)
+![Middleware Testing Bug 1](static/readme_images/bugs/searchpage_bug.png)
 </details>
 
 - **Sorting and Pagination** 

@@ -49,9 +49,6 @@ document.addEventListener("DOMContentLoaded", function() {
             labelInput.value = storedLabel;
         }
 
-        if (imgInput && storedImg) {
-            imgInput.value = storedImg;
-        }
     }
 });
 
