@@ -38,13 +38,17 @@
     - [Sign-in Page](#sign-in-page)
     - [Logout Page](#logout-page)
   - [Responsiveness Testing](#responsiveness-testing)
+    - [Browsers](#browsers)
+- [Devices](#devices)
   - [Bugs](#bugs)
     - [Fixed Bugs](#fixed-bugs)
     - [Known Bugs](#known-bugs)
 
 ## Testing User Stories
 
-User Stories were created at the start of my project. I did not check on in them enough
+User Stories were created at the start of my project.
+
+Link to Projects Board: [Project Board](https://github.com/users/chrisryan91/projects/5/views/1)
 
 ## User Story 1
 
@@ -428,7 +432,7 @@ class Review(models.Model):
 
 I first created two icons - a thumbs up and a thumbs down icon - to signify upvotes. Two forms needed to be added to each icon - and two buttons on each form. Four buttons altogether - one if they have upvoted, one if they have not upvoted, one if they have downvoted, one if they have not downvoted. If the user has upvoted, they can downvote, but the upvote has to be removed. If the user has downvoted, they can upvote, the downvote has to be removed. A class is attached to change the colour of the icon depending on the users choice.
 
-I attached the template and the logic below. This became a bug for me. It is documented in the bugs section. I luckily found a solution on ![Stack Overflow](https://stackoverflow.com/questions/77376229/django-upvote-downvote-system)
+I attached the template and the logic below. This became a bug for me. It is documented in the bugs section. I luckily found a solution on [Stack Overflow](https://stackoverflow.com/questions/77376229/django-upvote-downvote-system)
 
 <details>
 <summary>User Story 12 Upvote Screenshot</summary>
@@ -578,10 +582,10 @@ All my python files are PEP8 compliant. For this, I used the Code Institute Lint
 I installed [Django Extensions](https://github.com/django-extensions/django-extensions) to see if there were errors with the code in my templates. None were found.
 
 <details>
-<summary>CSS Validation</summary>
+<summary>Django Template Validation</summary>
 <br>
 
-![CSS Validation](static/readme_images/testing/templatevalidation.png)
+![Django Template Validation](static/readme_images/testing/templatevalidation.png)
 </details>
 
 ## Lighthouse Testing
@@ -829,13 +833,69 @@ On submit:
 
 ## Responsiveness Testing
 
+I tested the APP throughout the development with Dev Tools. Towards the end of development I paid more attention to it and tested my app on different devices. I sent the live link to friends of mine and I watched them use it. The app functioned correctly on all of these devices.
+
+### Browsers 
+- Chrome
+- Opera
+- Bing
+- Safari
+
+# Devices
+- Lenovo Laptop
+- Mac Desktop
+- Samsung Phone
+- iPhone
+- Huawei i7
+
 ## Bugs
-
---- Bugs regarding messages
-
-
 
 ### Fixed Bugs
 
+- **Placeholder Image**
+
+At the moment if a user does not upload an image when reviewing a recipe, a placeholder image is used. This placeholder is the same for all recipes. In the initial stages of design, I wanted to use the image that was returned by the API as a placeholder image, as this image has direct relevance to the recipe in question. Currently, the blog placeholder image is a generic image. 
+
+The API call returned a URL to an image link. This worked and the image rendered correctly on the page. After an hour or so however, the URL ceased to function. The API generated a URL to the image link that timed out after that period. This was less of a fix rather than second best option.
+
+- **Upvote and Downvote**
+
+My initial code for upvote and downvote logic became unwieldy. I could get users to upvote and downvote but I couldn't get total upvotes to work properly.
+
+In my model for my reviews, I originally just had one field called **upvotes**. This I would increase or decrease based on users actions. This was the root of my problem. My review model needed an upvote field to count upvotes and a downvote field to count downvotes. The I would defined a separate function within the model class which works out the total upvotes.
+
+I found the solution to my problem on [Stack Overflow](https://stackoverflow.com/questions/77376229/django-upvote-downvote-system).
+
 ### Known Bugs
 
+- **Bugs regarding messages**
+
+I couldn't get messaging to work properly on this app. I had experience adding messages to Django settings and utilizing bootstrap to make messages show up. I revisited a walkthrough project I had completed and was able the get some of them working - sign in and signed out in particular. However, other messages, such as "Form Completed", "Submission Accepted" or "this field is required" would not work correctly. In the image below, you see an error message that displayed if a value other than a string was entered into the search input the make an API call. It functioned initially but the problem I had was that it would return every time I revisited the search page. I removed it and consider this a feature I need to work on.
+
+Similarly, when I created some tests for some of the messages, the tests were running an error informing me that I had not installed Messages in the middleware section of my settings.py file. That did not make sense to me and I did not have time to fix this bug. The messages that are affected by this bug have been removed on submission.
+
+<details>
+<summary>Middleware Testing Bug</summary>
+<br>
+
+![Middleware Testing Bug 2](static/readme_images/bugs/message%20bug.png)
+</details> 
+
+<details>
+<summary>Middleware Testing Bug</summary>
+<br>
+
+![Middleware Testing Bug 1](static/readme_images/bugs/middleware%20bug.png)
+</details>
+
+- **Sorting and Pagination** 
+
+In the final testing stage of development I realised that there is an issue with how pagination works with the sorting feature on the blog page. The page paginates correctly and also sorts itself but number of upvotes. However, I think that when you sort by upvotes, then click onto the next page, the sorting reverses itself and doesn't continue onto the next page. This means that the sorting method only works for the blog posts on the first page.
+
+- **Select2 on New Ingredient Field**
+
+The Select2 library that works to make the input fields more dynamic on the ingredient input field in the Search page and the ingredient, utensil and cuisine type field on the submit review page would not work on the new ingredient field. Like the search input, the new ingredient field needs a csv input. I was able to get this working for the search input, but I could not get it working for the new ingredient field.
+
+My form for the search field was a simple select field that I was easily able to target with CSS and JavaScript. The enter new ingredient form field was an input field - not a select field - and I could not easily change it because some form elements were automatically rendered by Django. Select2 would not as easily work on an input field of that sort.
+
+Currently, the field works, but it is not user friendly, and for multiple ingredients to be entered they needed to be comma separated.

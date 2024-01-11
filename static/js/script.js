@@ -24,11 +24,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    var label2 = sessionStorage.getItem('modalLabel');
-    var titleElement = document.getElementById('recipe');
+    if (window.location.pathname === '/search/')  {
+        var label2 = sessionStorage.getItem('modalLabel');
+        var titleElement = document.getElementById('recipe');
 
-    if (label2 && titleElement) {
-        titleElement.textContent = label2;
+        if (label2 && titleElement) {
+            titleElement.textContent = label2;
+        }
     }
 });
 
@@ -54,24 +56,28 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 $(document).ready(function () {
-    $('#id_ingredients').select2();
+    if (window.location.pathname === '/submit_review/')  {
+        $('#id_ingredients').select2();
 
-    $('#id_utensils').select2();
+        $('#id_utensils').select2();
 
-    $('#id_cuisine_type').select2();
+        $('#id_cuisine_type').select2();
+    }
 });
 
 $(document).ready(function() {
-    $('#ingredientInput').select2({
-        tags: true,
-        tokenSeparators: [','],
-        placeholder: 'Enter ingredients',
-    });
+    if (window.location.pathname === '/search/')  {
+        $('#ingredientInput').select2({
+            tags: true,
+            tokenSeparators: [','],
+            placeholder: 'Enter ingredients',
+        });
 
-    $('form').submit(function() {
-        var selectedIngredients = $('#ingredientInput').val();
-        $('#ingredientQuery').val(selectedIngredients.join(','));
-    });
+        $('form').submit(function() {
+            var selectedIngredients = $('#ingredientInput').val();
+            $('#ingredientQuery').val(selectedIngredients.join(','));
+        });
+    }
 });
 
 setTimeout(function() {

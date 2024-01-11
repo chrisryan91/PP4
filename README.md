@@ -71,6 +71,8 @@ Ireland is estimated to generate 1.1 million tonnes of food waste per year, acco
 
 User Stories are tested in: [Testing.md](Testing.md)
 
+Link to Projects Board: [Project Board](https://github.com/users/chrisryan91/projects/5/views/1)
+
 ### Wireframes
 
 Wireframes were developed at the outset of my project. The general framework for how the website should be structured has remained the same. These served as a basis for my design from the beginning and prevented me from deviating too far in another direction. I created them partly because I understood that could could easily be made responsive to smaller screen sizes with bootstrap.
@@ -359,7 +361,7 @@ The **logout page** acts as defensive design asking the users if they are sure t
 <summary>Logout Page</summary>
 <br>
 
-![Login Page](static/readme_images/screenshots/logout_sm.png)
+![Logout Page](static/readme_images/screenshots/logout_sm.png)
 </details>
 
 ### Review Blog
@@ -471,7 +473,7 @@ The **Update Review** page renders the same form as the submit review page excep
 <summary>Update Review 2</summary>
 <br>
 
-![Update Review 2](static/readme_images/screenshots/updatereview_img.png)
+![Update Review 2](static/readme_images/screenshots/updatereview_img_b.png)
 </details>
 
 ### About
