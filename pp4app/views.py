@@ -83,15 +83,11 @@ def search(request):
                 recipes = paginator.page(page)
             except (PageNotAnInteger, EmptyPage):
                 recipes = paginator.page(1)
-        else:
-            error_message = "Invalid search query. Only letters are allowed."
-            messages.error(request, error_message)
 
     return render(request, 'search.html', {
         'form': form,
         'query': query,
-        'recipes': recipes,
-        'error_message': error_message})
+        'recipes': recipes})
 
 
 def get_recipes(query):
@@ -249,8 +245,6 @@ class ReviewPost(DetailView):
             print("Invalid comment form:", comment_form.errors)
             context['comment_form'] = comment_form
 
-        print("Context:", context)
-
         return self.render_to_response(context)
 
 
@@ -271,10 +265,11 @@ class ReviewUpvote(View):
             review.up_vote.filter(id=request.user.id).exists() \
                 and review.up_vote.remove(request.user)
 
+        print("Slug:", slug)
         generated_url = reverse('review_post', args=[slug])
         print("Generated URL:", generated_url)
 
-        return HttpResponseRedirect(reverse('review_post', args=[slug]))
+        return redirect(generated_url)
 
 
 @method_decorator(login_required, name='dispatch')

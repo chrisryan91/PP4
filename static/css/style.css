@@ -135,9 +135,9 @@ footer p i:hover {
 }
 
 /* Index.html Styles */
-#link {
-    margin: 0 auto;
-    text-align: center;
+.index_link {
+    margin: 0 auto !important;
+    text-align: center !important;
 }
 
 #top {
@@ -145,20 +145,24 @@ footer p i:hover {
     font-family: Alice, sans-serif;
 }
 
+#link {
+    padding-bottom: 35px;
+}
+
 .mid {
     width: 75%;
 }
 
-#link h2 a:hover {
+.index_link h2 a:hover {
     color: black;
 }
 
-#link div {
+.index_link div {
     margin: auto;
     text-align: center;
 }
 
-#link div h3 {
+.index_link div h3 {
     font-size: 15px;
 }
 

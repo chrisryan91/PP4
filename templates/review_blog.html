@@ -29,7 +29,7 @@
                                         {% else %}
                                             <img src="{{ review.featured_image_a.url }}" alt="Image for {{ review.label }}">
                                         {% endif %}
-                                        <a href="{% url 'review_post' review.slug %}" class="post-link">
+                                        <a href="{% url 'review_post' review.slug %}" class="post-link" aria-label="Review Post">
                                             <div class="middle">
                                                 <h4 class="card-text"><i class="fas fa-book"><span class="tooltiptext1">Visit Review</span></i></h4>
                                             </div>

@@ -39,10 +39,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="image-container">
-                                            <img src="{{ recipe.recipe.image }}" alt="Placeholder image for {{ recipe.review.label }}" class="card-img-top">
+                                            <img src="{{ recipe.recipe.image }}" alt="{{ recipe.review.label }}" class="card-img-top">
                                             <div class="middle">
                                                 <div class="icon-container">
-                                                    <a href="{{ recipe.recipe.url }}" class="card-text" target="_blank">
+                                                    <a href="{{ recipe.recipe.url }}" class="card-text" target="_blank" aria-label="{{ recipe.recipe.label}}">
                                                         <i class="fas fa-book">
                                                             <span class="tooltiptext1">Visit Recipe</span>
                                                         </i>

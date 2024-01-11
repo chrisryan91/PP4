@@ -36,10 +36,8 @@ document.addEventListener("DOMContentLoaded", function() {
     if (window.location.pathname === '/submit_review/') {
         var urlInput = document.getElementById("id_url");
         var labelInput = document.getElementById("id_recipe");
-        var imgInput = document.getElementById('id_featured_image_b');
         var storedUrl = sessionStorage.getItem("modalURL");
         var storedLabel = sessionStorage.getItem("modalLabel");
-        var storedImg = sessionStorage.getItem("modalImg");
 
         if (urlInput && storedUrl) {
             urlInput.value = storedUrl;
