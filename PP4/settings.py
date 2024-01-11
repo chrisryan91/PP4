@@ -30,7 +30,7 @@ app_id = os.environ.get("EDA_APP_ID")
 app_key = os.environ.get("EDA_APP_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", "portfolio-project-four.herokuapp.com", "portfolio-project-four-1f2f0bc1d6a0.herokuapp.com"]
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
+    'django_extensions',
     'cloudinary',
     'django_summernote',
     'crispy_forms',

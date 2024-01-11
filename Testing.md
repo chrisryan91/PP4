@@ -1,18 +1,50 @@
 # Full Testing
 
 ## Contents
-- Testing User Stories
-- Validator Testing
-- HTML Testing
-- CSS Testing
-- JavaScript Testing
-- Python Testing
-- User Stories Testing
-- Automated Testing
-- Manual Testing
-- Responsive Testing
-- Bugs and Fixes
-- Known Bugs
+- [Full Testing](#full-testing)
+  - [Contents](#contents)
+  - [Testing User Stories](#testing-user-stories)
+  - [User Story 1](#user-story-1)
+  - [User Story 2](#user-story-2)
+  - [User Story 3](#user-story-3)
+  - [User Story 4](#user-story-4)
+  - [User Story 5](#user-story-5)
+  - [User Story 6](#user-story-6)
+  - [User Story 7](#user-story-7)
+  - [User Story 8](#user-story-8)
+  - [User Story 9](#user-story-9)
+  - [User Story 10](#user-story-10)
+  - [User Story 11](#user-story-11)
+  - [User Story 12](#user-story-12)
+  - [Validator Testing](#validator-testing)
+    - [HTML](#html)
+    - [CSS](#css)
+    - [JavaScript](#javascript)
+    - [Python](#python)
+    - [Django Extensions](#django-extensions)
+  - [Lighthouse Testing](#lighthouse-testing)
+    - [Performance](#performance)
+    - [Accessibility](#accessibility)
+    - [Best Practises](#best-practises)
+    - [SEO](#seo)
+  - [Automated Testing](#automated-testing)
+  - [Manual Testing](#manual-testing)
+    - [Header](#header)
+    - [Footer](#footer)
+    - [Home Page](#home-page)
+    - [Search Page](#search-page)
+    - [Submit Review Page](#submit-review-page)
+    - [Review List Page](#review-list-page)
+    - [Review Post Page](#review-post-page)
+    - [Update Review Page](#update-review-page)
+    - [About Page](#about-page)
+    - [Register Page](#register-page)
+    - [Sign-in Page](#sign-in-page)
+    - [Logout Page](#logout-page)
+  - [Responsiveness Testing](#responsiveness-testing)
+  - [Bugs](#bugs)
+    - [Fixed Bugs](#fixed-bugs)
+    - [Known Bugs](#known-bugs)
 
 ## Testing User Stories
 
@@ -543,6 +575,10 @@ All my python files are PEP8 compliant. For this, I used the Code Institute Lint
 ![Admin.py](static/readme_images/python%20linter/views%20linter.png)
 </details>
 
+### Django Extensions
+
+I installed [Django Extensions](https://github.com/django-extensions/django-extensions) to see if there were errors with the code in my templates. None were found.
+
 ## Lighthouse Testing
 
 ### Performance
@@ -554,6 +590,22 @@ All my python files are PEP8 compliant. For this, I used the Code Institute Lint
 ### SEO
 
 ## Automated Testing
+
+Automated Testing was carried out using Django testing tool. I only have one main app for my project to achieve greater than 90% coverage I just needed to test four files:
+
+- test_admin.py
+- test_forms.py
+- test_models.py
+- test_views.py
+
+My test_views was by far the biggest. I came upon a few errors and bugs in the process of testing my views. One bug in particular - regarding Django's message tool - caused a lot of problems which is why my views.py testing covers only 78%. With a deadline approaching I had to focus on other elements of the project. I have covered this issue in the bug section.
+
+<details>
+<summary>Coverage Report</summary>
+<br>
+
+![Admin.py](static/readme_images/testing/coverage2.png)
+</details>
 
 ## Manual Testing
 
@@ -629,18 +681,18 @@ If logged in:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Card Div | Hover | Div appears with anchored icon | Works |
-| Card Div Icon | Hover | Text appears with external link to review | Works |
-| Card Div Icon | Click | New tab opens with link to recipe | Works |
-| Card Div Icon | Hover | URL, Label, Image stores in sessionStorage | Works |
+| Card .Div. | Hover | Div. appears with anchored icon | Works |
+| Card Div. Icon | Hover | Text appears with external link to review | Works |
+| Card Div. Icon | Click | New tab opens with link to recipe | Works |
+| Card Div. Icon | Hover | URL, Label, Image stores in sessionStorage | Works |
 
 If logged in:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Card Div | Hover | Div appears with second anchored icon | Works |
-| Card Div Icon | Hover | Text appears with internal link to review recipe | Works |
-| Card Div Icon | Click | Redirect to submit review page | Works |
+| Card Div. | Hover | Div. appears with second anchored icon | Works |
+| Card Div. Icon | Hover | Text appears with internal link to review recipe | Works |
+| Card Div. Icon | Click | Redirect to submit review page | Works |
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
@@ -679,9 +731,9 @@ On Submit:
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
 | Sort-By Dropdown | Click | Drop down appears with two values: latest and upvotes | Works|
-| Sort-By Button | Click | Card Divs sort themselves correctly | Works|
-| Review Card Div | Hover | Div with Icon Appears in Center | Works|
-| Review Card Div Icon | Hover | "Visit Review" text appears | Works |
+| Sort-By Button | Click | Card Div. sort themselves correctly | Works|
+| Review Card Div. | Hover | Div. wi.th Icon Appears in Centre | Works|
+| Review Card Div. Icon | Hover | "Visit Review" text appears | Works |
 | Next Link | Click | Directs to Next page | Works|
 | Last Link | Click | Directs to Last page | Works|
 
@@ -716,7 +768,7 @@ If logged in user in Review author:
 | Recipe Input | Type/Click | Not working - readme only | Works|
 | Review Input | Type/Click | Text can be updated | Works|
 | URL Input | Type/Click | Not working - readme only | Works|
-| Cuisine Type Input | Type/Click | Select 2 targets element, creates tags to choose from database, tags can be delted | Works|
+| Cuisine Type Input | Type/Click | Select 2 targets element, creates tags to choose from database, tags can be deleted | Works|
 | Ingredients Input | Type/Click | Select 2 targets element, creates tags to choose from, tags can be deleted | Works|
 | Utensils Input | Type/Click | Select 2 targets element, creates tags to choose from, tags can be deleted | Works|
 | Cloudinary Input | Click choose file | File Explored box pops up to choose image, old image can be cleared | Works|
@@ -779,6 +831,10 @@ On submit:
 ## Responsiveness Testing
 
 ## Bugs
+
+--- Bugs regarding messages
+
+
 
 ### Fixed Bugs
 

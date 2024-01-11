@@ -20,7 +20,7 @@ class AdminTest(TestCase):
         self.cuisine_type = CuisineType.objects.create(name='Test Cuisine Type')
 
         self.review = Review.objects.create(
-            title='Test Review',
+            title='Ches',
             recipe='Test Recipe',
             content='Test Content',
             author=self.user,
@@ -28,8 +28,8 @@ class AdminTest(TestCase):
         )
 
         self.comment = Comment.objects.create(
-            name='Test Commenter',
-            body='Test Comment Body',
+            name='Chris',
+            body='Bad recipe',
             review=self.review
         )
 
