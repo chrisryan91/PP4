@@ -705,10 +705,6 @@ span:nth-child(8) {
 /* Media query for smaller screens */
 @media only screen and (max-width: 768px) {
 
-    form ul li {
-        display: none;
-    }
-
     textarea {
         width: 70%;
     }
