@@ -69,7 +69,6 @@ class SearchForm(forms.Form):
 def search(request):
     recipes = []
     query = ''
-    error_message = None
 
     if request.method == 'POST' or request.method == 'GET':
         form = SearchForm(request.POST or request.GET)
