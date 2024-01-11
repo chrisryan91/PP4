@@ -4,9 +4,11 @@ from pp4app.models import Comment, Ingredient, Utensil, CuisineType
 from django.contrib.auth.models import User
 import unittest
 
+
 class ReviewFormTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.user = User.objects.create_user(
+            username='testuser', password='testpassword')
 
         self.ingredient = Ingredient.objects.create(name='Ingredient 1')
         self.utensil = Utensil.objects.create(name='Utensil 1')
@@ -33,7 +35,6 @@ class ReviewFormTest(TestCase):
             print(form.errors)
 
         self.assertTrue(form.is_valid(), f"Form errors: {form.errors}")
-        
         self.assertTrue(form.is_valid())
 
     def test_review_form_empty_data(self):
@@ -47,9 +48,9 @@ class ReviewFormTest(TestCase):
         self.assertIn('content', form.errors.keys())
         self.assertNotIn('new_ingredient', form.errors.keys())
 
-
     def test_review_form_invalid_data(self):
-        form = ReviewForm(data={'title': 'Test Review', 'recipe': 'Test Recipe'})
+        form = ReviewForm(data={
+            'title': 'Test Review', 'recipe': 'Test Recipe'})
 
         self.assertFalse(form.is_valid())
         self.assertIn('content', form.errors.keys())
@@ -58,7 +59,7 @@ class ReviewFormTest(TestCase):
         data = {
             'title': 'Delicious Recipe',
             'recipe': 'Test Recipe',
-            'content': 'This is a delicious recipe!',
+            'content': 'This is delicious!',
             'ingredients': [self.ingredient.id],
             'utensils': [self.utensil.id],
             'cuisine_type': [self.cuisine_type.id],
@@ -76,17 +77,20 @@ class ReviewFormTest(TestCase):
 
         self.assertEqual(review_instance.title, 'Delicious Recipe')
         self.assertEqual(review_instance.recipe, 'Test Recipe')
-        self.assertEqual(review_instance.content, 'This is a delicious recipe!')
+        self.assertEqual(review_instance.content, 'This is delicious!')
         self.assertEqual(review_instance.slug, 'delicious-recipe')
 
         self.client.logout
 
+
 if __name__ == '__main__':
     unittest.main()
 
+
 class CommentFormsTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='Richard', password='chess')
+        self.user = User.objects.create_user(
+            username='Richard', password='chess')
 
     def test_comment_form_valid_data(self):
         data = {'body': '... blah blah blah... '}
@@ -109,6 +113,7 @@ class CommentFormsTest(TestCase):
         form = CommentForms(data=data)
         self.assertFalse(form.is_valid())
         self.assertIn('body', form.errors.keys())
+
 
 if __name__ == '__main__':
     unittest.main()

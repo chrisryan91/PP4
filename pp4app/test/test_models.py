@@ -5,12 +5,14 @@ from django.contrib.auth.models import User
 from datetime import timedelta
 from django.utils import timezone
 
+
 class IngredientModelTest(TestCase):
     def test_ingredient_str_representation(self):
         ingredient = Ingredient(name='Tomato')
 
         expected_str = 'Tomato'
         self.assertEqual(str(ingredient), expected_str)
+
 
 class UtensilModelTest(TestCase):
     def test_utensil_str_representation(self):
@@ -19,6 +21,7 @@ class UtensilModelTest(TestCase):
         expected_str = 'Spatula'
         self.assertEqual(str(utensil), expected_str)
 
+
 class CuisineTypeModelTest(TestCase):
     def test_cuisine_type_str_representation(self):
         cuisine_type = CuisineType(name='Italian', slug='italian')
@@ -26,9 +29,11 @@ class CuisineTypeModelTest(TestCase):
         expected_str = 'Italian'
         self.assertEqual(str(cuisine_type), expected_str)
 
+
 class ReviewModelTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='mark', password='patterson')
+        self.user = User.objects.create_user(
+            username='mark', password='patterson')
         self.ingredient = Ingredient.objects.create(name='Asparagus')
         self.utensil = Utensil.objects.create(name='Wok')
         self.review = Review.objects.create(
@@ -63,21 +68,24 @@ class ReviewModelTest(TestCase):
         self.assertGreaterEqual(reviews[0].created_on, reviews[1].created_on)
 
     def test_review_upvote(self):
-        second_user = User.objects.create_user(username='MarkP', password='malahide')
+        second_user = User.objects.create_user(
+            username='MarkP', password='malahide')
         self.review.up_vote.add(self.user)
         self.review.up_vote.add(second_user)
 
         self.assertEqual(self.review.number_of_up_votes(), 2)
-    
+
     def test_number_of_down_votes(self):
-        second_user = User.objects.create_user(username='Sean', password='gambling')
+        second_user = User.objects.create_user(
+            username='Sean', password='gambling')
         self.review.down_vote.add(self.user)
         self.review.down_vote.add(second_user)
 
         self.assertEqual(self.review.number_of_down_votes(), 2)
 
     def test_total_votes(self):
-        second_user = User.objects.create_user(username='Sean', password='gambling')
+        second_user = User.objects.create_user(
+                username='Sean', password='gambling')
         self.review.up_vote.add(self.user)
         self.review.down_vote.add(second_user)
 
@@ -90,9 +98,11 @@ class ReviewModelTest(TestCase):
         expected_url = f'/update_review/{self.review.slug}/'
         self.assertEqual(self.review.get_absolute_url(), expected_url)
 
+
 class CommentModelTest(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='Alice', password='wonderland')
+        self.user = User.objects.create_user(
+            username='Alice', password='wonderland')
         self.ingredient = Ingredient.objects.create(name='Asparagus')
         self.utensil = Utensil.objects.create(name='Wok')
         self.review = Review.objects.create(

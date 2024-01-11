@@ -31,6 +31,7 @@ def bad_request(request, exception=None):
     print(f"Request to /400/ - User: {request.user}")
     return render(request, '400.html', status=400)
 
+
 def permission_denied(request, exception=None):
     print(f"Request to /403/ - User: {request.user}")
     return render(request, '403.html', status=403)
@@ -43,6 +44,7 @@ def page_not_found(request, *args, **kwargs):
 def server_error(request, exception=None):
     print(f"Request to /500/ - User: {request.user}")
     return render(request, '500.html', status=500)
+
 
 class CustomSignupView(SignupView):
     template_name = 'account/signup.html'
@@ -126,14 +128,15 @@ def SubmitReview(request):
                 existing_ingredients = form.cleaned_data.get('ingredients')
                 review.ingredients.set(existing_ingredients)
 
-                new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
+                new_ingredient_string = form.cleaned_data.get(
+                    'new_ingredient', '')
                 new_ingredient_list = [
                     ingredient.strip()
                     for ingredient in new_ingredient_string.split(',')]
 
                 for new_ingredient_name in new_ingredient_list:
                     try:
-                        new_ingredient, created = Ingredient.objects.get_or_create(
+                        new_ingredient = Ingredient.objects.get_or_create(
                             name=new_ingredient_name)
                         review.ingredients.add(new_ingredient)
                     except IntegrityError:
@@ -150,7 +153,7 @@ def SubmitReview(request):
                 if review.featured_image_a:
                     print(f"Cloudinary URL: {review.featured_image_a.url}")
                 else:
-                    print("No Cloudinary URL available (featured_image_a is None)")
+                    print("No Cloudinary URL (featured_image_a is None)")
 
                 url = form.cleaned_data.get("url")
                 if url:
@@ -168,7 +171,7 @@ def SubmitReview(request):
             'form': form,
             'ingredients': Ingredient.objects.all(),
             'utensils': Utensil.objects.all()})
-    
+
     else:
         return redirect('login')
 
@@ -191,8 +194,6 @@ class Reviews(generic.ListView):
                                 '-created_on')
         else:
             queryset = Review.objects.filter(status=1).order_by('-created_on')
-
-        print(f"queryset: {queryset}") 
 
         return queryset
 
@@ -314,9 +315,7 @@ class UpdateReview(View):
                     new_ingredient, created = Ingredient.objects.get_or_create(
                         name=new_ingredient_name)
 
-                    # Check if the object was created or retrieved
                     if created:
-                        # If created, add it to the review's ingredients
                         review.ingredients.add(new_ingredient)
                 except IntegrityError:
                     try:
@@ -335,7 +334,8 @@ class UpdateReview(View):
 
         return render(
             request, self.template_name, {'form': form, 'review': review})
-    
+
+
 def delete_comment(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
 
@@ -343,6 +343,6 @@ def delete_comment(request, comment_id):
         comment.delete()
         messages.success(request, 'Comment deleted successfully')
     else:
-        messages.error(request, 'You do not have permission to delete this comment')
+        messages.error(request, 'You do not have permission to delete')
 
     return redirect('review_post', slug=comment.review.slug)

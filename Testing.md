@@ -579,6 +579,13 @@ All my python files are PEP8 compliant. For this, I used the Code Institute Lint
 
 I installed [Django Extensions](https://github.com/django-extensions/django-extensions) to see if there were errors with the code in my templates. None were found.
 
+<details>
+<summary>CSS Validation</summary>
+<br>
+
+![CSS Validation](static/readme_images/testing/templatevalidation.png)
+</details>
+
 ## Lighthouse Testing
 
 ### Performance

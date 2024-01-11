@@ -1,11 +1,10 @@
 import unittest
 from django.test import TestCase, Client, RequestFactory
 from django.urls import reverse
-from django.http import HttpRequest
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from ..views import search, get_recipes, Reviews
-from ..forms import ReviewForm, CommentForms
-from ..models import Review, Comment, Ingredient, Utensil, CuisineType, Comment, User
+from django.core.paginator import Paginator
+from ..views import search, get_recipes
+from ..forms import ReviewForm
+from ..models import Review, Comment, Ingredient, Utensil, Comment, User
 from django.contrib.messages import get_messages
 from unittest.mock import patch
 from django.contrib.auth import get_user_model
@@ -22,6 +21,7 @@ class HomepageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
 
+
 class AboutTest(TestCase):
     def test_about_rendering(self):
         url = reverse('about')
@@ -30,12 +30,17 @@ class AboutTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'about.html')
 
+
 class TestSearchView(TestCase):
     def setUp(self):
         self.ingredient = Ingredient.objects.create(name='Flour')
         self.utensil = Utensil.objects.create(name='Whisk')
         self.user = User.objects.create_user(username='Alix', password='Bread')
-        self.review = Review.objects.create(title='Best Bread', recipe='Sourdough Bread', author=self.user, status=1, slug='Best-Bread')
+        self.review = Review.objects.create(
+            title='Best Bread',
+            recipe='Sourdough Bread',
+            author=self.user, status=1,
+            slug='Best-Bread')
 
     def test_search_view_with_results(self):
         response = self.client.get(reverse('search'), {'query': 'Flour'})
@@ -44,7 +49,9 @@ class TestSearchView(TestCase):
         self.assertContains(response, 'Flour')
 
     def test_search_view_without_results(self):
-        response = self.client.get(reverse('search'), {'query': 'Rare Ingredient'})
+        response = self.client.gt(
+            reverse('search'),
+            {'query': 'Rare Ingredient'})
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'search.html')
         self.assertContains(response, 'Rare Ingredient')
@@ -55,6 +62,7 @@ class TestSearchView(TestCase):
         self.assertTemplateUsed(response, 'search.html')
         self.assertContains(response, '')
 
+
 class SearchViewTest(TestCase):
     def setUp(self):
         self.factory = RequestFactory()
@@ -63,7 +71,9 @@ class SearchViewTest(TestCase):
         request = self.factory.post('/search', {'query': 'search'})
 
         with patch('pp4app.views.get_recipes') as mock_get_recipes:
-            mock_get_recipes.return_value = [{'recipe_name': 'Croque Madame'}, {'recipe_name': 'Pasta Alla Norma'}]
+            mock_get_recipes.return_value = [
+                {'recipe_name': 'Croque Madame'},
+                {'recipe_name': 'Pasta Alla Norma'}]
             response = search(request)
 
         self.assertEqual(response.status_code, 200)
@@ -75,7 +85,9 @@ class SearchViewTest(TestCase):
         request = self.factory.get('/search/', {'query': 'search'})
 
         with patch('pp4app.views.get_recipes') as mock_get_recipes:
-            mock_get_recipes.return_value = [{'recipe_name': 'Croque Madame'}, {'recipe_name': 'Pasta Alla Norma'}]
+            mock_get_recipes.return_value = [
+                {'recipe_name': 'Croque Madame'},
+                {'recipe_name': 'Pasta Alla Norma'}]
 
             response = search(request)
 
@@ -83,23 +95,31 @@ class SearchViewTest(TestCase):
         self.assertContains(response, '<h2>Search results for: search</h2>')
         mock_get_recipes.assert_called_once_with('search')
 
+
 class GetRecipesTest(unittest.TestCase):
     @patch('pp4app.views.requests.get')
     def test_get_recipes_success(self, mock_requests_get):
         mock_response = unittest.mock.Mock()
         mock_response.status_code = 200
-        mock_response.json.return_value = {'hits': [{'recipe_name': 'Kung Po Chicken'}, {'recipe_name': 'Prawn Korma'}]}
+        mock_response.json.return_value = {'hits': [
+            {'recipe_name': 'Kung Po Chicken'},
+            {'recipe_name': 'Prawn Korma'}]}
 
         mock_requests_get.return_value = mock_response
 
         result = get_recipes('your_query')
 
-        self.assertEqual(result, [{'recipe_name': 'Kung Po Chicken'}, {'recipe_name': 'Prawn Korma'}])
+        self.assertEqual(result, [
+            {'recipe_name': 'Kung Po Chicken'},
+            {'recipe_name': 'Prawn Korma'}])
 
         mock_requests_get.assert_called_once_with(
             'https://api.edamam.com/api/recipes/v2',
-            params={'q': 'your_query', 'app_id': unittest.mock.ANY, 'app_key': unittest.mock.ANY, 'type': 'public'}
-        )
+            params={'q': 'your_query',
+                    'app_id': unittest.mock.ANY,
+                    'app_key': unittest.mock.ANY,
+                    'type': 'public'}
+                )
 
     @patch('pp4app.views.requests.get')
     def test_get_recipes_failure(self, mock_requests_get):
@@ -114,11 +134,16 @@ class GetRecipesTest(unittest.TestCase):
 
         mock_requests_get.assert_called_once_with(
             'https://api.edamam.com/api/recipes/v2',
-            params={'q': 'your_query', 'app_id': unittest.mock.ANY, 'app_key': unittest.mock.ANY, 'type': 'public'}
-        )
+            params={'q': 'your_query',
+                    'app_id': unittest.mock.ANY,
+                    'app_key': unittest.mock.ANY,
+                    'type': 'public'}
+                )
+
 
 if __name__ == '__main__':
     unittest.main()
+
 
 class ReviewsViewTest(TestCase):
     def setUp(self):
@@ -144,8 +169,12 @@ class ReviewsViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'review_blog.html')
 
-        expected_reviews = Review.objects.filter(status=1).order_by('-created_on')
-        self.assertQuerysetEqual(response.context['review_list'], expected_reviews, transform=lambda x: x)
+        expected_reviews =
+        Review.objects.filter(status=1).order_by('-created_on')
+        self.assertQuerysetEqual(
+            response.context['review_list'],
+            expected_reviews,
+            transform=lambda x: x)
 
         self.assertTrue('paginator' in response.context)
         paginator = response.context['paginator']
@@ -162,7 +191,10 @@ class ReviewsViewTest(TestCase):
         expected_reviews = Review.objects.filter(status=1).annotate(
             net_votes_count=Count('up_vote') - Count('down_vote')
         ).order_by('-net_votes_count', '-created_on')
-        self.assertQuerysetEqual(response.context['review_list'], expected_reviews, transform=lambda x: x)
+        self.assertQuerysetEqual(
+            response.context['review_list'],
+            expected_reviews,
+            transform=lambda x: x)
 
     def test_reviews_view_context_data(self):
         url = reverse('review_blog')
@@ -172,12 +204,16 @@ class ReviewsViewTest(TestCase):
         self.assertTrue('current_sort' in response.context)
         self.assertEqual(response.context['current_sort'], '')
 
+
 if __name__ == '__main__':
     unittest.main()
 
+
 class ReviewPostViewTestContext(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='Peter', password='sweden')
+        self.user = User.objects.create_user(
+            username='Peter',
+            password='sweden')
 
         self.review = Review.objects.create(
             title='Meatballs',
@@ -208,10 +244,13 @@ class ReviewPostViewTestContext(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
+
 class ReviewPostViewTestPost(TestCase):
     def setUp(self):
 
-        self.user = User.objects.create_user(username='ChristopherFrancisDerekRyan', password='password123')
+        self.user = User.objects.create_user(
+            username='ChristopherFrancisDerekRyan',
+            password='password123')
 
         title = 'Nice for dinner'
         slug = slugify(title)
@@ -225,7 +264,9 @@ class ReviewPostViewTestPost(TestCase):
             slug=slug
         )
 
-        self.client.login(username='ChristopherFrancisDerekRyan', password='password123')
+        self.client.login(
+                username='ChristopherFrancisDerekRyan',
+                password='password123')
 
         self.comment_form_data = {
             'body': 'This is a test comment.',
@@ -240,7 +281,9 @@ class ReviewPostViewTestPost(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Awaiting approval')
 
-        comment = Comment.objects.get(review=self.review, body='This is a test comment.')
+        comment = Comment.objects.get(
+            review=self.review,
+            body='This is a test comment.')
         comment.approved = True
         comment.save()
 
@@ -250,10 +293,13 @@ class ReviewPostViewTestPost(TestCase):
 
         self.assertContains(response, 'This is a test comment.')
 
+
 class ReviewUpvoteViewTest(TestCase):
 
     def setUp(self):
-        self.user = User.objects.create_user(username='ChrisR', password='password123')
+        self.user = User.objects.create_user(
+            username='ChrisR',
+            password='password123')
 
         self.review = Review.objects.create(
             title='Fish and Chips',
@@ -271,11 +317,14 @@ class ReviewUpvoteViewTest(TestCase):
         response = self.client.post(url, {'vote_type': 'upvote'})
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('review_post', args=[self.review.slug]))
+        self.assertRedirects(
+            response,
+            reverse('review_post', args=[self.review.slug]))
 
         self.assertTrue(self.review.up_vote.filter(id=self.user.id).exists())
 
-        self.assertFalse(self.review.down_vote.filter(id=self.user.id).exists())
+        self.assertFalse(
+            self.review.down_vote.filter(id=self.user.id).exists())
 
     def test_downvote_post(self):
         url = reverse('review_upvote', args=[self.review.slug])
@@ -283,15 +332,19 @@ class ReviewUpvoteViewTest(TestCase):
         response = self.client.post(url, {'vote_type': 'downvote'})
 
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse('review_post', args=[self.review.slug]))
+        self.assertRedirects(response, reverse(
+            'review_post',
+            args=[self.review.slug]))
 
         self.assertTrue(self.review.down_vote.filter(id=self.user.id).exists())
-
         self.assertFalse(self.review.up_vote.filter(id=self.user.id).exists())
-    
+
+
 class UpdateReviewViewTestGet(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='TrickyDicky', password='nixon')
+        self.user = User.objects.create_user(
+            username='TrickyDicky',
+            password='nixon')
 
         self.review = Review.objects.create(
             title='Nice for dinner',
@@ -321,7 +374,9 @@ class UpdateReviewViewTestGet(TestCase):
 
 class UpdateReviewTestCasePost(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(username='RichardFanning', password='kilkenny')
+        self.user = User.objects.create_user(
+            username='RichardFanning',
+            password='kilkenny')
 
         self.review = Review.objects.create(
             title='Stew',
@@ -359,7 +414,9 @@ class UpdateReviewTestCasePost(TestCase):
         self.assertEqual(response.status_code, 200)
         updated_review = Review.objects.get(id=self.review.id)
         self.assertEqual(updated_review.title, 'Updated Test Review')
-        self.assertEqual(updated_review.content, 'Updated content for the review')
+        self.assertEqual(
+            updated_review.content,
+            'Updated content for the review')
 
     def test_update_review_invalid_form(self):
         review = Review.objects.create(
@@ -385,6 +442,7 @@ class UpdateReviewTestCasePost(TestCase):
         self.assertEqual(response.status_code, 200)
         updated_review = Review.objects.get(id=review.id)
         self.assertNotEqual(updated_review.title, '')
+
 
 class DeleteCommentViewTest(TestCase):
     def setUp(self):
@@ -415,12 +473,17 @@ class DeleteCommentViewTest(TestCase):
 
         response = self.client.post(url)
 
-        self.assertEqual(Comment.objects.filter(id=self.comment.id).exists(), False)
+        self.assertEqual(Comment.objects.filter(
+            id=self.comment.id).exists(),
+            False)
 
         messages = [m.message for m in get_messages(response.wsgi_request)]
         self.assertIn('Comment deleted successfully', messages)
 
-        self.assertRedirects(response, reverse('review_post', kwargs={'slug': self.review.slug}))
+        self.assertRedirects(
+            response,
+            reverse('review_post',
+                    kwargs={'slug': self.review.slug}))
 
     def test_delete_comment_permission_denied(self):
         other_user = User.objects.create_user(
@@ -431,12 +494,17 @@ class DeleteCommentViewTest(TestCase):
         self.client.login(username='otheruser', password='otherpassword')
         url = reverse('delete_comment', kwargs={'comment_id': self.comment.id})
         response = self.client.post(url)
-        self.assertEqual(Comment.objects.filter(id=self.comment.id).exists(), True)
+        self.assertEqual(
+            Comment.objects.filter(id=self.comment.id).exists(), True)
 
-    
         messages = [m.message for m in get_messages(response.wsgi_request)]
-        self.assertIn('You do not have permission to delete this comment', messages)
-        self.assertRedirects(response, reverse('review_post', kwargs={'slug': self.review.slug}))
+        self.assertIn(
+            'You do not have permission to delete this comment',
+            messages)
+        self.assertRedirects(response, reverse(
+            'review_post',
+            kwargs={'slug': self.review.slug}))
+
 
 class CustomSignupViewTest(TestCase):
     def setUp(self):
@@ -460,7 +528,8 @@ class CustomSignupViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'index.html')
 
-        self.assertTrue(User.objects.filter(username=self.user_data['username']).exists())
+        self.assertTrue(User.objects.filter(
+            username=self.user_data['username']).exists())
 
     def test_signup_view_post_failure(self):
         self.user_data['password2'] = 'DifferentPassword123!'
@@ -470,7 +539,9 @@ class CustomSignupViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account/signup.html')
 
-        self.assertFalse(User.objects.filter(username=self.user_data['username']).exists())
+        self.assertFalse(User.objects.filter(
+            username=self.user_data['username']).exists())
+
 
 class CustomLoginViewTest(TestCase):
     def setUp(self):
@@ -507,11 +578,11 @@ class CustomLoginViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'account/login.html')
 
+
 class ErrorViewsTest(TestCase):
     def test_bad_request_view(self):
         response = self.client.get('/400/')
         self.assertEqual(response.status_code, 400)
-
 
     def test_permission_denied_view(self):
         response = self.client.get('/403/')

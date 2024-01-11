@@ -54,6 +54,7 @@ class CommentForms(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
+
 class CustomSignupForm(SignupForm):
     email = forms.EmailField(required=False, widget=forms.HiddenInput())
 
@@ -61,8 +62,6 @@ class CustomSignupForm(SignupForm):
         super(CustomSignupForm, self).__init__(*args, **kwargs)
 
 
-
 class CustomLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(CustomLoginForm, self).__init__(*args, **kwargs)
-
