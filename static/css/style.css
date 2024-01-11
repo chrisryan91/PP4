@@ -705,6 +705,14 @@ span:nth-child(8) {
 /* Media query for smaller screens */
 @media only screen and (max-width: 768px) {
 
+    form ul li {
+        display: none;
+    }
+
+    textarea {
+        width: 70%;
+    }
+
     .headingmid {
         width: 80%;
         font-size: 15px !important;
@@ -766,10 +774,6 @@ span:nth-child(8) {
 
 @media only screen and (max-width: 500px) {
 
-    textarea {
-        width: 100%;
-    }
-
     #top {
         font-size: 30px;
     }   
@@ -786,7 +790,7 @@ span:nth-child(8) {
         padding-bottom: 1px;
     }
 
-    .animation-span {
+    .animation-span1 {
         padding-bottom: 1px;
     }
 
