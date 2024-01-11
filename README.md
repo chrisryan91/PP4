@@ -489,11 +489,19 @@ The **About** page consists of information regarding the importance of Ending Fo
 
 ### Features Left to Implement
 
-1. The ability to edit and delete comments has not yet been implemented. I would also like comments to be upvoted and downvote. They could be sorted by upvotes/downvotes like reddit.
+1. The ability to edit comments has not yet been implemented. I would also like comments to be upvoted and downvote. They could be sorted by upvotes/downvotes like reddit.
+   
 2. I was in two minds about the feasibility of creating some kind of user dashboard so users could potentially update all their content from the one place. I was not confident that I would get it done on time but it was certainly the next feature I would want to add. At present CRUD operations are present but for a user it would be more manageable to have them in one place.
-3. Email confirmation in login and sign-up processes.
-4. Social Media sign-in.
-5. Search feature on the review blog to search for reviews rather than recipes
+   
+3. Email confirmation in login and sign-up processes. Currently the app only has authentication with username and password. It is good if users would like to maintain their anonymity but negative if the app seeks to foster a community of people talking and chatting. So I need to implement this feature.
+   
+4. Social Media sign-in. Similarly for the same reason above, social media sign-in would help foster community and also people could share the app with their friends.
+   
+5. Search feature on the review blog to search for reviews rather than recipes. With so few entries, as the blog gains traction a search feature would need to be implemented to search through the database for reviews.
+   
+6. On the review submit page, there is no option currently to enter New Utensils or Cuisine Types into the database. Due to the issue documented in the bugs section regarding Select2 targeting those types of elements, typing a csv string is not user friendly. I held off on adapting the code and logic used to enter new values from the form into the database for ingredients or cuisine types until I found either a solution to get Select2 working, or another more user-friendly solution. 
+   
+There are many features more I would like to implement. Due to the fact this was my first project and there was a deadline, features not implemented was as much a matter of me not being able to find a solution rather than there not being a solution. The more time I got lost researching one issue, the less time I found myself to spend on another issue.
 
 ## Technologies Used
 
@@ -574,4 +582,29 @@ In Django settings:
 - For Heroku deployment, set the environment variables in the Heroku dashboard or the Heroku CLI
 
 ## Credits
+
+- This video helped me with testing with Unittest: [Django Testing Tutorial](https://www.youtube.com/watch?v=qwypH3YvMKc&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM)
+- This video too: [Testing a Django Model](https://www.youtube.com/watch?v=bIFVweK0hMc)
+- I got my background image here: [Toa Heftiba, Leek](https://unsplash.com/photos/closeup-photo-of-sliced-spring-onion-KN4ampW-QOI)
+- This for CSS div opacity: [CSS Div. Opacity](https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_image_overlay_opacity)
+- This for CSS animations: [22 Useful CSS Tips and Tricks Every Developer Should Know](https://www.makeuseof.com/css-tips-and-tricks-you-must-know/)
+- I got my fonts from FontAwesome: [Font Awesome](https://fontawesome.com/)
+- My upvote/downvote logic came from Stack Overflow: [Django upvote & downvote system](https://stackoverflow.com/questions/77376229/django-upvote-downvote-system)
+- Fonts from Google: [Alice](https://fonts.google.com/specimen/Alice/about) & [Merriweather](https://fonts.google.com/specimen/Merriweather/about)
+- dbdiagram was used to make an SQL Database diagram: [dbdiagram](https://dbdiagram.io/)
+- Balsamiq was used to create wireframes: [Lucid Chart](https://www.lucidchart.com/pages/)
+- Responsively was used to test for responsivity: [Responsively](https://responsively.app/)
+- AmIResponsive was used to create the image at the top of this readme: [AmIresponsive?](https://amiresponsive.co.uk/)
+- Django Project: [Django Project](https://www.djangoproject.com/start/)
+  
+On a general basis I don't know how many times I consulted **Stack Overflow** for solutions. If I got an error I didn't understand I was always directed by Google to Stack Overflow.
+
+Similarly, the W3Schools section on Django was a go to in developing my project: [w3schools](https://www.w3schools.com/django/django_templates.php)
+
+- I would like to thank my friend Jonny who helped me with my code despite how messy it got at times. He kept saying: "that's not industry standard."
+- I would like to thank my tutor Antonio.
+- I would like to thank everyone on the Slack Channel - someone generally always asked the same question I had before me. 
+
+
+
 

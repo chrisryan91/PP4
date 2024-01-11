@@ -594,7 +594,7 @@ I installed [Django Extensions](https://github.com/django-extensions/django-exte
 
 ## Automated Testing
 
-Automated Testing was carried out using Django testing tool. I only have one main app for my project to achieve greater than 90% coverage I just needed to test four files:
+Automated Testing was carried out using Django testing tool. I tested after my code was written. I only have one main app for my project to achieve greater than 90% coverage I just needed to test four files:
 
 - test_admin.py
 - test_forms.py
@@ -616,220 +616,220 @@ My test_views was by far the biggest. I came upon a few errors and bugs in the p
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Site Name| Click | Return to homepage | Works|
-| Site Name| Hover | Cursor changes | Works|
-| Search Link | Click | Directs to search page | Works|
-| Search Link | Hover | Icon Wobbles | Works|
-| Search Link | Hover | Cursor changes | Works|
-| Reviews Link | Click | Directs to Reviews Blog page | Works|
-| Reviews Link | Hover | Icon Wobbles | Works|
-| Reviews Link | Hover | Cursor changes | Works|
-| About Link | Click | Directs to About page | Works|
-| About Link | Hover | Icon Wobbles | Works|
-| About Link | Hover | Cursor changes | Works|
+| Site Name| Click | Return to homepage | Working |
+| Site Name| Hover | Cursor changes | Working |
+| Search Link | Click | Directs to Search | Working |
+| Search Link | Hover | Icon Wobbles | Working |
+| Search Link | Hover | Cursor changes | Working |
+| Reviews Link | Click | Directs to Reviews Blog page | Working |
+| Reviews Link | Hover | Icon Wobbles | Working |
+| Reviews Link | Hover | Cursor changes | Working |
+| About Link | Click | Directs to About page | Working |
+| About Link | Hover | Icon Wobbles | Working |
+| About Link | Hover | Cursor changes | Working |
 
 If not logged in:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Register Link | Click | Directs to Register page | Works|
-| Register Link | Hover | Icon Wobbles | Works|
+| Register Link | Click | Directs to Register page | Working |
+| Register Link | Hover | Icon Wobbles | Working |
 | Register Link | Hover | Cursor changes | Works|
-| Login Link | Click | Directs to Login page | Works|
-| Login Link | Hover | Icon Wobbles | Works|
-| Login Link | Hover | Cursor changes | Works|
+| Login Link | Click | Directs to Login page | Working |
+| Login Link | Hover | Icon Wobbles | Working |
+| Login Link | Hover | Cursor changes | Working |
 
 If logged in:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Logout Link | Click | Directs to Logout page | Works|
-| Logout Link | Hover | Icon Wobbles | Works|
-| Logout Link | Hover | Cursor changes | Works|
+| Logout Link | Click | Directs to Logout page | Working |
+| Logout Link | Hover | Icon Wobbles | Working |
+| Logout Link | Hover | Cursor changes | Working |
 
 ### Footer
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Facebook Link | Click | Facebook opens in new tab | Works|
-| Facebook Link | Hover | Icon Wobbles | Works|
-| Facebook Link | Hover | Cursor changes | Works|
-| Twitter Link | Click | Twitter opens in new tab | Works|
-| Twitter Link | Hover | Icon Wobbles | Works|
-| Twitter Link | Hover | Cursor changes | Works|
-| Instagram Link | Click | Instagram opens in new tab | Works|
-| Instagram Link | Hover | Icon Wobbles | Works|
-| Instagram Link | Hover | Cursor changes | Works|
-| YouTube Link | Click | YouTube opens in new tab | Works|
-| YouTube Link | Hover | Icon Wobbles | Works|
-| YouTube Link | Hover | Cursor changes | Works|
+| Facebook Link | Click | Facebook opens in new tab | Working |
+| Facebook Link | Hover | Icon Wobbles | Working |
+| Facebook Link | Hover | Cursor changes | Working |
+| Twitter Link | Click | Twitter opens in new tab | Working |
+| Twitter Link | Hover | Icon Wobbles | Working |
+| Twitter Link | Hover | Cursor changes | Working |
+| Instagram Link | Click | Instagram opens in new tab | Working |
+| Instagram Link | Hover | Icon Wobbles | Working  |
+| Instagram Link | Hover | Cursor changes | Working |
+| YouTube Link | Click | YouTube opens in new tab | Working |
+| YouTube Link | Hover | Icon Wobbles | Working |
+| YouTube Link | Hover | Cursor changes | Working |
 
 ### Home Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Search Link | Click | Directs to Search page | Works|
-| Search Link | Hover | Cursor changes | Works|
-| View Blog Link | Click | Directs to Reviews Blog | Works|
-| View Blog Link | Hover | Cursor changes | Works|
+| Search Link | Click | Directs to Search page | Working |
+| Search Link | Hover | Cursor changes | Working |
+| View Blog Link | Click | Directs to Reviews Blog | Working |
+| View Blog Link | Hover | Cursor changes | Working |
 
 ### Search Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Form Input | Enter Ingredient | Select2 targets the element and saves it in a tag | Works |
-| Form Button | Enter anything other than a string with letters | Invalid data message | Works |
-| Form Button | Click Search with valid | Tags get converted to CSV string and returns recipes | Works |
-| Form Button | Click Search with data with no results | "No results" renders in template | Works |
+| Form Input | Enter Ingredient | Select2 targets the element and saves it in a tag | Working |
+| Form Button | Enter anything other than a string with letters | Invalid data message | Working |
+| Form Button | Click Search with valid entry | Tags get converted to CSV string and returns recipes | Working |
+| Form Button | Click Search with data with no results | "No results" renders in template | Working |
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Card .Div. | Hover | Div. appears with anchored icon | Works |
-| Card Div. Icon | Hover | Text appears with external link to review | Works |
-| Card Div. Icon | Click | New tab opens with link to recipe | Works |
-| Card Div. Icon | Hover | URL, Label, Image stores in sessionStorage | Works |
+| Card .Div. | Hover | Div. appears with anchored icon | Working |
+| Card Div. Icon | Hover | Text appears with external link to review | Working |
+| Card Div. Icon | Click | New tab opens with link to recipe | Working |
+| Card Div. Icon | Hover | URL, Label, Image stores in sessionStorage | Working |
+
+| Element | Action | Expectation | Result|
+|---------|--------|-------------|-------|
+| Next Link | Click | Directs to Next page | Working |
+| Last Link | Click | Directs to Last page | Working |
 
 If logged in:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Card Div. | Hover | Div. appears with second anchored icon | Works |
-| Card Div. Icon | Hover | Text appears with internal link to review recipe | Works |
-| Card Div. Icon | Click | Redirect to submit review page | Works |
-
-| Element | Action | Expectation | Result|
-|---------|--------|-------------|-------|
-| Next Link | Click | Directs to Next page | Works|
-| Last Link | Click | Directs to Last page | Works|
+| Card Div. | Hover | Div. appears with second anchored icon | Working |
+| Card Div. Icon | Hover | Text appears with internal link to review recipe | Working |
+| Card Div. Icon | Click | Redirect to submit review page | Working |
 
 ### Submit Review Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Title Input | Type/Click | Title will function | Works|
-| Recipe Input | Type/Click | Not working - readme only | Works|
-| Review Input | Type/Click | Review content appears | Works|
-| URL Input | Type/Click | Not working - readme only | Works|
-| Cuisine Type Input | Type/Click | Select 2 targets element, creates tags to choose from database | Works|
-| Ingredients Input | Type/Click | Select 2 targets element, creates tags to choose from | Works|
-| Utensils Input | Type/Click | Select 2 targets element, creates tags to choose from | Works|
-| Cloudinary Input | Click choose file | File Explored box pops up to choose image | Works|
-| Prep Time Input | Type | Text box appears only allowing numbers | Works |
-| New Ingredient Input | Type | Text box appears | Works |
+| Title Input | Type/Click | Title will function | Working |
+| Recipe Input | Type/Click | Not working - readme only | Working |
+| Review Input | Type/Click | Review content appears | Working |
+| URL Input | Type/Click | Not working - readme only | Working |
+| Cuisine Type Input | Type/Click | Select 2 targets element, creates tags to choose from database | Working |
+| Ingredients Input | Type/Click | Select 2 targets element, creates tags to choose from | Working |
+| Utensils Input | Type/Click | Select 2 targets element, creates tags to choose from | Working |
+| Cloudinary Input | Click choose file | File Explored box pops up to choose image | Working |
+| Prep Time Input | Type | Text box appears only allowing numbers | Working |
+| New Ingredient Input | Type | Text box appears | Working |
 
 On Submit:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Cuisine Type Input | Enter Two Values | Valid | Works|
-| Ingredients Input | Enter no values | Invalid | Works|
-| Utensils Input | Enter no values | Invalid | Works|
-| Cloudinary Input | Enter no image | Valid | Works|
-| Prep Time Input | Type | Enter no value | Works |
-| New Ingredient Input | Enter CSV string | valid | Works |
-| New Utensil Input | Enter CSV string | Valid | Works |
+| Cuisine Type Input | Enter Two Values | Valid | Working |
+| Ingredients Input | Enter no values | Invalid | Working |
+| Utensils Input | Enter no values | Invalid | Working |
+| Cloudinary Input | Enter no image | Valid | Working |
+| Prep Time Input | Type | Enter no value | Working |
+| New Ingredient Input | Enter CSV string | valid | Working |
+| New Utensil Input | Enter CSV string | Valid | Working |
 
 ### Review List Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Sort-By Dropdown | Click | Drop down appears with two values: latest and upvotes | Works|
-| Sort-By Button | Click | Card Div. sort themselves correctly | Works|
-| Review Card Div. | Hover | Div. wi.th Icon Appears in Centre | Works|
-| Review Card Div. Icon | Hover | "Visit Review" text appears | Works |
-| Next Link | Click | Directs to Next page | Works|
-| Last Link | Click | Directs to Last page | Works|
+| Sort-By Dropdown | Click | Drop down appears with two values: latest and upvotes | Working |
+| Sort-By Button | Click | Card Div. sort themselves correctly | Working |
+| Review Card Div. | Hover | Div. wi.th Icon Appears in Centre | Working |
+| Review Card Div. Icon | Hover | "Visit Review" text appears | Working |
+| Next Link | Click | Directs to Next page | Working |
+| Last Link | Click | Directs to Last page | Working |
 
 ### Review Post Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| External Recipe Link | Click | New tab opens with recipe | Works|
+| External Recipe Link | Click | New tab opens with recipe | Working |
 
 If logged in:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Upvote | Hover | Icon Wobbles | Works|
-| Upvote | Click | Colour Changes, total upvotes increases correctly | Works|
-| Downvote | Hover | Icon Wobbles | Works|
-| Downvote | Click | Colour Changes, total upvotes decreases correctly | Works|
-| Comment Textbox | Click/Type | Textbox size can be increased and written in | Works|
-| Comment Submit Button | Click | In text is in the box, valid - otherwise, not valid | Works|
+| Upvote | Hover | Icon Wobbles | Working |
+| Upvote | Click | Colour Changes, total upvotes increases correctly | Working |
+| Downvote | Hover | Icon Wobbles | Working |
+| Downvote | Click | Colour Changes, total upvotes decreases correctly | Working |
+| Comment Textbox | Click/Type | Textbox size can be increased and written in | Working |
+| Comment Submit Button | Click | In text is in the box, valid - otherwise, not valid | Working |
 
 If logged in user in Review author:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Update Review Link | Click | Page redirects to a new form | Works |
+| Update Review Link | Click | Page redirects to a new form | Working |
 
 ### Update Review Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Title Input | Type/Click | Text can be updated | Works|
-| Recipe Input | Type/Click | Not working - readme only | Works|
-| Review Input | Type/Click | Text can be updated | Works|
-| URL Input | Type/Click | Not working - readme only | Works|
-| Cuisine Type Input | Type/Click | Select 2 targets element, creates tags to choose from database, tags can be deleted | Works|
-| Ingredients Input | Type/Click | Select 2 targets element, creates tags to choose from, tags can be deleted | Works|
-| Utensils Input | Type/Click | Select 2 targets element, creates tags to choose from, tags can be deleted | Works|
-| Cloudinary Input | Click choose file | File Explored box pops up to choose image, old image can be cleared | Works|
-| Prep Time Input | Type | Text box appears only allowing numbers | Works |
-| New Ingredient Input | Type | Text box appears | Works |
+| Title Input | Type/Click | Text can be updated | Working |
+| Recipe Input | Type/Click | Not working - readme only | Working |
+| Review Input | Type/Click | Text can be updated | Working |
+| URL Input | Type/Click | Not working - readme only | Working |
+| Cuisine Type Input | Type/Click | Select 2 targets element, creates tags to choose from database, tags can be deleted | Working |
+| Ingredients Input | Type/Click | Select 2 targets element, creates tags to choose from, tags can be deleted | Working |
+| Utensils Input | Type/Click | Select 2 targets element, creates tags to choose from, tags can be deleted | Working |
+| Cloudinary Input | Click choose file | File Explored box pops up to choose image, old image can be cleared | Working |
+| Prep Time Input | Type | Text box appears only allowing numbers | Working |
+| New Ingredient Input | Type | Text box appears | Working |
 
 On Submit:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Cuisine Type Input | Enter Two Values | Valid | Works|
-| Ingredients Input | Enter no values | Invalid | Works|
-| Utensils Input | Enter no values | Invalid | Works|
-| Cloudinary Input | Enter no image | Valid | Works|
-| Prep Time Input | Type | Enter no value | Works |
-| New Ingredient Input | Enter CSV string | valid | Works |
-| New Utensil Input | Enter CSV string | Valid | Works | 
+| Cuisine Type Input | Enter Two Values | Valid | Working |
+| Ingredients Input | Enter no values | Invalid | Working |
+| Utensils Input | Enter no values | Invalid | Working |
+| Cloudinary Input | Enter no image | Valid | Working |
+| Prep Time Input | Type | Enter no value | Working |
+| New Ingredient Input | Enter CSV string | valid | Working |
+| New Utensil Input | Enter CSV string | Valid | Working | 
 
 ### About Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| External links | Click | New tab opens with correct link | Works |
+| External links | Click | New tab opens with correct link | Working |
 
 ### Register Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Sign in link | Click | Page redirects to login page | Works |
+| Sign in link | Click | Page redirects to login page | Working |
 
 On submit:
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Name input | Type Name that already exists | Invalid - notification appears appears | Works|
-| Name input | Type Name that doesn't exists | Valid | Works|
-| Password input | Password Contains Name | Invalid - notification appears appears | Works|
-| Password input | Password Doesn't Contains Name | Valid | Works|
-| Password input | Paste password into input field | Invalid | Works |
+| Name input | Type Name that already exists | Invalid - notification appears appears | Working |
+| Name input | Type Name that doesn't exists | Valid | Working |
+| Password input | Password Contains Name | Invalid - notification appears appears | Working |
+| Password input | Password Doesn't Contains Name | Valid | Working |
+| Password input | Paste password into input field | Invalid | Working |
 | Email input | No input | Valid | Works|
-| Email input | Text but not an email address | Not valid - needs @ | Works|
-| Email input | Enter email | Valid | Works |
-| Sign-up button | Click | Valid | Works |
+| Email input | Text but not an email address | Not valid - needs @ | Working |
+| Email input | Enter email | Valid | Working |
+| Sign-up button | Click | Valid | Working |
 
 ### Sign-in Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Name Input & Password Input | type | Values appear | Works |
-| Remember Me Checkbox | Click | Checkbox ticks | Works |
-| Sign In Button | Click with valid data| Logs in | Works |
-| Sign In Button | Click with invalid data| Message is rendered in html | Works |
+| Name Input & Password Input | type | Values appear | Working |
+| Remember Me Checkbox | Click | Checkbox ticks | Working |
+| Sign In Button | Click with valid data| Logs in | Working |
+| Sign In Button | Click with invalid data| Message is rendered in html | Working |
 
 ### Logout Page
 
 | Element | Action | Expectation | Result|
 |---------|--------|-------------|-------|
-| Logout Button | Click | Logs out | Works |
+| Logout Button | Click | Logs out | Working |
 
 ## Responsiveness Testing
 
@@ -886,6 +886,10 @@ My initial code for upvote and downvote logic became unwieldy. I could get users
 In my model for my reviews, I originally just had one field called **upvotes**. This I would increase or decrease based on users actions. This was the root of my problem. My review model needed an upvote field to count upvotes and a downvote field to count downvotes. The I would defined a separate function within the model class which works out the total upvotes.
 
 I found the solution to my problem on [Stack Overflow](https://stackoverflow.com/questions/77376229/django-upvote-downvote-system).
+
+- **URL Configuration**
+
+At some points throughout creating the project my URLs were not configured properly. They needed to be changed and the order of the needed to be changed. I used Stack Overflow for solutions regarding this: [Django URLs randomly shows ImproperlyConfigured](https://stackoverflow.com/questions/48237188/django-urls-randomly-shows-improperlyconfigured)
 
 ### Known Bugs
 
