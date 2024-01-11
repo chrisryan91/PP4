@@ -39,7 +39,7 @@
     - [Logout Page](#logout-page)
   - [Responsiveness Testing](#responsiveness-testing)
     - [Browsers](#browsers)
-- [Devices](#devices)
+    - [Devices](#devices)
   - [Bugs](#bugs)
     - [Fixed Bugs](#fixed-bugs)
     - [Known Bugs](#known-bugs)
@@ -841,12 +841,33 @@ I tested the APP throughout the development with Dev Tools. Towards the end of d
 - Bing
 - Safari
 
-# Devices
+### Devices
 - Lenovo Laptop
 - Mac Desktop
 - Samsung Phone
 - iPhone
 - Huawei i7
+
+<details>
+<summary>iPad</summary>
+<br>
+
+![iPad](static/readme_images/testing/iPad-1705009608231.jpeg)
+</details>
+
+<details>
+<summary>iPhone 12 Pro</summary>
+<br>
+
+![iPhone 12 Pro](static/readme_images/testing/iPhone%2012%20Pro-1705009599182.jpeg)
+</details>
+
+<details>
+<summary>MacBook Pro</summary>
+<br>
+
+![iPhone 12 Pro](static/readme_images/testing/MacBook%20Pro-1705009615852.jpeg)
+</details>
 
 ## Bugs
 
