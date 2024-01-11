@@ -26,6 +26,14 @@ a {
     cursor: pointer;
 }
 
+a:hover {
+    color: black;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
 /* Navigation Styles */
 .navbar-toggler {
     padding: .25rem .75rem;
