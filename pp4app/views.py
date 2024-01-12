@@ -131,17 +131,17 @@ def SubmitReview(request):
 
                 for new_ingredient_name in new_ingredient_list:
                     try:
-                        new_ingredient, created = /
-                        Ingredient.objects.get_or_create(
+                        new_ingredient,
+                        created = Ingredient.objects.get_or_create(
                             name=new_ingredient_name)
                         review.ingredients.add(new_ingredient)
                     except IntegrityError:
                         try:
                             new_ingredient = Ingredient.objects.get(
-                                name=new_ingredient_name)
+                                    name=new_ingredient_name)
                         except Ingredient.DoesNotExist:
-                            new_ingredient_id =
-                            Ingredient.objects.latest('id').id + 1
+                            new_ingredient_id = Ingredient.objects.latest(
+                                    'id').id + 1
                             new_ingredient = Ingredient.objects.create(
                                 id=new_ingredient_id, name=new_ingredient_name)
                         review.ingredients.add(new_ingredient)
@@ -156,9 +156,8 @@ def SubmitReview(request):
                     request.session["modalURL"] = url
                     print(f"Session modalURL set to: {url}")
 
-                messages.success(
-                    request,
-                    'Review submitted successfully - pending approval!')
+                messages.success(request, 'Review submitted successfully')
+
                 return redirect('review_blog')
             else:
                 print(form.errors)
@@ -308,8 +307,8 @@ class UpdateReview(View):
 
             new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
             new_ingredient_list = [
-                ingredient.strip() \
-                for ingredient in new_ingredient_string.split(',')]
+                ingredient.strip() for \
+                    ingredient in new_ingredient_string.split(',')]
 
             for new_ingredient_name in new_ingredient_list:
                 try:
@@ -321,8 +320,8 @@ class UpdateReview(View):
                         new_ingredient = Ingredient.objects.get(
                                 name=new_ingredient_name)
                     except Ingredient.DoesNotExist:
-                        new_ingredient_id \
-                        = Ingredient.objects.latest('id').id + 1
+                        new_ingredient_id = Ingredient.objects.latest(
+                                'id').id + 1
                         new_ingredient = Ingredient.objects.create(
                             id=new_ingredient_id, name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
@@ -332,9 +331,9 @@ class UpdateReview(View):
             return redirect(reverse('blog'))
 
         return render(
-                request,
-                self.template_name,
-                {'form': form, 'review': review})
+            request,
+            self.template_name,
+            {'form': form, 'review': review})
 
 
 def delete_comment(request, comment_id):
