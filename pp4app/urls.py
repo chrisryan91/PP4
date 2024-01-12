@@ -27,10 +27,10 @@ urlpatterns = [
     path('accounts/signup/', views.CustomSignupView.as_view(), name='signup'),
     path('accounts/login/', views.CustomLoginView.as_view(), name='login'),
     path('accounts/logout/', LogoutView.as_view(), name='account_logout'),
-    path('<slug:slug>/', views.ReviewPost.as_view(), name='review_post'),
     path('400/', views.bad_request, name='custom_400'),
     path('403/', views.permission_denied, name='custom_403'),
     path('500/', views.server_error, name='custom_500'),
+    path('<slug:slug>/', views.ReviewPost.as_view(), name='review_post'),
     path(
             '<path:unmatched_path>/',
             views.page_not_found,
