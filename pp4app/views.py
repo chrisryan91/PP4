@@ -111,67 +111,61 @@ def get_recipes(query):
 
 
 def SubmitReview(request):
-    if request.user.is_authenticated:
-        if request.method == "POST":
-            form = ReviewForm(request.POST, request.FILES)
-            if form.is_valid():
-                review = form.save(commit=False)
-                review.author = request.user
-                review.save()
-                form.save_m2m()
+    if request.method == "POST":
+        form = ReviewForm(request.POST, request.FILES)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.author = request.user
+            review.save()
+            form.save_m2m()
 
-                existing_ingredients = form.cleaned_data.get('ingredients')
-                review.ingredients.set(existing_ingredients)
+            existing_ingredients = form.cleaned_data.get('ingredients')
+            review.ingredients.set(existing_ingredients)
 
-                new_ingredient_string = form.cleaned_data.get(
-                    'new_ingredient', '')
-                new_ingredient_list = [
-                    ingredient.strip()
-                    for ingredient in new_ingredient_string.split(',')]
+            new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
+            new_ingredient_list = [
+                ingredient.strip() for
+                ingredient in new_ingredient_string.split(',')]
 
-                for new_ingredient_name in new_ingredient_list:
+            for new_ingredient_name in new_ingredient_list:
+                try:
+                    new_ingredient, created =
+                    Ingredient.objects.get_or_create(name=new_ingredient_name)
+                    review.ingredients.add(new_ingredient)
+                except IntegrityError:
                     try:
-                        new_ingredient,
-                        created = Ingredient.objects.get_or_create(
+                        new_ingredient = Ingredient.objects.get(
                             name=new_ingredient_name)
-                        review.ingredients.add(new_ingredient)
-                    except IntegrityError:
-                        try:
-                            new_ingredient = Ingredient.objects.get(
-                                    name=new_ingredient_name)
-                        except Ingredient.DoesNotExist:
-                            new_ingredient_id = Ingredient.objects.latest(
-                                    'id').id + 1
-                            new_ingredient = Ingredient.objects.create(
-                                id=new_ingredient_id, name=new_ingredient_name)
-                        review.ingredients.add(new_ingredient)
+                    except Ingredient.DoesNotExist:
+                        new_ingredient_id =
+                        Ingredient.objects.latest('id').id + 1
+                        new_ingredient = Ingredient.objects.create(
+                            id=new_ingredient_id, name=new_ingredient_name)
+                    review.ingredients.add(new_ingredient)
 
-                if review.featured_image_a:
-                    print(f"Cloudinary URL: {review.featured_image_a.url}")
-                else:
-                    print("No Cloudinary URL (featured_image_a is None)")
-
-                url = form.cleaned_data.get("url")
-                if url:
-                    request.session["modalURL"] = url
-                    print(f"Session modalURL set to: {url}")
-
-                messages.success(request, 'Review submitted successfully')
-
-                return redirect('blog')
+            if review.featured_image_a:
+                print(f"Cloudinary URL: {review.featured_image_a.url}")
             else:
-                print(form.errors)
+                print("No Cloudinary URL available (featured_image_a is None)")
+
+            url = form.cleaned_data.get("url")
+            if url:
+                request.session["modalURL"] = url
+                print(f"Session modalURL set to: {url}")
+
+            return redirect('blog')
         else:
-            form = ReviewForm()
             print(form.errors)
 
-        return render(request, 'submit_review.html', {
-            'form': form,
-            'ingredients': Ingredient.objects.all(),
-            'utensils': Utensil.objects.all()})
-
     else:
-        return redirect('login')
+
+        form = ReviewForm()
+        print(form.errors)
+
+    return render(request, 'submit_review.html', {
+        'form': form,
+        'ingredients': Ingredient.objects.all(),
+        'utensils': Utensil.objects.all()})
 
 
 class Reviews(generic.ListView):
