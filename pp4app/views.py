@@ -307,8 +307,8 @@ class UpdateReview(View):
 
             new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
             new_ingredient_list = [
-                ingredient.strip() for \
-                    ingredient in new_ingredient_string.split(',')]
+                ingredient.strip() for
+                ingredient in new_ingredient_string.split(',')]
 
             for new_ingredient_name in new_ingredient_list:
                 try:
