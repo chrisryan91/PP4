@@ -47,6 +47,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_logout' %}"><strong><u>Logout</u></strong></a>
                     </li>
+                    <li class="nav-item">
+                        <u class="nav-link"><strong><u>Welcome, {{ user.username }}</u></strong></u>
+                    </li>
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account_signup' %}"><strong><u>Register</u></strong></a>

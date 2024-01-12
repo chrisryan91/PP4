@@ -1,0 +1,338 @@
+
+1, Carrots
+2, Broccoli
+3, Spinach
+4, Bell peppers
+5, Tomatoes
+6, Onions
+7, Garlic
+8, Zucchini
+9, Mushrooms
+10, Eggplant
+11, Asparagus
+12, Cauliflower
+13, Cabbage
+14, Brussels sprouts
+15, Kale
+16, Celery
+17, Cucumber
+18, Radishes
+19, Leeks
+20, Artichokes
+21, Beets
+22, Turnips
+23, Sweet potatoes
+24, Butternut squash
+25, Radicchio
+26, Peas
+27, Corn
+28, Green beans
+29, Avocado
+30, Pumpkin
+31, Apples
+32, Bananas
+33, Oranges
+34, Berries (Strawberries, Blueberries, Raspberries)
+35, Mangoes
+36, Pineapple
+37, Kiwi
+38, Watermelon
+39, Pomegranate
+40, Grapefruit
+41, Peaches
+42, Plums
+43, Nectarines
+44, Cherries
+45, Papaya
+46, Passion fruit
+47, Melons (Cantaloupe, Honeydew)
+48, Figs
+49, Dates
+50, Guava
+51, Dragon fruit
+52, Persimmons
+53, Cranberries
+54, Lemon
+55, Lime
+56, Grapefruit
+57, Clementines
+58, Tangerines
+59, Apricots
+60, Kiwi
+61, Basil
+62, Cilantro
+63, Parsley
+64, Mint
+65, Rosemary
+66, Thyme
+67, Dill
+68, Chives
+69, Sage
+70, Oregano
+71, Marjoram
+72, Tarragon
+73, Bay leaves
+74, Coriander
+75, Fennel
+76, Lemongrass
+77, Cinnamon sticks
+78, Nutmeg
+79, Ginger root
+80, Turmeric
+81, Chicken breast
+82, Ground beef
+83, Salmon fillets
+84, Tofu
+85, Shrimp
+86, Eggs
+87, Lentils
+88, Chickpeas
+89, Pork chops
+90, Turkey
+91, Duck
+92, Lamb
+93, Venison
+94, Quail
+95, Bison
+96, Crab
+97, Lobster
+98, Scallops
+99, Clams
+100, Mussels
+101, Rice
+102, Quinoa
+103, Barley
+104, Bulgur
+105, Oats
+106, Farro
+107, Couscous
+108, Buckwheat
+109, Millet
+110, Polenta
+111, Wild rice
+112, Sorghum
+113, Teff
+114, Amaranth
+115, Spelt
+116, Freekeh
+117, Kamut
+118, Fonio
+119, Einkorn
+120, Rye
+121, Milk
+122, Cheese (Cheddar, Mozzarella, Feta)
+123, Greek Yogurt
+124, Almond Milk
+125, Coconut Milk
+126, Cottage Cheese
+127, Parmesan
+128, Sour Cream
+129, Butter
+130, Cream Cheese
+131, Gouda
+132, Brie
+133, Swiss cheese
+134, Gruyère
+135, Havarti
+136, Blue cheese
+137, Camembert
+138, Ricotta
+139, Gorgonzola
+140, Monterey Jack
+141, Pepper Jack
+142, Goat cheese
+143, Manchego
+144, Provolone
+145, Fontina
+146, Colby
+147, Pecorino
+148, Emmental
+149, Queso fresco
+150, Queso blanco
+151, Flour
+152, Sugar
+153, Baking Powder
+154, Baking Soda
+155, Vanilla Extract
+156, Cocoa Powder
+157, Chocolate Chips
+158, Yeast
+159, Honey
+160, Maple Syrup
+161, Molasses
+162, Cornstarch
+163, Almond flour
+164, Coconut flour
+165, Agave nectar
+166, Shortening
+167, Cornmeal
+168, Rolled oats
+169, Condiments:
+170, Ketchup
+171, Mustard
+172, Mayonnaise
+173, Soy Sauce
+174, Worcestershire Sauce
+175, Hot Sauce
+176, BBQ Sauce
+177, Tahini
+178, Pesto
+179, Salsa
+180, Hummus
+181, Sriracha
+182, Hoisin sauce
+183, Fish sauce
+184, Harissa
+185, Miso paste
+186, Tomato sauce
+187, Pickles
+188, Relish
+189, Olive Oil
+190, Vegetable Oil
+191, Canola Oil
+192, Sesame Oil
+193, Coconut Oil
+194, Grapeseed Oil
+195, Avocado Oil
+196, Peanut Oil
+197, Walnut Oil
+198, Flaxseed Oil
+199, Balsamic Vinegar
+200, Apple Cider Vinegar
+201, Red Wine Vinegar
+202, White Wine Vinegar
+203, Rice Vinegar
+204, Canned Tomatoes
+205, Tomato Paste
+206, Tomato Sauce
+207, Diced Tomatoes
+208, Crushed Tomatoes
+209, Tomato Puree
+210, Black Beans
+211, Kidney Beans
+212, Cannellini Beans
+213, Chickpeas
+214, Pinto Beans
+215, Green Beans
+216, Corn
+217, Peas
+218, Diced Green Chilies
+219, Artichoke Hearts
+220, Pickled Jalapeños
+221, Capers
+222, Tuna
+223, Salmon
+224, Sardines
+225, Anchovies
+226, Almonds
+227, Walnuts
+228, Pecans
+229, Hazelnuts
+230, Pistachios
+231, Cashews
+232, Brazil Nuts
+233, Macadamia Nuts
+234, Pine Nuts
+235, Sunflower Seeds
+236, Pumpkin Seeds
+237, Chia Seeds
+238, Flaxseeds
+239, Sesame Seeds
+240, Poppy Seeds
+241, Hemp Seeds
+242, Quinoa
+243, Frozen Vegetables
+244, Frozen Fruits
+245, Frozen Pizza
+246, Frozen Meals
+247, Frozen Appetizers
+248, Frozen Desserts
+249, Frozen French Fries
+250, Frozen Waffles
+251, Frozen Breakfast Sandwiches
+252, Coffee Beans
+253, Ground Coffee
+254, Tea (Black, Green, Herbal)
+255, Coffee Pods
+256, Instant Coffee
+257, Coffee Creamer
+258, Milk
+259, Fruit Juice
+260, Soda
+261, Sparkling Water
+262, Bottled Water
+263, Sports Drinks
+264, Energy Drinks
+265, Iced Tea
+266, Lemonade
+267, Almond Milk
+268, Coconut Water
+269, Wine
+270, Beer
+271, Salt
+272, Pepper
+273, Paprika
+274, Cumin
+275, Coriander
+276, Chili Powder
+277, Cinnamon
+278, Nutmeg
+279, Ginger
+280, Turmeric
+281, Cayenne Pepper
+282, Red Pepper Flakes
+283, Onion Powder
+284, Garlic Powder
+285, Thyme
+286, Rosemary
+287, Oregano
+288, Basil
+289, Parsley
+290, Dill
+291, Potato Chips
+292, Tortilla Chips
+293, Pretzels
+294, Popcorn
+295, Trail Mix
+296, Rice Cakes
+297, Granola Bars
+298, Crackers
+299, Dried Fruit
+300, Sugar
+301, Flour
+302, Butter
+303, Chocolate Chips
+304, Cocoa Powder
+305, Vanilla Extract
+306, Eggs
+307, Baking Soda
+308, Baking Powder
+309, Whipping Cream
+310, Cream Cheese
+311, Confectioners Sugar
+312, Pie Crust
+313, Pastry Dough
+314, Ice Cream Cones
+315, Oatmeal
+316, Granola
+317, Cereal
+318, Pancake Mix
+319, Maple Syrup
+320, Honey
+321, Peanut Butter
+322, Almond Butter
+323, Cashew Butter
+324, Jam or Fruit Preserves
+325, Curry Paste
+326, Garam Masala
+327, Soy Sauce
+328, Teriyaki Sauce
+329, Sriracha
+330, Fish Sauce
+331, Dashi Powder
+332, Nori Sheets
+333, Miso Paste
+334, Harissa Paste
+335, Tahini
+336, Couscous
+337, Quinoa

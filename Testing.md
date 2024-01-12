@@ -919,7 +919,7 @@ Similarly, when I created some tests for some of the messages, the tests were ru
 <summary>Middleware Testing Bug</summary>
 <br>
 
-![Middleware Testing Bug 2](static/readme_images/bugs/)
+![Middleware Testing Bug 2](static/readme_images/bugs/middleware%20bug.png)
 </details> 
 
 <details>

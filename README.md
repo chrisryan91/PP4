@@ -596,6 +596,7 @@ In Django settings:
 - Responsively was used to test for responsivity: [Responsively](https://responsively.app/)
 - AmIResponsive was used to create the image at the top of this readme: [AmIresponsive?](https://amiresponsive.co.uk/)
 - Django Project: [Django Project](https://www.djangoproject.com/start/)
+- I got some datasets here: [data.world](https://data.world/datasets/ingredients)
   
 On a general basis I don't know how many times I consulted **Stack Overflow** for solutions. If I got an error I didn't understand I was always directed by Google to Stack Overflow.
 

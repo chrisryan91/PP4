@@ -131,7 +131,8 @@ def SubmitReview(request):
 
                 for new_ingredient_name in new_ingredient_list:
                     try:
-                        new_ingredient = Ingredient.objects.get_or_create(
+                        new_ingredient, created = /
+                        Ingredient.objects.get_or_create(
                             name=new_ingredient_name)
                         review.ingredients.add(new_ingredient)
                     except IntegrityError:
@@ -139,8 +140,8 @@ def SubmitReview(request):
                             new_ingredient = Ingredient.objects.get(
                                 name=new_ingredient_name)
                         except Ingredient.DoesNotExist:
-                            new_ingredient_id = Ingredient.objects.latest(
-                                'id').id + 1
+                            new_ingredient_id =
+                            Ingredient.objects.latest('id').id + 1
                             new_ingredient = Ingredient.objects.create(
                                 id=new_ingredient_id, name=new_ingredient_name)
                         review.ingredients.add(new_ingredient)
@@ -155,6 +156,9 @@ def SubmitReview(request):
                     request.session["modalURL"] = url
                     print(f"Session modalURL set to: {url}")
 
+                messages.success(
+                    request,
+                    'Review submitted successfully - pending approval!')
                 return redirect('review_blog')
             else:
                 print(form.errors)
@@ -253,12 +257,14 @@ class ReviewUpvote(View):
 
         vote_type = request.POST.get('vote_type', None)
         if vote_type == 'upvote':
+            messages.success(request, 'You have upvoted')
             review.up_vote.filter(id=request.user.id).exists() is False \
                 and review.up_vote.add(request.user)
             review.down_vote.filter(id=request.user.id).exists() \
                 and review.down_vote.remove(request.user)
 
         elif vote_type == 'downvote':
+            messages.success(request, 'You have downvoted')
             review.down_vote.filter(id=request.user.id).exists() \
                 is False and review.down_vote.add(request.user)
             review.up_vote.filter(id=request.user.id).exists() \
@@ -271,61 +277,64 @@ class ReviewUpvote(View):
 
 @method_decorator(login_required, name='dispatch')
 class UpdateReview(View):
-
     template_name = 'update_review.html'
 
     def get(self, request, slug):
         review = get_object_or_404(Review, slug=slug, author=request.user)
         form = ReviewForm(instance=review)
         return render(
-            request, self.template_name, {'form': form, 'review': review})
+            request,
+            self.template_name,
+            {'form': form, 'review': review})
 
     def post(self, request, slug):
         review = get_object_or_404(Review, slug=slug, author=request.user)
-        form = ReviewForm(request.POST, instance=review)
+        form = ReviewForm(request.POST, request.FILES, instance=review)
 
         if 'delete' in request.POST:
             review.delete()
             return redirect('blog')
 
         if form.is_valid():
+
             updated_review = form.save(commit=False)
             updated_review.author = request.user
-
-            review.ingredients.clear()
 
             existing_ingredients = form.cleaned_data.get('ingredients')
             review.ingredients.set(existing_ingredients)
 
+            existing_utensils = form.cleaned_data.get('utensils')
+            review.utensils.set(existing_utensils)
+
             new_ingredient_string = form.cleaned_data.get('new_ingredient', '')
             new_ingredient_list = [
-                ingredient.strip() for
-                ingredient in new_ingredient_string.split(',')]
+                ingredient.strip() \
+                for ingredient in new_ingredient_string.split(',')]
 
             for new_ingredient_name in new_ingredient_list:
                 try:
                     new_ingredient, created = Ingredient.objects.get_or_create(
                         name=new_ingredient_name)
-
-                    if created:
-                        review.ingredients.add(new_ingredient)
+                    review.ingredients.add(new_ingredient)
                 except IntegrityError:
                     try:
                         new_ingredient = Ingredient.objects.get(
-                            name=new_ingredient_name)
+                                name=new_ingredient_name)
                     except Ingredient.DoesNotExist:
-                        new_ingredient_id = Ingredient.objects.latest(
-                            'id').id + 1
+                        new_ingredient_id \
+                        = Ingredient.objects.latest('id').id + 1
                         new_ingredient = Ingredient.objects.create(
-                            id=new_ingredient_id,
-                            name=new_ingredient_name)
+                            id=new_ingredient_id, name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
 
             updated_review.save()
+
             return redirect(reverse('blog'))
 
         return render(
-            request, self.template_name, {'form': form, 'review': review})
+                request,
+                self.template_name,
+                {'form': form, 'review': review})
 
 
 def delete_comment(request, comment_id):
@@ -334,7 +343,5 @@ def delete_comment(request, comment_id):
     if request.method == 'POST' and request.user.username == comment.name:
         comment.delete()
         messages.success(request, 'Comment deleted successfully')
-    else:
-        messages.error(request, 'You do not have permission to delete')
 
     return redirect('review_post', slug=comment.review.slug)
