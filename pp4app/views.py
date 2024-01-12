@@ -158,7 +158,7 @@ def SubmitReview(request):
 
                 messages.success(request, 'Review submitted successfully')
 
-                return redirect('review_blog')
+                return redirect('blog')
             else:
                 print(form.errors)
         else:
