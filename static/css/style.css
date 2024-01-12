@@ -51,6 +51,10 @@ button i {
     font-size: xx-large;
 }
 
+.btnburger:hover i, .nav-item:hover .nav-link, .btn-like:hover i, a:hover i {
+    animation: shake 0.8s;
+}
+
 /* Label Styles */
 label {
     font-family: Merriweather, sans-serif;
@@ -365,7 +369,7 @@ footer p i:hover {
     font-size: 12px;
 }
 
-/* Review.html Styles */
+/* review.html and review_blog tyles */
 
 .row {
     background-color: transparent;
@@ -624,6 +628,20 @@ form ul li {
     font-size: 10px;
 }
 
+/* Sign-up & Login */
+.select2 {
+    width: 300px;
+}
+
+
+/* Error Page */
+
+#error {
+    font-family: Alice, sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+}
+
 /* Animations */
 .animation-span1 {
     text-align: center;
@@ -698,9 +716,23 @@ span:nth-child(8) {
     }
 }
 
-/* Sign-up & Login */
-.select2 {
-    width: 300px;
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(5px);
+    }
+
+    50% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0px);
+    }
 }
 
 @media only screen and (max-width: 1130px) {
@@ -798,26 +830,4 @@ span:nth-child(8) {
         padding-bottom: 1px;
     }
 
-}
-
-.btnburger:hover i, .nav-item:hover .nav-link, .btn-like:hover i, a:hover i {
-    animation: shake 0.8s;
-}
-
-@keyframes shake {
-    0% {
-        transform: translateX(0);
-    }
-
-    25% {
-        transform: translateX(5px);
-    }
-
-    50% {
-        transform: translateX(-5px);
-    }
-
-    100% {
-        transform: translateX(0px);
-    }
 }

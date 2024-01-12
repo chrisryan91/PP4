@@ -45,29 +45,26 @@ Live Website here: [Wasteless Table](https://portfolio-project-four-1f2f0bc1d6a0
 
 ## Concept
 
-When researching Application Programming Interfaces (APIs), I chanced upon an interesting Recipe Search API provided by [EDAMAM](https://www.edamam.com/). The provider offers different APIs but the Recipe Search was useful in developing my idea as it could be the basis of where I retrieved recipes from for my blog. If offers 2.3 million different recipes, 500+ web resources and many different types of filters. 
+When researching Application Programming Interfaces (APIs), I found an interesting recipe search API provided by [EDAMAM](https://www.edamam.com/). The provider offers different services but the recipe search tool was useful in helping shape my project. It could be the basis of where I retrieved recipes from for my blog. If offers 2.3 million different recipes, 500+ web resources and many different types of filters. 
 
-Last September I was staying in a remote guesthouse with very little ingredients and I was wondering what recipes I could make with what little I had. Given the location of the guesthouse, I could not make it to the nearest shop or supermarket. I was reminded of this time when I found the EDAMAM API and read the documentation regarding it's filtering system. It server as the basis of my blog concept. As well as this I have a very bad habit of throwing food away. I do not use things up and often forget I have food stuff lying around - oftentimes I buy an ingredient when I already have some. I've been scolded in the past by this from friends who chastise me for my wastefulness. I decided to combine these general ideas and concepts when considering what I should build for my project.
-
-
-Ireland is estimated to generate 1.1 million tonnes of food waste per year, according to the [Environmental Protection Agency](https://www.epa.ie/publications/circular-economy/resources/nature-and-extent-update-15th-June.pdf)
+Last September I was staying in a remote guesthouse with very little ingredients and I was wondering what recipes I could make with what little I had. Given the location of the guesthouse, I could not make it to the nearest shop or supermarket. I was reminded of this time when I found the EDAMAM API and read the documentation regarding it's filtering system. It server as the basis of my blog concept. As well as this I have a very bad habit of throwing food away. I do not use things up and often forget I have food stuff lying around - oftentimes I buy an ingredient when I already have some. I decided to combine these general ideas and concepts when considering what I should build for my project. Ireland is estimated to generate 1.1 million tonnes of food waste per year, according to the [Environmental Protection Agency](https://www.epa.ie/publications/circular-economy/resources/nature-and-extent-update-15th-June.pdf)
 
 ## Development
 
 ### User Stories
 
-1. As a site user, I can search for so that I can find a recipe to eat.
-2. As a site user, I can search with ingredients, tag names or cuisine types so that I can find a list of recipes.
-3. As a site user I can see my user profile so that I can see my details.
+1. As a site administrator I can create, read, update and delete so that the blog's content can be managed.
+2. As a site user I can use the search the recipe blog so that I can find recipes.
+3. As a user I can search with ingredients, tag names or cuisine type so that I can see a list of recipes.
 4. As a site user I can view a list of paginated recipes so that select the recipe details.
-5. As a user I can submit recipe reviews so that the admin can add a recipe review to the blog.
-6. As a site user I can register an account so that I can leave a comment, rating and like.
-7. As a Site User I can click on a recipe so that I can see the details.
-8. As a site administrator I can approve posts so that the blog is populated.
-9. As a site administrator I can create, read, update and delete so that the blog's content can be managed.
-10. As a site administrator I can approve or disapprove comments and recipes so that I can filter content.
-11. As a site user and administrator I can view the comments on a recipe so that see what is being talked about.
-12. As a site user and administrator I can view the rating and number of likes/upvotes on each recipe so that I can determine the best and popular ones.
+5. As a Site User I can click on a recipe so that I can see the details.
+6. As a site administrator I can approve or disapprove comments and recipes so that I can filter content.
+7. As a site user I can see my user profile so that I can see my details.
+8. As a site user I can register an account so that I can leave a comment, rating and like.
+9. As a user I can submit recipe reviews so that I can add a recipe review to the blog.
+10. As a site user and administrator I can view the comments on a recipe so that see what is being talked about.
+11. As a administrator I can approve posts so that the blog is populated.
+12. As a site user and administrator I can view the rating and number of likes on each recipe so that I can determine the best and popular ones.
 
 User Stories are tested in: [Testing.md](Testing.md)
 
@@ -125,7 +122,7 @@ Another reason that the design necessitated plainness was that the images return
 
 The two font styles that are carried through the website are [Alice](https://fonts.google.com/specimen/Alice/about) and [Merriweather](https://fonts.google.com/specimen/Merriweather/about). Alice is defined by Google Fonts as "eclectic and quaint, old-fashioned, having widened proportions, open aperture, and soft rounded features; perfect for long meditative text-setting and headlines." I found it to be suitable for headings and titles. Merriweather is a Font I've become accustomed to using over the past few months and considered it appropriate for elements with longer text. I agree with Google when they say it is "a text face that is pleasant to read on screens."
 
-Some text and icons are animated. In-fact there was more JavaScript interactivity and CSS styling in the original iteration of the website but my tutor advise me that I was creating a suboptimal experience by creating too much user friction.
+Some text and icons are animated. In-fact there was more JavaScript interactivity and CSS styling in the original iteration of the website but my tutor advised me that I was creating a sub optimal experience for the user by creating too much user friction.
 
 While the [EDAMAM API](https://www.edamam.com/) is a useful tool, it is unable to return the exact steps involved in making the recipe as it did not hold the copyright to the recipes. It returns a lot - labels, images, ingredients, nutritional value - but the exact steps involved in making the recipe were not returned. Given this fact I linked the external URL to the recipe card div which is opened in a new tab. The steps to how the recipes are made are not held on my blog - that is unless a User writing a review wants to include them. Given the fact this blog is focused on ingredients in particular, in my submit review form, there are sections for ingredients and utensils, but not for the exact steps to making the recipe. The blog post is a review - with hints, tips and tricks.
 
@@ -268,7 +265,7 @@ Again, using GitHub projects to help maintain the direction of my project, I cre
 
 ### Authentication and Authorisation
 
-**Django All Auth** is used for backend authentication
+**Django All Auth** is used for backend authentication:
 
 - Users can create an account in the sign-up page.
 - Users can sign-in to their account to leave comments, posts and likes using the sign-in page.
@@ -304,7 +301,7 @@ The **Footer** is also carried across all pages. It has a transparent background
 
 ### Homepage
 
-The **Homepage** contains the name of the website centrally aligned animated as a welcome. Beneath it are two sections with information about the two main parts of the website - the search function and the review blog. These contain links those pages and a few sentences describing the function of each.
+The **Homepage** contains the name of the website animated as a welcome. Beneath it are two sections with information about the two main parts of the website - the search function and the review blog. These contain links those pages and a few sentences describing the function of each.
 
 <details>
 <summary>Homepage</summary>

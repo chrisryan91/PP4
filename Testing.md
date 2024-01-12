@@ -606,7 +606,56 @@ I installed [Django Extensions](https://github.com/django-extensions/django-exte
 
 ## Lighthouse Testing
 
+Beneath is Lighthouse testing from Chrome Dev tools for each of the main pages on my app. The performance of the app is affected by the images returned from the API on the search page and images from Cloudinary.
 
+<details>
+<summary>Homepage Lighthouse</summary>
+<br>
+
+![Homepage Lighthouse](static/readme_images/lighthouse/homepage_ligthhouse.png)
+</details>
+
+<details>
+<summary>Search Page Lighthouse</summary>
+<br>
+
+![Search Page Lighthouse](static/readme_images/lighthouse/searchpage_lighthouse.png)
+</details>
+
+<details>
+<summary>Submit Review Lighthouse</summary>
+<br>
+
+![Submit Review Lighthouse](static/readme_images/lighthouse/submitreview_lighthouse.png)
+</details>
+
+<details>
+<summary>Review Blog Lighthouse</summary>
+<br>
+
+![Homepage Lighthouse](static/readme_images/lighthouse/review_blog_lighthouse.png)
+</details>
+
+<details>
+<summary>Review Post Lighthouse</summary>
+<br>
+
+![Review Post Lighthouse](static/readme_images/lighthouse/reviewpage_lighthouse.png)
+</details>
+
+<details>
+<summary>About Page Lighthouse</summary>
+<br>
+
+![About Page Lighthouse](static/readme_images/lighthouse/aboutpage_lighthouse.png)
+</details>
+
+<details>
+<summary>Update Review Lighthouse</summary>
+<br>
+
+![Homepage Lighthouse](static/readme_images/lighthouse/updatereview_lighthouse.png)
+</details>
 
 ## Automated Testing
 
@@ -907,11 +956,15 @@ I found the solution to my problem on [Stack Overflow](https://stackoverflow.com
 
 At some points throughout creating the project my URLs were not configured properly. They needed to be changed and the order of the needed to be changed. I used Stack Overflow for solutions regarding this: [Django URLs randomly shows ImproperlyConfigured](https://stackoverflow.com/questions/48237188/django-urls-randomly-shows-improperlyconfigured)
 
+- **Migrations**
+
+At the outset of my project, my data model was not correct. At one point, I had to clear the entire database from the command line and make migrations all over again.
+
 ### Known Bugs
 
 - **Bugs regarding messages**
 
-I couldn't get messaging to work properly on this app. I had experience adding messages to Django settings and utilizing bootstrap to make messages show up. I revisited a walkthrough project I had completed and was able the get some of them working - sign in and signed out in particular. However, other messages, such as "Form Completed", "Submission Accepted" or "this field is required" would not work correctly. In the image below, you see an error message that displayed if a value other than a string was entered into the search input the make an API call. It functioned initially but the problem I had was that it would return every time I revisited the search page. I removed it and consider this a feature I need to work on.
+I couldn't get messaging to work properly on this app. I had experience adding messages to Django settings and utilizing bootstrap to make messages show up. I revisited a walkthrough project I had completed and was able the get some of them working - sign in and signed out in particular, upvote and downvote notifications. However, other messages, such as "Form Completed", "Submission Accepted" or "this field is required" would not work correctly. In the image below, you see an error message that displayed if a value other than a string was entered into the search input the make an API call. It functioned initially but the problem I had was that it would return every time I revisited the search page. I removed it and consider this a feature I need to work on.
 
 Similarly, when I created some tests for some of the messages, the tests were running an error informing me that I had not installed Messages in the middleware section of my settings.py file. That did not make sense to me and I did not have time to fix this bug. The messages that are affected by this bug have been removed on submission.
 
