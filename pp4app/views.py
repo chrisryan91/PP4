@@ -129,16 +129,14 @@ def SubmitReview(request):
 
             for new_ingredient_name in new_ingredient_list:
                 try:
-                    new_ingredient, created =
-                    Ingredient.objects.get_or_create(name=new_ingredient_name)
+                    new_ingredient, created = Ingredient.objects.get_or_create(name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
                 except IntegrityError:
                     try:
                         new_ingredient = Ingredient.objects.get(
                             name=new_ingredient_name)
                     except Ingredient.DoesNotExist:
-                        new_ingredient_id =
-                        Ingredient.objects.latest('id').id + 1
+                        new_ingredient_id = Ingredient.objects.latest('id').id + 1
                         new_ingredient = Ingredient.objects.create(
                             id=new_ingredient_id, name=new_ingredient_name)
                     review.ingredients.add(new_ingredient)
